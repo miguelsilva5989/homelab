@@ -1,0 +1,15 @@
+---
+- name: Install first K3s server node with embedded etcd
+  hosts: servers
+  become: true
+  tasks:
+    - name: Install K3s server node with embedded etcd
+      shell: curl -sfL https://get.k3s.io | K3S_TOKEN={{ k3s_token }} sh -s - --disable traefik --cluster-init --tls-san=10.69.69.1 # --disable servicelb
+      args:
+        executable: /bin/bash
+
+    - name: Ensure K3s service is running
+      systemd:
+        name: k3s
+        state: started
+        enabled: yes

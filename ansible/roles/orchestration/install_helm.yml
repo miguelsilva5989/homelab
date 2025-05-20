@@ -1,0 +1,13 @@
+---
+- name: Install Helm
+  hosts: servers
+  become: true
+  tasks:
+    - name: Getting the latest Helm version
+      shell: |
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      args:
+        executable: /bin/bash
+
+    - name: Add Helm Repo for Traefik
+      command: helm repo add traefik https://traefik.github.io/charts

@@ -1,0 +1,39 @@
+---
+- name: Install OpenTofu on Ubuntu 24.04
+  hosts: opentofu
+  become: yes
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - curl
+          - unzip
+        state: present
+
+    - name: Download OpenTofu binary
+      get_url:
+        url: "https://github.com/opentofu/tofu/releases/latest/download/tofu_linux_amd64.zip"
+        dest: "/tmp/tofu.zip"
+
+    - name: Unzip OpenTofu binary
+      unarchive:
+        src: "/tmp/tofu.zip"
+        dest: "/usr/local/bin/"
+        remote_src: yes
+
+    - name: Make OpenTofu binary executable
+      file:
+        path: "/usr/local/bin/tofu"
+        mode: '0755'
+
+    - name: Verify OpenTofu installation
+      command: tofu version
+      register: tofu_version_output
+      
+    - name: Debug output
+      debug:
+        msg: "OpenTofu installed successfully: {{ tofu_version_output.stdout }}"
