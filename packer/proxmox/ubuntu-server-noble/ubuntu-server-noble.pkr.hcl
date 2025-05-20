@@ -30,7 +30,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     node = "proxamus"
     vm_id = "100"
     vm_name = "ubuntu-server-24"
-    template_description = "Ubuntu Server 24 Image"
+    template_description = "Ubuntu Server 24 (Noble) Image"
 
     # VM OS Settings
     # (Option 1) Local ISO File

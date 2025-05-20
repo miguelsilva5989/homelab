@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open-webui-config
+data:
+  OPENWEBUI_SETTING_1: "value1"
+  OPENWEBUI_SETTING_2: "value2"

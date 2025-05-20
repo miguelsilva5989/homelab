@@ -1,0 +1,9 @@
+---
+- name: Deploy CICD and network configurations
+  hosts: master, cicd
+  become: yes
+  roles:
+    - cicd
+    - network
+    - orchestration
+
