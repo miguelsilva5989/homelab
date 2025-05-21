@@ -1,0 +1,11 @@
+all:
+  children:
+    master:
+      hosts:
+        matrix-01: 19.69.69.1
+    cicd:
+      hosts:
+        architect-01: 19.69.69.11
+        architect-02: 19.69.69.12
+
+

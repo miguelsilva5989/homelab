@@ -1,0 +1,41 @@
+---
+- name: Install Terraform
+  hosts: master:cicd
+  become: yes  # Use become to run tasks with elevated privileges
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - gnupg
+          - software-properties-common
+          - curl
+        state: present
+      
+    - name: Add HashiCorp GPG key
+      shell: >
+        wget -O- https://apt.releases.hashicorp.com/gpg | 
+        gpg --dearmor | 
+        tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+
+    - name: Verify HashiCorp GPG key fingerprint
+      command: >
+        gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+      register: gpg_fingerprint
+
+    - debug:
+        var: gpg_fingerprint.stdout_lines
+
+    - name: Add HashiCorp repository for amd64 architecture
+      lineinfile:
+        path: /etc/apt/sources.list.d/hashicorp.list
+        line: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+        create: yes
+
+    - name: Update APT package list
+      apt:
+        update_cache: yes
+
+    - name: Install Terraform
+      apt:
+        name: terraform
+        state: present

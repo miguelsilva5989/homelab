@@ -1,6 +1,6 @@
 ---
 - name: Install Helm
-  hosts: servers
+  hosts: cicd
   become: true
   tasks:
     - name: Getting the latest Helm version

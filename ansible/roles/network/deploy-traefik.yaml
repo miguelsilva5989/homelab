@@ -1,6 +1,6 @@
 ---
 - name: Deploy traefik v3.4.0
-  hosts: "{{ my_hosts | d([]) }}"
+  hosts: master
 
   tasks:
     - name: Deploy traefik
