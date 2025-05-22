@@ -2,8 +2,8 @@
 # FluxCD Setup
 
 ```sh
-flux bootstrap git \
-           --url=ssh://git@github.com/miguelsilva5989/homelab.git \
-           --branch=main \
-           --path=clusters/zion
+export GITHUB_TOKEN=<gh-token>
+
+flux bootstrap github --owner=miguelsilva5989 --repository=homelab --path=clusters/zion --personal --token-auth
+
 ```
