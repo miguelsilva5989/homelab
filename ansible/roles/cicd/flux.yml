@@ -1,0 +1,15 @@
+---
+- name: Install Flux CLI
+  hosts: master:cicd
+  become: true
+  tasks:
+    - name: Getting the latest Flux CLI
+      shell: |
+        curl -s https://fluxcd.io/install.sh | bash
+      args:
+        executable: /bin/bash
+
+    - name: Check if installed
+      apt:
+        name: flux
+        state: present

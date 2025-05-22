@@ -1,0 +1,42 @@
+---
+- name: Install K9s
+  hosts: master:cicd
+  become: yes
+  tasks:
+    - name: Ensure required packages are installed
+      apt:
+        name: curl
+        state: present
+
+    - name: Set K9s version
+      set_fact:
+        k9s_version: "v0.50.6"
+
+    - name: Download K9s binary
+      get_url:
+        url: "https://github.com/derailed/k9s/releases/download/{{ k9s_version }}/k9s_Linux_amd64.tar.gz"  
+        dest: "/tmp/k9s_Linux_amd64.tar.gz"
+
+    - name: Extract K9s binary
+      unarchive:
+        src: "/tmp/k9s_Linux_amd64.tar.gz"
+        dest: "/usr/local/bin/"
+        remote_src: yes
+
+    - name: Make K9s executable
+      file:
+        path: "/usr/local/bin/k9s"
+        mode: '0755'
+        
+    - name: Clean up
+      file:
+        path: "/tmp/k9s_Linux_amd64.tar.gz"
+        state: absent
+
+    - name: Verify K9s installation
+      command: k9s version
+      register: k9s_version_output
+      ignore_errors: yes
+      
+    - debug:
+        msg: "K9s version: {{ k9s_version_output.stdout }}"
