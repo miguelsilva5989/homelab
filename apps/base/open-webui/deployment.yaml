@@ -1,24 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: openwebui
+  name: open-webui
+  namespace: default
   labels:
-    app: openwebui
+    app: open-webui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: openwebui
+      app: open-webui
   template:
     metadata:
       labels:
-        app: openwebui
+        app: open-webui
     spec:
       containers:
-      - name: openwebui
+      - name: open-webui
         image: openwebui/openwebui:latest
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
-            name: openwebui-config
+            name: open-webui-configmap

@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: open-webui
+  namespace: open-webui
+spec:
+  replicas: 3
