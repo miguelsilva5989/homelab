@@ -3,11 +3,10 @@ kind: Ingress
 metadata:
   name: open-webui
   annotations:
-    # Traefik ingress class annotation (adjust label if needed)
-    kubernetes.io/ingress.class: "traefik"
     traefik.ingress.kubernetes.io/router.entrypoints: web
     # Optionally add TLS redirect, middleware, etc.
 spec:
+  ingressClassName: traefik
   rules:
   - host: openwebui.milanchis.com
     http:

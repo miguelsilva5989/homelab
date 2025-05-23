@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: open-webui
-  namespace: default
   labels:
     app: open-webui
 spec:
@@ -17,7 +16,7 @@ spec:
     spec:
       containers:
       - name: open-webui
-        image: openwebui/openwebui:latest
+        image: ghcr.io/open-webui/open-webui:main
         ports:
         - containerPort: 8080
         envFrom:

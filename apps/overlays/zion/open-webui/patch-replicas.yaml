@@ -5,3 +5,11 @@ metadata:
   namespace: open-webui
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: open-webui
+  template:
+    metadata:
+      labels:
+        app: open-webui
+

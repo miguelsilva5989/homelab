@@ -3,9 +3,13 @@ kind: Kustomization
 
 namespace: open-webui
 
+metadata:  
+  name: open-webui
+  namespace: open-webui
+
 resources:
-  - ../../../base/open-webui
   - configmap.yaml
+  - ../../../base/open-webui
   - ingress.yaml
 
 patches:

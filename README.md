@@ -1,4 +1,4 @@
-# Homelab Infrastructure & Configuration
+# 🏠 Homelab Infrastructure & Configuration
 
 This repository documents my end-to-end journey in architecting and deploying a robust homelab environment from the ground up.
 
@@ -7,7 +7,7 @@ This repository documents my end-to-end journey in architecting and deploying a 
 My goal is to build a scalable and maintainable virtualized infrastructure using:
 
 - **Proxmox VE** as the hypervisor platform for running multiple VMs.
-- **Packer**, **OpenTofu (Terraform alternative)**, and **Ansible** for automated VM creation, provisioning, and configuration management.
+- **Packer**, **Terraform**, and **Ansible** for automated VM creation, provisioning, and configuration management.
 - **k3s** lightweight Kubernetes distribution for container orchestration and workload management.
 - **FluxCD** for GitOps-based continuous deployment of Kubernetes manifests, enabling declarative infrastructure and application lifecycle management.
 - **GitLab** to automate build, test, and deployment pipelines.
