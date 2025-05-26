@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: open-webui
 
+namePrefix:
+  zion-
+
 metadata:  
   name: open-webui
   namespace: open-webui
