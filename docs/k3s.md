@@ -1,6 +1,16 @@
 # K3S
 
-## install
+## High Availability Cluster
+
+An HA K3s cluster with embedded etcd is composed of:
+
+- `Three` or more server nodes that will serve the Kubernetes API and run other control plane services, as well as host the embedded etcd datastore.
+- Optional: Zero or more agent nodes that are designated to run your apps and services
+- Optional: A fixed registration address for agent nodes to register with the cluster
+
+## Install K3S Master Node
+
+This will install K3S HA Embedded etcd using `--cluster-init`
 
 ```sh
 curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --cluster-init --tls-san=10.69.69.1 --tls-san=milanchis.com --tls-san=0.0.0.0 --node-taint --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
@@ -8,11 +18,14 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --
 
 Added --node-taint to not have pods running on master nodes
 
-## second server
+## Seconds + Third K3S server
+
+Add a **second** and **third** server to the k3s cluster
 
 ```sh
 curl -sfL https://get.k3s.io | K3S_TOKEN=K3S_TOKEN sh -s - server \
     --server https://10.69.69.1:6443 \
+    --node-taint \
     --tls-san=10.69.69.1 # Optional, needed if using a fixed registration address
 ```
 
@@ -20,7 +33,13 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=K3S_TOKEN sh -s - server \
 k get nodes
 ```
 
-## agent
+## Agent
+
+Example
+
+```sh
+curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - agent --server https://<ip or hostname of server>:6443
+```
 
 ```sh
 curl -sfL https://get.k3s.io | K3S_URL=https://10.69.1.1:6443 K3S_TOKEN=$K3S_TOKEN sh -s -  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
@@ -29,7 +48,11 @@ curl -sfL https://get.k3s.io | K3S_URL=https://10.69.1.1:6443 K3S_TOKEN=$K3S_TOK
 sudo k3s agent --server https://192.168.69.13:6443 --token $K3S_TOKEN
 ```
 
-## TRaefik
+<!-- ## Cluster Load Balancer
+
+https://docs.k3s.io/datastore/cluster-loadbalancer?ext-load-balancer=HAProxy#setup-load-balancer -->
+
+<!-- ## Traefik
 
 Install
 
@@ -123,4 +146,4 @@ routes:
 #            name: whoami
 #            port:
 #            number: 80
-```
+``` -->
