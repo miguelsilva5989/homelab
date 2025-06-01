@@ -46,7 +46,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     # (Option 1) Local ISO File
     iso_file = "local:iso/ubuntu-24.04.2-live-server-amd64.iso"
     # (Option 2) Download ISO
-    # iso_url = "https://releases.ubuntu.com/24.04.2/ubuntu-24.04.2-live-server-amd64.iso"
+    # iso_url = "https://releases.ubuntu.com/24.04/ubuntu-24.04.2-live-server-amd64.iso"
     iso_checksum = "d6dab0c3a657988501b4bd76f1297c053df710e06e0c3aece60dead24f270b4d"
     iso_storage_pool = "local"
     unmount_iso = true
@@ -133,7 +133,8 @@ build {
             "sudo cloud-init clean",
             "sudo rm -f /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg",
             "sudo rm -f /etc/netplan/00-installer-config.yaml",
-            "sudo sync"
+            "sudo sync",
+            "sudo echo 'Ubuntu 24.04 Template by Packer' | sudo tee /etc/issue"
         ]
     }
 
