@@ -3,6 +3,16 @@
 # Packer Template to create an Ubuntu Server (24) on Proxmox
 
 # Variable Definitions
+packer {
+  required_plugins {
+    name = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
+
 variable "proxmox_api_url" {
     type = string
 }
@@ -27,7 +37,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     insecure_skip_tls_verify = true
 
     # VM General Settings
-    node = "proxamus"
+    node = "matrix"
     vm_id = "100"
     vm_name = "ubuntu-server-24"
     template_description = "Ubuntu Server 24 (Noble) Image"
@@ -49,7 +59,7 @@ source "proxmox-iso" "ubuntu-server-24" {
 
     disks {
         disk_size = "80G"
-        format = "qcow2"
+        format = "raw"
         storage_pool = "local-zfs"
         storage_pool_type = "zfs"
         type = "virtio"
@@ -60,7 +70,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     cpu_type = "x86-64-v4" # Compatible with Intel CPU >= Skylake, AMD CPU >= EPYC v4 Genoa. Added CPU flags compared to x86-64-v3: +avx512f, +avx512bw, +avx512cd, +avx512dq, +avx512vl.
 
     # VM Memory Settings
-    memory = "4096"
+    memory = "8192"
 
     # VM Network Settings
     network_adapters {

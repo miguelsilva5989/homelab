@@ -1,1 +1,3 @@
 credentials.pkr.hcl
+
+**/packer_cache/
