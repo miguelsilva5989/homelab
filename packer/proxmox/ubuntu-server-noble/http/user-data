@@ -31,3 +31,4 @@ autoinstall:
         # - or -
         ssh_authorized_keys:
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLLV9ehqs+sUZlER6k/MWjkdF6vQQ/Kein3agLuqcU3 miguelsilva5989@gmail.com
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEciSdaCO+tBNVkgHCz8rpM00CmPfWICQ3O9ePKDHrU3 miguelsilva5989@gmail.com

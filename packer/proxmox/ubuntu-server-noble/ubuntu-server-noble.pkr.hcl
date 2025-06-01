@@ -39,7 +39,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     # VM General Settings
     node = "matrix"
     vm_id = "100"
-    vm_name = "ubuntu-server-24"
+    vm_name = "ubuntu-server-24-noble"
     template_description = "Ubuntu Server 24 (Noble) Image"
 
     # VM OS Settings
@@ -83,7 +83,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     cloud_init = true
     cloud_init_storage_pool = "local-zfs"
 
-    # PACKER Boot Commands
+     # PACKER Boot Commands
     boot_command = [
         "<esc><wait>",
         "e<wait>",
@@ -92,8 +92,10 @@ source "proxmox-iso" "ubuntu-server-24" {
         "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
         "<f10><wait>"
     ]
-    boot = "c"
-    boot_wait = "5s"
+
+    boot                    = "c"
+    boot_wait               = "10s"
+    communicator            = "ssh"
 
     # PACKER Autoinstall Settings
     http_directory = "http"
@@ -110,7 +112,8 @@ source "proxmox-iso" "ubuntu-server-24" {
     ssh_private_key_file = "~/.ssh/id_ed25519"
 
     # Raise the timeout, when installation takes longer
-    ssh_timeout = "10m"
+    ssh_timeout = "15m"
+    ssh_pty     = true
 }
 
 build {
