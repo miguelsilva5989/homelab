@@ -3,7 +3,8 @@ all:
     master:
       hosts:
         matrix-01: 10.69.5.1
-        # matrix-02: 10.69.5.2
+        matrix-02: 10.69.5.2
+        matrix-03: 10.69.5.3
     cicd:
       hosts:
         architect-01: 10.69.5.11
