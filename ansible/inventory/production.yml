@@ -2,11 +2,9 @@ all:
   children:
     master:
       hosts:
-        matrix-01: 19.69.69.1
-        # matrix-01: 19.69.69.2
+        matrix-01: 10.69.5.1
+        # matrix-02: 10.69.5.2
     cicd:
       hosts:
-        architect-01: 19.69.69.11
-        architect-02: 19.69.69.12
-
-
+        architect-01: 10.69.5.11
+        architect-02: 10.69.5.12

@@ -70,7 +70,7 @@ source "proxmox-iso" "ubuntu-server-24" {
     cpu_type = "x86-64-v4" # Compatible with Intel CPU >= Skylake, AMD CPU >= EPYC v4 Genoa. Added CPU flags compared to x86-64-v3: +avx512f, +avx512bw, +avx512cd, +avx512dq, +avx512vl.
 
     # VM Memory Settings
-    memory = "8192"
+    memory = "16384"
 
     # VM Network Settings
     network_adapters {

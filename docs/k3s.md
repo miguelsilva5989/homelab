@@ -13,7 +13,7 @@ An HA K3s cluster with embedded etcd is composed of:
 This will install K3S HA Embedded etcd using `--cluster-init`
 
 ```sh
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --cluster-init --tls-san=10.69.69.1 --tls-san=milanchis.com --tls-san=0.0.0.0 --node-taint --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --cluster-init --tls-san=10.69.5.1 --tls-san=k3s.milanchis.com --tls-san=0.0.0.0  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
 Added --node-taint to not have pods running on master nodes
@@ -24,9 +24,9 @@ Add a **second** and **third** server to the k3s cluster
 
 ```sh
 curl -sfL https://get.k3s.io | K3S_TOKEN=K3S_TOKEN sh -s - server \
-    --server https://10.69.69.1:6443 \
+    --server https://10.69.5.2:6443 \
     --node-taint \
-    --tls-san=10.69.69.1 # Optional, needed if using a fixed registration address
+    --tls-san=10.69.5.2 # Optional, needed if using a fixed registration address
 ```
 
 ```sh
@@ -42,7 +42,7 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - agent --server https://<
 ```
 
 ```sh
-curl -sfL https://get.k3s.io | K3S_URL=https://10.69.1.1:6443 K3S_TOKEN=$K3S_TOKEN sh -s -  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
+curl -sfL https://get.k3s.io | K3S_URL=https://10.69.5.1:6443 K3S_TOKEN=$K3S_TOKEN sh -s -  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
 
 # this worked to launch agent
 sudo k3s agent --server https://192.168.69.13:6443 --token $K3S_TOKEN
