@@ -3,6 +3,7 @@ resource "proxmox_vm_qemu" "matrix_02" {
     desc = "CICD Ubuntu Server 24"
     vmid = "102"
     target_node = "matrix"
+    onboot  = true
 
     agent = 1 # qemu
 
