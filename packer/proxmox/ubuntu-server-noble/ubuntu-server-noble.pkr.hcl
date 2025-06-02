@@ -74,7 +74,7 @@ source "proxmox-iso" "ubuntu-server-24" {
 
     # VM Network Settings
     network_adapters {
-        model = "virtio"
+        model = "virtio" # needs to have DHCP - if not create an adapter that allows it
         bridge = "vmbr0"
         firewall = "false"
     }
