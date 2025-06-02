@@ -14,7 +14,7 @@ This will install K3S HA Embedded etcd using `--cluster-init`
 
 ```sh
 export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --cluster-init --tls-san=10.69.5.1 --tls-san=k3s.milanchis.com --tls-san=0.0.0.0  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable servicelb --disable traefik --cluster-init --tls-san=10.69.5.1 --tls-san=k3s.milanchis.com --tls-san=0.0.0.0  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
 Added --node-taint to not have pods running on master nodes
@@ -26,17 +26,17 @@ Add a **second** and **third** server to the k3s cluster
 ```sh
 # Second server
 export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --tls-san=10.69.5.2 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --disable servicelb --disable traefik --tls-san=10.69.5.2 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
 ```sh
 # Third server
 export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --tls-san=10.69.5.3 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --disable servicelb --disable traefik --tls-san=10.69.5.3 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
 ```sh
-k get nodes
+kubectl get nodes
 ```
 
 ## Agent
