@@ -46,6 +46,24 @@ export K3S_TOKEN=<SECRET>
 curl -sfL https://get.k3s.io | K3S_URL=https://10.69.5.1:6443 K3S_TOKEN=$K3S_TOKEN sh -
 ```
 
+## Development machine
+
+Add this to dev server to connect directly to k3s clusters.
+Just need to have kubectl installed.
+
+On a master node:
+
+```cat /etc/rancher/k3s/k3s.yaml```
+
+On the dev machine
+
+```sh
+KUBECONFIG=~/.kube/k3s.yaml
+vim $KUBECONFIG #paste the k3s config from the previous step
+sed -i 's/127.0.0.1/10.69.5.1/' ~/.kube/k3s.yaml
+set -x KUBECONFIG ~/.kube/k3s.yaml # fish shell
+```
+
 <!-- ## Cluster Load Balancer
 
 https://docs.k3s.io/datastore/cluster-loadbalancer?ext-load-balancer=HAProxy#setup-load-balancer -->
