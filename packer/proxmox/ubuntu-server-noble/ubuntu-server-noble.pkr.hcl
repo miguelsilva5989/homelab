@@ -54,6 +54,10 @@ source "proxmox-iso" "ubuntu-server-24" {
     # VM System Settings
     qemu_agent = true
 
+    qemuargs = [
+        ["-machine", "type=q35"],
+    ]
+
     # VM Hard Disk Settings
     scsi_controller = "virtio-scsi-pci"
 
