@@ -1,0 +1,26 @@
+---
+- name: Install and run Portainer
+  hosts: master
+  become: yes
+  tasks:
+    - name: Pull Portainer image
+      docker_image:
+        name: portainer/portainer-ce
+        source: pull
+        tag: latest
+
+    - name: Create portainer data volume
+      docker_volume:
+        name: portainer_data
+
+    - name: Run Portainer container
+      docker_container:
+        name: portainer
+        image: portainer/portainer-ce:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "9000:9000"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - portainer_data:/data
