@@ -13,6 +13,7 @@ An HA K3s cluster with embedded etcd is composed of:
 This will install K3S HA Embedded etcd using `--cluster-init`
 
 ```sh
+export K3S_TOKEN=<SECRET>
 curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable traefik --cluster-init --tls-san=10.69.5.1 --tls-san=k3s.milanchis.com --tls-san=0.0.0.0  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
@@ -35,17 +36,9 @@ k get nodes
 
 ## Agent
 
-Example
-
 ```sh
-curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - agent --server https://<ip or hostname of server>:6443
-```
-
-```sh
-curl -sfL https://get.k3s.io | K3S_URL=https://10.69.5.1:6443 K3S_TOKEN=$K3S_TOKEN sh -s -  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo
-
-# this worked to launch agent
-sudo k3s agent --server https://192.168.69.13:6443 --token $K3S_TOKEN
+export K3S_TOKEN=<SECRET>
+curl -sfL https://get.k3s.io | K3S_URL=https://10.69.5.1:6443 K3S_TOKEN=$K3S_TOKEN sh -
 ```
 
 <!-- ## Cluster Load Balancer
