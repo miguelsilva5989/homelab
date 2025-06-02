@@ -24,10 +24,15 @@ Added --node-taint to not have pods running on master nodes
 Add a **second** and **third** server to the k3s cluster
 
 ```sh
-curl -sfL https://get.k3s.io | K3S_TOKEN=K3S_TOKEN sh -s - server \
-    --server https://10.69.5.2:6443 \
-    --node-taint \
-    --tls-san=10.69.5.2 # Optional, needed if using a fixed registration address
+# Second server
+export K3S_TOKEN=<SECRET>
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --tls-san=10.69.5.2 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+```
+
+```sh
+# Third server
+export K3S_TOKEN=<SECRET>
+curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --tls-san=10.69.5.3 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
 ```
 
 ```sh
