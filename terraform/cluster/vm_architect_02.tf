@@ -1,7 +1,7 @@
-resource "proxmox_vm_qemu" "architect_01" {
-    name = "architect-01"
+resource "proxmox_vm_qemu" "architect_02" {
+    name = "architect-02"
     desc = "CICD Ubuntu Server 24"
-    vmid = "111"
+    vmid = "112"
     target_node = "matrix"
     onboot  = true
 
@@ -44,7 +44,7 @@ resource "proxmox_vm_qemu" "architect_01" {
     }
 
     os_type = "cloud-init"
-    ipconfig0 = "ip=10.69.5.11/16,gw=10.69.0.1"
+    ipconfig0 = "ip=10.69.5.12/16,gw=10.69.0.1"
     nameserver = "10.69.0.1"
 
     ciuser = "mike"

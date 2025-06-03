@@ -38,8 +38,8 @@ source "proxmox-iso" "ubuntu-server-24" {
 
     # VM General Settings
     node = "matrix"
-    vm_id = "100"
-    vm_name = "ubuntu-server-24-noble"
+    vm_id = "101"
+    vm_name = "ubuntu-server-24-noble-docker"
     template_description = "Ubuntu Server 24 (Noble) Image"
 
     # VM OS Settings
@@ -150,14 +150,14 @@ build {
         inline = [ "sudo cp /tmp/99-pve.cfg /etc/cloud/cloud.cfg.d/99-pve.cfg" ]
     }
 
-    # # Docker installation
-    # provisioner "shell" {
-    #     inline = [
-    #         "sudo apt-get install -y ca-certificates curl gnupg lsb-release",
-    #         "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
-    #         "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-    #         "sudo apt-get -y update",
-    #         "sudo apt-get install -y docker-ce docker-ce-cli containerd.io"
-    #     ]
-    # }
+    # Docker installation
+    provisioner "shell" {
+        inline = [
+            "sudo apt-get install -y ca-certificates curl gnupg lsb-release",
+            "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
+            "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
+            "sudo apt-get -y update",
+            "sudo apt-get install -y docker-ce docker-ce-cli containerd.io"
+        ]
+    }
 }

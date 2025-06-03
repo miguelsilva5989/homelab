@@ -1,3 +1,17 @@
+
+TODO 
+
+check k3sup
+
+https://www.youtube.com/watch?v=Yt_PWpn-97g
+
+the nodes need to be added afterwards!
+
+
+
+
+
+
 # K3S
 
 ## High Availability Cluster
