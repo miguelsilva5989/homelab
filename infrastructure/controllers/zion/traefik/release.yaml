@@ -9,7 +9,7 @@ spec:
     createNamespace: true
   chart:
     spec:
-      chart: traefik/traefik
+      chart: traefik
       version: "35.*"  # specify desired chart version
       sourceRef:
         kind: HelmRepository
