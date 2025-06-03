@@ -134,11 +134,7 @@ sed -i 's/127.0.0.1/10.69.69.1/' ~/.kube/k3s.yaml
 set -x KUBECONFIG ~/.kube/k3s.yaml # fish shell
 ```
 
-<!-- ## Cluster Load Balancer
-
-https://docs.k3s.io/datastore/cluster-loadbalancer?ext-load-balancer=HAProxy#setup-load-balancer -->
-
-<!-- ## Traefik
+## Traefik
 
 Install
 
@@ -149,8 +145,9 @@ helm install traefik traefik/traefik --namespace traefik --create-namespace --va
 
 Helm Values - this will redirect all traffic to https, even local one. To test locally disable this by only using `ports: web: {}` and `helm upgrade`
 
-    helm upgrade traefik traefik/traefik --namespace traefik --create-namespace --values traefik-values.yaml
----
+```sh
+helm upgrade traefik traefik/traefik --namespace traefik --create-namespace --values traefik-values.yaml
+```
 
 ```yaml
 ports:
@@ -232,4 +229,4 @@ routes:
 #            name: whoami
 #            port:
 #            number: 80
-``` -->
+```
