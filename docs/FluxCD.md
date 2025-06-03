@@ -1,7 +1,7 @@
 
 # FluxCD Setup
 
-check https://github.com/fluxcd/flux2-kustomize-helm-example
+Check [Helm example](https://github.com/fluxcd/flux2-kustomize-helm-example)
 
 ```sh
 
