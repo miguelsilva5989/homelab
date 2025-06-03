@@ -15,12 +15,7 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-  values:
-    service:
-      type: LoadBalancer
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
-    websecure:
-      port: 8443
-      exposedPort: 443
+  valuesFrom:
+    - kind: ConfigMap
+      name: traefik-values
+

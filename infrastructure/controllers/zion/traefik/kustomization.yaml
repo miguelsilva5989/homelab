@@ -5,3 +5,13 @@ resources:
   - namespace.yaml
   - repository.yaml
   - release.yaml
+  - secret.yaml
+  - values.yaml
+
+configMapGenerator:
+  - name: traefik-values
+    files:
+      - values.yaml=values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
