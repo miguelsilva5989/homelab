@@ -11,7 +11,7 @@ resource "proxmox_vm_qemu" "matrix_03" {
 
     cores = 2
     cpu_type = "x86-64-v4"
-    memory = 16384
+    memory = 8192
 
     network {
         id  = 0
