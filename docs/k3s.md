@@ -1,17 +1,3 @@
-
-TODO 
-
-check k3sup
-
-https://www.youtube.com/watch?v=Yt_PWpn-97g
-
-the nodes need to be added afterwards!
-
-
-
-
-
-
 # K3S
 
 ## High Availability Cluster
@@ -22,50 +8,120 @@ An HA K3s cluster with embedded etcd is composed of:
 - Optional: Zero or more agent nodes that are designated to run your apps and services
 - Optional: A fixed registration address for agent nodes to register with the cluster
 
-## Install K3S Master Node
+## K3sup
 
-This will install K3S HA Embedded etcd using `--cluster-init`
+check k3sup
 
-```sh
-export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - --disable servicelb --disable traefik --cluster-init --tls-san=10.69.5.1 --tls-san=k3s.milanchis.com --tls-san=0.0.0.0  --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
-```
+https://www.youtube.com/watch?v=Yt_PWpn-97g
 
-Added --node-taint to not have pods running on master nodes
+the nodes need to be added afterwards!
 
-## Seconds + Third K3S server
+https://github.com/alexellis/k3sup
 
-Add a **second** and **third** server to the k3s cluster
+### Installation
 
 ```sh
-# Second server
-export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --disable servicelb --disable traefik --tls-san=10.69.5.2 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+curl -sLS https://get.k3sup.dev | sh
+sudo install k3sup /usr/local/bin/
+
+k3sup --help
+```
+
+### Configuration
+
+`10.69.69.1` will be our cluster virtual IP address used by kubevip for LB
+
+```sh
+ssh-copy-id mike@10.69.5.1
+ssh-copy-id mike@10.69.5.2
+ssh-copy-id mike@10.69.5.3
+ssh-copy-id mike@10.69.5.11
+ssh-copy-id mike@10.69.5.12
+
+# Master
+k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
+```
+
+### Kubevip
+
+Configure Kubevip by applying the RBAC manifest (Kubevip runs as a DaemonSet under k3s)
+
+```sh
+kubectl apply -f https://kube-vip.io/manifests/rbac.yaml
+```
+
+On the master node `ssh mike@10.69.5.1`
+
+```sh
+sudo su
+export VIP=10.69.69.1 # this is not the IP of the master node. It's the TLS san we setup before :) this is the IP for the kube vip control plane
+export INTERFACE=eth0
+KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
+alias kube-vip="ctr image pull ghcr.io/kube-vip/kube-vip:$KVVERSION; ctr run --rm --net-host ghcr.io/kube-vip/kube-vip:$KVVERSION vip /kube-vip"
+
+# sudo touch /var/lib/rancher/k3s/server/manifests/kube-vip.yaml
+# sudo chown mike /var/lib/rancher/k3s/server/manifests/kube-vip.yaml
+
+kube-vip manifest daemonset \
+    --interface $INTERFACE \
+    --address $VIP \
+    --inCluster \
+    --taint \
+    --controlplane \
+    --services \
+    --arp \
+    --leaderElection | tee /var/lib/rancher/k3s/server/manifests/kube-vip.yaml
+```
+
+Back to the development machine, let's test the DaemonSet by pinging `10.69.69.1` and it should be reachable
+
+```sh
+ping 10.69.69.1
+# PING 10.69.69.1 (10.69.69.1) 56(84) bytes of data.
+# 64 bytes from 10.69.69.1: icmp_seq=1 ttl=63 time=0.412 ms
+# 64 bytes from 10.69.69.1: icmp_seq=2 ttl=63 time=0.358 ms
+kubectl get ds -A
+# NAMESPACE     NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+# kube-system   kube-vip-ds   1         1         1       1            1           <none>          90s
+```
+
+Join the remaining control nodes
+
+```sh
+# 2nd Server
+# notice servce-ip is the virtual IP
+k3sup join --ip 10.69.5.2 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.2 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
 ```
 
 ```sh
-# Third server
-export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_TOKEN=$K3S_TOKEN sh -s - server --server https://10.69.5.1:6443 --disable servicelb --disable traefik --tls-san=10.69.5.3 --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule
+# 3rd Server
+k3sup join --ip 10.69.5.3 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.3 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
 ```
+
+Check the nodes `kubectl get nodes`
+
+Change the local kube config to point to the virtual IP
 
 ```sh
-kubectl get nodes
+sed -i 's/10.69.5.1/10.69.69.1/' ~/.kube/config
+kubectl get nodes # this should still work after the change
 ```
 
-## Agent
+Join the agents
 
 ```sh
-export K3S_TOKEN=<SECRET>
-curl -sfL https://get.k3s.io | K3S_URL=https://10.69.5.1:6443 K3S_TOKEN=$K3S_TOKEN sh -
+k3sup join --ip 10.69.5.11 --server-ip 10.69.69.1 --user mike
+k3sup join --ip 10.69.5.12 --server-ip 10.69.69.1 --user mike
 ```
 
-## Development machine
+Check the nodes `kubectl get nodes`
 
-Add this to dev server to connect directly to k3s clusters.
-Just need to have kubectl installed.
+## Other development machines
 
-On a master node:
+If required when changing to another development machine, add this to dev server to connect directly to k3s clusters.
+We just need to have `kubectl` installed.
+
+On a master node
 
 ```cat /etc/rancher/k3s/k3s.yaml```
 
@@ -74,7 +130,7 @@ On the dev machine
 ```sh
 KUBECONFIG=~/.kube/k3s.yaml
 vim $KUBECONFIG #paste the k3s config from the previous step
-sed -i 's/127.0.0.1/10.69.5.1/' ~/.kube/k3s.yaml
+sed -i 's/127.0.0.1/10.69.69.1/' ~/.kube/k3s.yaml
 set -x KUBECONFIG ~/.kube/k3s.yaml # fish shell
 ```
 

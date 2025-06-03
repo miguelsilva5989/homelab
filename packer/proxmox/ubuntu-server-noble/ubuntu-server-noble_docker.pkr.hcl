@@ -12,7 +12,6 @@ packer {
   }
 }
 
-
 variable "proxmox_api_url" {
     type = string
 }
@@ -118,7 +117,6 @@ source "proxmox-iso" "ubuntu-server-24" {
 }
 
 build {
-
     name = "ubuntu-server-24"
     sources = ["proxmox-iso.ubuntu-server-24"]
 
