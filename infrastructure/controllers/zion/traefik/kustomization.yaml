@@ -7,10 +7,10 @@ resources:
   - repository.yaml
   # - secret.yaml
 
-# configMapGenerator:
-#   - name: traefik-values
-#     files:
-#       - values.yaml=values.yaml
+configMapGenerator:
+  - name: traefik-values
+    files:
+      - values.yaml=values.yaml
 
-# configurations:
-#   - kustomizeconfig.yaml
+configurations:
+  - kustomizeconfig.yaml

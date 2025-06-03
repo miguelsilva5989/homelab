@@ -23,17 +23,17 @@ persistence:
   size: 1Gi
   path: /ssl-certs
 
-env:
-  - name: CF_API_EMAIL
-    valueFrom:
-      secretKeyRef:
-        key: email
-        name: cloudflare-credentials
-  - name: CF_API_KEY
-    valueFrom:
-      secretKeyRef:
-        key: apiKey
-        name: cloudflare-credentials
+# env:
+#   - name: CF_API_EMAIL
+#     valueFrom:
+#       secretKeyRef:
+#         key: email
+#         name: cloudflare-credentials
+#   - name: CF_API_KEY
+#     valueFrom:
+#       secretKeyRef:
+#         key: apiKey
+#         name: cloudflare-credentials
 
 
 
