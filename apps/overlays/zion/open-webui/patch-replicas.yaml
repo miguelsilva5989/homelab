@@ -4,7 +4,7 @@ metadata:
   name: open-webui
   namespace: open-webui
 spec:
-  replicas: 3
+  replicas: 6
   selector:
     matchLabels:
       app: open-webui
