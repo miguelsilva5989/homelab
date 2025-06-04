@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  labels:
+    app: test-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-app
+        image: hashicorp/http-echo:0.2.3  # lightweight echo server for HTTP test
+        args:
+          - "-text=Hello HTTPS from Traefik!"
+        ports:
+        - containerPort: 5678

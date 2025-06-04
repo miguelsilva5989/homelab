@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: test-app
+
+namePrefix:
+  zion-
+
+metadata:  
+  name: test-app
+  namespace: test-app
+
+resources:
+  - ../../../base/test-app
+  - ingress.yaml
