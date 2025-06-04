@@ -6,10 +6,10 @@ deployment:
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
-  # tolerations:
-  #   - key: "node-role.kubernetes.io/master"
-  #     operator: "Exists"
-  #     effect: "NoSchedule"
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+      effect: "NoSchedule"
 
 # -- This example pod anti-affinity forces the scheduler to put traefik pods
 # -- on nodes where no other traefik pods are scheduled.
@@ -22,6 +22,16 @@ deployment:
 #             app.kubernetes.io/name: traefik
 #             app.kubernetes.io/instance: traefik-traefik
 #         topologyKey: kubernetes.io/hostname
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+              app.kubernetes.io/instance: traefik-traefik
+          topologyKey: kubernetes.io/hostname
 
 service:
   enabled: true
