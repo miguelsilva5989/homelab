@@ -39,7 +39,7 @@ ssh-copy-id mike@10.69.5.11
 ssh-copy-id mike@10.69.5.12
 
 # Master
-k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
+k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
 ```
 
 ### Kubevip
@@ -90,12 +90,12 @@ Join the remaining control nodes
 ```sh
 # 2nd Server
 # notice servce-ip is the virtual IP
-k3sup join --ip 10.69.5.2 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.2 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
+k3sup join --ip 10.69.5.2 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.2 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
 ```
 
 ```sh
 # 3rd Server
-k3sup join --ip 10.69.5.3 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.3 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo --node-taint node-role.kubernetes.io/master=:NoSchedule'
+k3sup join --ip 10.69.5.3 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.3 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
 ```
 
 Check the nodes `kubectl get nodes`

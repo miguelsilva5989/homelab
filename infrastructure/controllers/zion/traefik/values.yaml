@@ -22,7 +22,7 @@ deployment:
 #             app.kubernetes.io/name: traefik
 #             app.kubernetes.io/instance: traefik-traefik
 #         topologyKey: kubernetes.io/hostname
-affinity:
+# affinity:
   # nodeAffinity:
   #   requiredDuringSchedulingIgnoredDuringExecution:
   #     nodeSelectorTerms:
@@ -33,13 +33,13 @@ affinity:
   #         - master-01
   #         - master-02
   #         - master-03
-  podAntiAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: traefik
-          app.kubernetes.io/instance: traefik-traefik
-      topologyKey: kubernetes.io/hostname
+  # podAntiAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #   - labelSelector:
+  #       matchLabels:
+  #         app.kubernetes.io/name: traefik
+  #         app.kubernetes.io/instance: traefik-traefik
+  #     topologyKey: kubernetes.io/hostname
   # podAntiAffinity:
     # requiredDuringSchedulingIgnoredDuringExecution:
     # - labelSelector:

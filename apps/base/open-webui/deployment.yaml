@@ -22,3 +22,10 @@ spec:
         envFrom:
         - configMapRef:
             name: open-webui-configmap
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist

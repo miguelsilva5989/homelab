@@ -21,7 +21,13 @@ spec:
           - "-text=Hello HTTPS from Traefik!"
         ports:
         - containerPort: 5678
-
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
 ---
 apiVersion: v1
 kind: Namespace
