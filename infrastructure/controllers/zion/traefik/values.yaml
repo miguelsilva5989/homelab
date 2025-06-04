@@ -13,7 +13,7 @@ deployment:
           - key: app.kubernetes.io/name
             operator: In
             values:
-            - traefik
+            - traefik-traefik
         topologyKey: "kubernetes.io/hostname"
 
 service:

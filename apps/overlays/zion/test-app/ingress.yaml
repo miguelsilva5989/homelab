@@ -9,6 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
 spec:
+  ingressClassName: traefik
   rules:
   - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
     http:
