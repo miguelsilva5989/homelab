@@ -1,10 +1,15 @@
 deployment:
   enabled: true
+  kind: Deployment
   replicas: 2 # match with number of workers
   annotations: {}
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+      effect: "NoSchedule"
 
 # -- This example pod anti-affinity forces the scheduler to put traefik pods
 # -- on nodes where no other traefik pods are scheduled.
@@ -15,7 +20,7 @@ affinity:
       - labelSelector:
           matchLabels:
             app.kubernetes.io/name: traefik
-            app.kubernetes.io/instance: traefik-traefik
+            app.kubernetes.io/instance: traefik
         topologyKey: kubernetes.io/hostname
 
 service:
