@@ -5,20 +5,31 @@ deployment:
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
-  tolerations:
+  tolerations: # to allow these pods to run on master nodes
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
       effect: "NoSchedule"
   affinity:
-    podAntiAffinity:
+    # podAntiAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #   - labelSelector:
+    #       matchExpressions:
+    #       - key: app.kubernetes.io/name
+    #         operator: In
+    #         values:
+    #         - traefik
+    #     topologyKey: "kubernetes.io/hostname"
+    nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
-          - key: app.kubernetes.io/name
+          - key: kubernetes.io/hostname
             operator: In
             values:
-            - traefik
-        topologyKey: "kubernetes.io/hostname"
+            - architect-02
+            - matrix-01
+            - matrix-02
+            - matrix-03
 
 service:
   enabled: true
