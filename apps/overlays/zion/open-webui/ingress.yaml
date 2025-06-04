@@ -3,8 +3,11 @@ kind: Ingress
 metadata:
   name: open-webui
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    # Optionally add TLS redirect, middleware, etc.
+    # traefik.ingress.kubernetes.io/router.entrypoints: web
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: "cloudflare"
 spec:
   ingressClassName: traefik
   rules:
@@ -19,7 +22,7 @@ spec:
             port:
               number: 80
   # Optional TLS section
-  # tls:
-  # - hosts:
-  #   - openwebui.milanchis.com
+  tls:
+    - hosts:
+        - openwebui.milanchis.com
   #   secretName: openwebui-tls-secret
