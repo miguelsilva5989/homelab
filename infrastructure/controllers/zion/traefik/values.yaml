@@ -1,36 +1,22 @@
 deployment:
   enabled: true
-  replicas: 3 # match with number of workers
+  replicas: 2 # match with number of workers
   annotations: {}
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
-  tolerations: # to allow these pods to run on master nodes
-    - key: "node-role.kubernetes.io/master"
-      operator: "Exists"
-      effect: "NoSchedule"
 
+# -- This example pod anti-affinity forces the scheduler to put traefik pods
+# -- on nodes where no other traefik pods are scheduled.
+# It should be used when hostNetwork: true to prevent port conflicts
 affinity:
-  # podAntiAffinity:
-  #   requiredDuringSchedulingIgnoredDuringExecution:
-  #   - labelSelector:
-  #       matchExpressions:
-  #       - key: app.kubernetes.io/name
-  #         operator: In
-  #         values:
-  #         - traefik
-  #     topologyKey: "kubernetes.io/hostname"
-  nodeAffinity:
+  podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - architect-02
-          - matrix-01
-          - matrix-02
-          - matrix-03
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: traefik
+            app.kubernetes.io/instance: traefik-traefik
+        topologyKey: kubernetes.io/hostname
 
 service:
   enabled: true
