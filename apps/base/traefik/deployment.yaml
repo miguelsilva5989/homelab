@@ -41,7 +41,7 @@ spec:
               secretKeyRef:
                 key: apiKey
                 name: cloudflare-credentials
-    volumes:
-      - name: config
-        configMap:
-          name: traefik-config
+      volumes:
+        - name: config
+          configMap:
+            name: traefik-config
