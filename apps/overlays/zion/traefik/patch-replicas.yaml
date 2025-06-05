@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: open-webui
+  namespace: open-webui
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: open-webui
+  template:
+    metadata:
+      labels:
+        app: open-webui
+

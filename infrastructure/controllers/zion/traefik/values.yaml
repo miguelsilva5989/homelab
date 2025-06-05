@@ -1,7 +1,7 @@
 deployment:
   enabled: true
   kind: Deployment
-  replicas: 9 # match with number of workers
+  replicas: 3 # match with number of workers
   annotations: {}
   podAnnotations: {}
   additionalContainers: []
