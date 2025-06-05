@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:  
-  name: open-webui
-  namespace: open-webui
+  name: traefik
+  namespace: traefik
 spec:
   replicas: 6
   selector:
     matchLabels:
-      app: open-webui
+      app: traefik
   template:
     metadata:
       labels:
-        app: open-webui
+        app: traefik
 
