@@ -2,14 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: test-app-ingress
-  namespace: default      # or your namespace, e.g. open-webui or test-app ns
+  namespace: test-app
   annotations:
     kubernetes.io/ingress.class: "traefik"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
 spec:
-  ingressClassName: traefik
+  # ingressClassName: traefik
   rules:
   - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
     http:

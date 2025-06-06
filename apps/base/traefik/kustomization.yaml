@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: traefik
 
 resources:
-  - rbac.yaml
   - namespace.yaml
   - cloudflare-api-token-sealedsecret.yaml
   - configmap.yaml

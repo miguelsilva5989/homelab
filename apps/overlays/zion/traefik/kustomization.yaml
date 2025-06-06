@@ -11,6 +11,8 @@ metadata:
   namespace: traefik
 
 resources:
+  - service-account.yaml
+  - rbac.yaml
   - ../../../base/traefik
 
 patches:

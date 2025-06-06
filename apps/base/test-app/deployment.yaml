@@ -19,6 +19,7 @@ spec:
         image: hashicorp/http-echo:0.2.3  # lightweight echo server for HTTP test
         args:
           - "-text=Hello HTTPS from Traefik!"
+          - "--providers.kubernetesingress.ingressclass=traefik"
         ports:
         - containerPort: 5678
       affinity:

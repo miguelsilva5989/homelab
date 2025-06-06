@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: open-webui
 spec:
-  type: LoadBalancer
+  # type: LoadBalancer
+  selector:
+    app: open-webui
   ports:
   - protocol: TCP
     port: 80
     targetPort: 8080
-  selector:
-    app: open-webui

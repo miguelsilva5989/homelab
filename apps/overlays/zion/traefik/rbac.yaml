@@ -69,5 +69,5 @@ roleRef:
   name: traefik-ingress-controller
 subjects:
   - kind: ServiceAccount
-    name: traefik-ingress-controller
-    namespace: default
+    name: zion-traefik
+    namespace: traefik
