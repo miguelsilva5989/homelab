@@ -7,6 +7,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: "local-path"
   hostPath:  # Use a local option, or adjust it based on your infrastructure.
     path: /mnt/data/open-webui
 ---
