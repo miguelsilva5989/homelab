@@ -5,8 +5,9 @@ namespace: traefik
 
 resources:
   - namespace.yaml
-  - release.yaml
-  - repository.yaml
+  # - release.yaml
+  # - repository.yaml
+  - volume.yaml
   - middleware.yaml
   - cloudflare-api-token-sealedsecret.yaml
 

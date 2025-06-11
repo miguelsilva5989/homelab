@@ -129,9 +129,9 @@ On the dev machine
 
 ```sh
 KUBECONFIG=~/.kube/k3s.yaml
+set -x KUBECONFIG ~/.kube/k3s.yaml # fish shell
 vim $KUBECONFIG #paste the k3s config from the previous step
 sed -i 's/127.0.0.1/10.69.69.1/' ~/.kube/k3s.yaml
-set -x KUBECONFIG ~/.kube/k3s.yaml # fish shell
 ```
 
 ## Traefik
@@ -140,13 +140,13 @@ Install
 
 ```sh
 helm repo add traefik https://traefik.github.io/charts
-helm install traefik traefik/traefik --namespace traefik --create-namespace --values traefik-values.yaml 
+helm install traefik traefik/traefik --namespace traefik --create-namespace --values values.yaml 
 ```
 
 Helm Values - this will redirect all traffic to https, even local one. To test locally disable this by only using `ports: web: {}` and `helm upgrade`
 
 ```sh
-helm upgrade traefik traefik/traefik --namespace traefik --create-namespace --values traefik-values.yaml
+helm upgrade traefik traefik/traefik --namespace traefik --create-namespace --values values.yaml
 ```
 
 ```yaml

@@ -38,6 +38,6 @@ spec:
   #           port:
   #             number: 80
   tls:
-    certResolver: default
+    certResolver: cloudflare
   # - hosts:
   #   - argocd.milanchis.com

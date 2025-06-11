@@ -1,7 +1,7 @@
 deployment:
   enabled: true
-  kind: Deployment
-  replicas: 3 # match with number of workers
+  kind: DaemonSet # to run on multiple nodes
+  # replicas: 3 # match with number of workers
   annotations: {}
   podAnnotations: {}
   additionalContainers: []
@@ -14,7 +14,7 @@ deployment:
 # -- This example pod anti-affinity forces the scheduler to put traefik pods
 # -- on nodes where no other traefik pods are scheduled.
 # It should be used when hostNetwork: true to prevent port conflicts
-# affinity:
+affinity: {}
 #   podAntiAffinity:
 #     requiredDuringSchedulingIgnoredDuringExecution:
 #       - labelSelector:
@@ -80,13 +80,14 @@ ports:
 
 ingressRoute:
   dashboard:
-    enabled: false
+    enabled: true
 
 persistence:
   enabled: true
-  name: ssl-certs
-  size: 1Gi
-  path: /ssl-certs
+  existingClaim: ssl-certs
+  # name: ssl-certs
+  # size: 1Gi
+  # path: /ssl-certs
 
 env:
   - name: CF_API_EMAIL

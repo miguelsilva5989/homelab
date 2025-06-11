@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: open-webui
 spec:
-  # type: LoadBalancer
+  type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app: open-webui
   ports:

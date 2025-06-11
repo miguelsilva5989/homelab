@@ -5,11 +5,12 @@ metadata:
   namespace: test-app
   annotations:
     kubernetes.io/ingress.class: "traefik"
+    # traefik.ingress.kubernetes.io/router.entrypoints: web
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
 spec:
-  # ingressClassName: traefik
+  ingressClassName: traefik
   rules:
   - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
     http:
@@ -18,7 +19,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: test-app
+            name: zion-test-app
             port:
               number: 80
   tls:
