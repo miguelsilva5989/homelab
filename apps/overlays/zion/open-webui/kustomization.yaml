@@ -13,7 +13,6 @@ metadata:
 resources:
   - ../../../base/open-webui
   - configmap.yaml
-  - volume.yaml
   - ingress.yaml
 
 patches:
