@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - cert-manager
+  - authentik
   - longhorn
   - traefik
