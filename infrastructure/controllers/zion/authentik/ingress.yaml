@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-ingress
+  namespace: authentik
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    # traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
+    cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: authentik
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - authentik.milanchis.com
+    # secretName: authentik-certificate-secret

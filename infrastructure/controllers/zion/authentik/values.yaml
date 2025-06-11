@@ -1,0 +1,59 @@
+deployment:
+  enabled: true
+  kind: DaemonSet # to run on multiple nodes
+  # replicas: 3 # match with number of workers
+  annotations: {}
+  podAnnotations: {}
+  additionalContainers: []
+  initContainers: []
+  # tolerations:
+  #   - key: "node-role.kubernetes.io/master"
+  #     operator: "Exists"
+  #     effect: "NoSchedule"
+
+affinity: {}
+
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - authentik.milanchis.com
+  env:
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: authentikSecret
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: postgresPassword
+
+postgresql:
+  enabled: true
+  auth:
+    # password: "ThisIsNotASecurePassword"
+    existingSecret: authentik-credentials
+
+redis:
+  enabled: true
+
+# # add this block under the `authentik:` block in your values.yaml file
+# # authentik:
+# email:
+#     # -- SMTP Server emails are sent from, fully optional
+#     host: ""
+#     port: 587
+#     # -- SMTP credentials. When left empty, no authentication will be done.
+#     username: ""
+#     # -- SMTP credentials. When left empty, no authentication will be done.
+#     password: ""
+#     # -- Enable either use_tls or use_ssl. They can't be enabled at the same time.
+#     use_tls: true
+#     # -- Enable either use_tls or use_ssl. They can't be enabled at the same time.
+#     use_ssl: false
+#     # -- Connection timeout in seconds
+#     timeout: 30
+#     # -- Email 'from' address can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>"
+#     from: "miguelsilva5989@gmail.com"
