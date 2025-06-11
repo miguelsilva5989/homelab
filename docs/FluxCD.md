@@ -19,3 +19,7 @@ flux get kustomizations --watch
 
 
 ```
+
+## Secrets
+
+https://fluxcd.io/flux/guides/sealed-secrets/

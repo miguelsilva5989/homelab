@@ -22,6 +22,9 @@ spec:
         envFrom:
         - configMapRef:
             name: open-webui-configmap
+        volumeMounts:
+        - mountPath: /app/backend/data
+          name: open-webui-storage
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

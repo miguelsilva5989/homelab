@@ -4,4 +4,5 @@ metadata:
   name: open-webui-configmap
 data:
   OLLAMA_ORIGINS: "*"
+  # OLLAMA_BBASE_URL: "X.X.X.X"
   OPENWEBUI_SETTING_2: "value2"
