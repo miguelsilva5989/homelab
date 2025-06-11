@@ -23,8 +23,12 @@ spec:
         - configMapRef:
             name: open-webui-configmap
         volumeMounts:
-        - mountPath: /app/backend/data
-          name: open-webui
+        - mountPath: /app/backend/data  
+          name: open-webui-storage  
+      volumes:  
+      - name: open-webui-storage 
+        persistentVolumeClaim:
+          claimName: open-webui
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
