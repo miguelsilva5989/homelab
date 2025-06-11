@@ -15,4 +15,7 @@ spec:
         namespace: cert-manager
       interval: 12h
   values:
-    installCRDs: true
+    crds:
+      enabled: true
+    dns01RecursiveNameserversOnly: true
+    dns01RecursiveNameservers: "1.1.1.1:53,1.0.0.1:53"
