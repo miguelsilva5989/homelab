@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
+  - host: authentik.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
     http:
       paths:
       - path: /
