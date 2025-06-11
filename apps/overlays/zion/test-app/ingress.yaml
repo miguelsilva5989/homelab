@@ -26,4 +26,4 @@ spec:
   tls:
   - hosts:
     - test.milanchis.com
-    secretName: test-app-certificate-secret
+    # secretName: test-app-certificate-secret
