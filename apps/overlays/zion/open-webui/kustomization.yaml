@@ -11,8 +11,9 @@ metadata:
   namespace: open-webui
 
 resources:
-  - configmap.yaml
   - ../../../base/open-webui
+  - configmap.yaml
+  - volume.yaml
   - ingress.yaml
 
 patches:
