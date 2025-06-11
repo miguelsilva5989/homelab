@@ -12,5 +12,5 @@ metadata:
 
 resources:
   - ../../../base/test-app
-  - ingress.yaml
   - certificate.yaml
+  - ingress.yaml
