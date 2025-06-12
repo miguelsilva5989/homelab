@@ -11,7 +11,7 @@ metadata:
     # traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
     cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"
     # traefik.http.routers.test-app.middlewares: "authentik@file"
-    traefik.ingress.kubernetes.io/router.middlewares: "test-app-middleware@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "test-app/test-app-middleware@kubernetescrd"
 spec:
   ingressClassName: traefik
   rules:
@@ -28,4 +28,4 @@ spec:
   tls:
   - hosts:
     - test.milanchis.com
-    # secretName: test-app-certificate-secret
+    secretName: test-app-certificate-secret
