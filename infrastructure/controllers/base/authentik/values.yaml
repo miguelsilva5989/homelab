@@ -26,10 +26,10 @@ server:
       value: redis
     # - name: AUTHENTIK_POSTGRESQL__HOST
     #   value: postgresql
-    - name: AUTHENTIK_POSTGRESQL__USER
-      value: authentik-mike
-    - name: AUTHENTIK_POSTGRESQL__NAME
-      value: authentik-db
+    # - name: AUTHENTIK_POSTGRESQL__USER
+    #   value: authentik-mike
+    # - name: AUTHENTIK_POSTGRESQL__NAME
+    #   value: authentik-db
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
@@ -58,10 +58,10 @@ worker:
       value: redis
     # - name: AUTHENTIK_POSTGRESQL__HOST
     #   value: postgresql
-    - name: AUTHENTIK_POSTGRESQL__USER
-      value: authentik-mike
-    - name: AUTHENTIK_POSTGRESQL__NAME
-      value: authentik-db
+    # - name: AUTHENTIK_POSTGRESQL__USER
+    #   value: authentik-mike
+    # - name: AUTHENTIK_POSTGRESQL__NAME
+    #   value: authentik-db
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
@@ -82,8 +82,8 @@ worker:
 postgresql:
   enabled: true
   auth:
-    username: authentik-mike
-    database: authentik-db
+    # username: authentik-mike
+    # database: authentik-db
     # password: "ThisIsNotASecurePassword"
     existingSecret: authentik-credentials
 
