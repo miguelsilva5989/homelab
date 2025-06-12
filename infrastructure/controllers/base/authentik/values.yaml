@@ -26,6 +26,11 @@ server:
     #   - hosts:
     #     - authentik.milanchis.com
     #     # secretName: authentik-zion-tls
+  containerPorts:
+    # -- http container port
+    http: 9000
+    # -- https container port
+    https: 9443
   env:
     - name: AUTHENTIK_REDIS__HOST
       value: authentik-redis-master
