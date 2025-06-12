@@ -28,7 +28,7 @@ server:
       valueFrom:
         secretKeyRef:
           name: authentik-credentials
-          key: postgresPassword
+          key: password
 
 postgresql:
   enabled: true
