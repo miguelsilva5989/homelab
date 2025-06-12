@@ -13,6 +13,11 @@ deployment:
 
 affinity: {}
 
+
+authentik:
+  existingSecret: authentik-credentials
+
+
 server:
   ingress:
     enabled: true
@@ -23,12 +28,17 @@ server:
       valueFrom:
         secretKeyRef:
           name: authentik-credentials
-          key: authentikSecret
-    - name: AUTHENTIK_SECRET_KEY
+          key: password
+    - name: PG_PASS
       valueFrom:
         secretKeyRef:
           name: authentik-credentials
           key: password
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: authentikSecret
 
 postgresql:
   enabled: true
