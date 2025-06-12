@@ -23,9 +23,9 @@ server:
       - authentik.milanchis.com
   env:
     - name: AUTHENTIK_REDIS__HOST
-      value: redis
-    # - name: AUTHENTIK_POSTGRESQL__HOST
-    #   value: postgresql
+      value: authentik-redis-master
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: authentik-postgresql
     # - name: AUTHENTIK_POSTGRESQL__USER
     #   value: authentik-mike
     # - name: AUTHENTIK_POSTGRESQL__NAME
@@ -55,9 +55,9 @@ worker:
   replicas: 5
   env:
     - name: AUTHENTIK_REDIS__HOST
-      value: redis
-    # - name: AUTHENTIK_POSTGRESQL__HOST
-    #   value: postgresql
+      value: authentik-redis-master
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: authentik-postgresql
     # - name: AUTHENTIK_POSTGRESQL__USER
     #   value: authentik-mike
     # - name: AUTHENTIK_POSTGRESQL__NAME
