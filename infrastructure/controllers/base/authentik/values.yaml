@@ -26,10 +26,10 @@ server:
       value: authentik-redis-master
     - name: AUTHENTIK_POSTGRESQL__HOST
       value: authentik-postgresql
-    # - name: AUTHENTIK_POSTGRESQL__USER
-    #   value: authentik-mike
-    # - name: AUTHENTIK_POSTGRESQL__NAME
-    #   value: authentik-db
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: authentik
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: authentik
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
@@ -58,10 +58,10 @@ worker:
       value: authentik-redis-master
     - name: AUTHENTIK_POSTGRESQL__HOST
       value: authentik-postgresql
-    # - name: AUTHENTIK_POSTGRESQL__USER
-    #   value: authentik-mike
-    # - name: AUTHENTIK_POSTGRESQL__NAME
-    #   value: authentik-db
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: authentik
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: authentik
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
