@@ -10,6 +10,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     # traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare
     cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"
+    traefik.http.routers.test-app.middlewares: "authentik@file"
 spec:
   ingressClassName: traefik
   rules:
