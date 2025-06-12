@@ -13,10 +13,8 @@ deployment:
 
 affinity: {}
 
-
 authentik:
   existingSecret: authentik-credentials
-
 
 server:
   ingress:
@@ -24,6 +22,14 @@ server:
     hosts:
       - authentik.milanchis.com
   env:
+    - name: AUTHENTIK_REDIS__HOST
+      value: redis
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: postgresql
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: authentik-mike
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: authentik-db
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
@@ -48,6 +54,14 @@ worker:
   # -- The number of worker pods to run
   replicas: 5
   env:
+    - name: AUTHENTIK_REDIS__HOST
+      value: redis
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: postgresql
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: authentik-mike
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: authentik-db
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
@@ -68,6 +82,8 @@ worker:
 postgresql:
   enabled: true
   auth:
+    username: authentik-mike
+    database: authentik-db
     # password: "ThisIsNotASecurePassword"
     existingSecret: authentik-credentials
 
