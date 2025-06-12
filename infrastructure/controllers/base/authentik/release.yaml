@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: goauthentik
         namespace: authentik
-  # valuesFrom:
-  #   - kind: ConfigMap
-  #     name: traefik-values
+  valuesFrom:
+    - kind: ConfigMap
+      name: authentik-values
 

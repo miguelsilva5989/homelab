@@ -5,14 +5,3 @@ namespace: authentik
 
 resources:
   - ../../base/authentik
-  - authentik-sealedsecret.yaml
-  - certificate.yaml
-  - ingress.yaml
-
-configMapGenerator:
-  - name: authentik-values
-    files:
-      - values.yaml=values.yaml
-
-configurations:
-  - kustomizeconfig.yaml

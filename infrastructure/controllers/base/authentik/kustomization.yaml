@@ -7,11 +7,14 @@ resources:
   - namespace.yaml
   - release.yaml
   - repository.yaml
+  - authentik-sealedsecret.yaml
+  - certificate.yaml
+  - ingress.yaml
 
-# configMapGenerator:
-#   - name: authentik-values
-#     files:
-#       - values.yaml=values.yaml
+configMapGenerator:
+  - name: authentik-values
+    files:
+      - values.yaml=values.yaml
 
-# configurations:
-#   - kustomizeconfig.yaml
+configurations:
+  - kustomizeconfig.yaml
