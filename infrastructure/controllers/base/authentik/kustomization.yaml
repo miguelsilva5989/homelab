@@ -10,6 +10,7 @@ resources:
   - authentik-sealedsecret.yaml
   - certificate.yaml
   - ingress.yaml
+  - service.yaml
 
 configMapGenerator:
   - name: authentik-values
