@@ -48,6 +48,16 @@ worker:
   # -- The number of worker pods to run
   replicas: 5
   env:
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: password
+    - name: PG_PASS
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: password
     - name: AUTHENTIK_SECRET_KEY
       valueFrom:
         secretKeyRef:
