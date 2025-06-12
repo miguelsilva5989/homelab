@@ -24,8 +24,8 @@ server:
   env:
     - name: AUTHENTIK_REDIS__HOST
       value: redis
-    - name: AUTHENTIK_POSTGRESQL__HOST
-      value: postgresql
+    # - name: AUTHENTIK_POSTGRESQL__HOST
+    #   value: postgresql
     - name: AUTHENTIK_POSTGRESQL__USER
       value: authentik-mike
     - name: AUTHENTIK_POSTGRESQL__NAME
@@ -56,8 +56,8 @@ worker:
   env:
     - name: AUTHENTIK_REDIS__HOST
       value: redis
-    - name: AUTHENTIK_POSTGRESQL__HOST
-      value: postgresql
+    # - name: AUTHENTIK_POSTGRESQL__HOST
+    #   value: postgresql
     - name: AUTHENTIK_POSTGRESQL__USER
       value: authentik-mike
     - name: AUTHENTIK_POSTGRESQL__NAME
