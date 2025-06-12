@@ -40,6 +40,21 @@ server:
           name: authentik-credentials
           key: authentikSecret
 
+worker:
+  # -- whether to enable worker resources
+  enabled: true
+  # -- authentik worker name
+  name: worker
+  # -- The number of worker pods to run
+  replicas: 5
+  env:
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-credentials
+          key: authentikSecret
+
+
 postgresql:
   enabled: true
   auth:
