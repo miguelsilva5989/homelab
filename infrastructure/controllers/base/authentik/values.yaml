@@ -18,14 +18,14 @@ authentik:
 
 server:
   ingress:
-    ingressClassName: traefik
-    enabled: false
+    # ingressClassName: traefik
+    enabled: true
     hosts:
       - authentik.milanchis.com
-    tls:
-      - hosts:
-        - authentik.milanchis.com
-        # secretName: authentik-zion-tls
+    # tls:
+    #   - hosts:
+    #     - authentik.milanchis.com
+    #     # secretName: authentik-zion-tls
   env:
     - name: AUTHENTIK_REDIS__HOST
       value: authentik-redis-master
