@@ -11,7 +11,7 @@ resources:
   - certificate.yaml
   - ingress.yaml
   # - service.yaml
-  - middleware.yaml
+  # - middleware.yaml
 
 configMapGenerator:
   - name: authentik-values

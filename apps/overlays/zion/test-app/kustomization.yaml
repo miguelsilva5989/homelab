@@ -14,3 +14,4 @@ resources:
   - ../../../base/test-app
   - certificate.yaml
   - ingress.yaml
+  - middleware.yaml
