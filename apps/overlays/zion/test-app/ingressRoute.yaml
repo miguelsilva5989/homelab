@@ -30,19 +30,19 @@ spec:
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: zion-traefik-outpost
           port: 9000
-  # ingressClassName: traefik
-  # rules:
-  # - host: argocd.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
-  #   http:
-  #     paths:
-  #     - path: /
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: argocd-server
-  #           port:
-  #             number: 80
-  # tls:
-  #   certResolver: cloudflare
-  # - hosts:
-  #   - argocd.milanchis.com
+  ingressClassName: traefik
+  rules:
+  - host: test.milanchis.com   # YOUR domain/subdomain, pointed to your Traefik IP via Cloudflare A record
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-app
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - test.milanchis.com
+    certResolver: cloudflare
