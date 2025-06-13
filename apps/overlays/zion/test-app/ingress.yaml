@@ -59,19 +59,20 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`test.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    - match: Host(`test.milanchis.com`)
       kind: Rule
+      priority: 10
       middlewares:
-        - name: test-app-middleware
-      services:
-        - name: traefik-outpost
-          port: 9000
-    - match: Host(`test.milanchis.com`) && PathPrefix(`/`)
-      kind: Rule
-      middlewares:
-        - name: test-app-middleware
+        - name: authentik-forwardauth
+          namespace: traefik
       services:
         - name: zion-test-app
           port: 80
+    - match: Host(`test.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      priority: 15
+      services:
+        - name: traefik-outpost
+          port: 9000
   tls:
     certResolver: cloudflare
