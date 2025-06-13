@@ -41,5 +41,10 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+    - match: Host(`traefik.milanchis.com`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
   tls:
     certResolver: cloudflare

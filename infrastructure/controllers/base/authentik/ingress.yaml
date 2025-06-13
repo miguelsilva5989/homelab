@@ -26,4 +26,4 @@ spec:
   tls:
   - hosts:
     - authentik.milanchis.com
-    # secretName: authentik-certificate-secret
+    secretName: authentik-certificate-secret
