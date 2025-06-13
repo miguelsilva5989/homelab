@@ -42,7 +42,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: traefik-outpost
+            name: zion-traefik-outpost
             port:
               number: 9000
   tls:
