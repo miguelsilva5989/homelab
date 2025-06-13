@@ -38,11 +38,15 @@ spec:
   routes:
     - match: Host(`traefik.milanchis.com`) && PathPrefix(`/dashboard`)
       kind: Rule
+      middlewares:
+        - name: authentik-forwardauth
       services:
         - name: api@internal
           kind: TraefikService
     - match: Host(`traefik.milanchis.com`) && PathPrefix(`/api`)
       kind: Rule
+      middlewares:
+        - name: authentik-forwardauth
       services:
         - name: api@internal
           kind: TraefikService
