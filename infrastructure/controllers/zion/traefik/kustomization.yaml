@@ -10,6 +10,7 @@ resources:
   - volume.yaml
   - middleware.yaml
   - cloudflare-api-token-sealedsecret.yaml
+  - ingress.yaml
 
 configMapGenerator:
   - name: traefik-values
