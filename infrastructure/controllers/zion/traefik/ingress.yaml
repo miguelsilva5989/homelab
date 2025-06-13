@@ -40,6 +40,7 @@ spec:
       kind: Rule
       middlewares:
         - name: authentik-forwardauth
+        - name: add-slash
       services:
         - name: api@internal
           kind: TraefikService
