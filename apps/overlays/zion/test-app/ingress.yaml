@@ -25,6 +25,13 @@ spec:
             name: zion-test-app
             port:
               number: 80
+      - path: /outpost.goauthentik.io/
+        pathType: Prefix
+        backend:
+          service:
+            name: traefik-outpost
+            port:
+              number: 9000
   tls:
   - hosts:
     - test.milanchis.com
