@@ -15,4 +15,3 @@ resources:
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml
-  - ingressRoute.yaml
