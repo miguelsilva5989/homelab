@@ -25,6 +25,7 @@ metadata:
     cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"
     # traefik.http.routers.test-app.middlewares: "authentik@file"
     # traefik.ingress.kubernetes.io/router.middlewares: "test-app-middleware@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "default-headers@kubernetescrd"
 spec:
   ingressClassName: traefik
   rules:
