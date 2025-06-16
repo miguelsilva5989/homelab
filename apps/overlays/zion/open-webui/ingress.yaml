@@ -44,15 +44,15 @@ spec:
         - name: zion-open-webui
           port: 80
       middlewares:
-        - name: open-webui-auth-headers
-        - name: open-webui-cors-middleware
+        - name: zion-open-webui-auth-headers
+        - name: zion-open-webui-cors-middleware
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
       kind: Rule
       services:
         - name: zion-open-webui
           port: 80
       middlewares:
-        - name: open-webui-auth-headers
-        - name: open-webui-cors-middleware
+        - name: zion-open-webui-auth-headers
+        - name: zion-open-webui-cors-middleware
   tls:
     secretName: open-webui-certificate-secret
