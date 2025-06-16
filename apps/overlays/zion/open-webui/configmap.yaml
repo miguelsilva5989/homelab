@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: open-webui-configmap
 data:
-  OLLAMA_ORIGINS: "*"
-  # OLLAMA_BBASE_URL: "X.X.X.X"
-  OPENWEBUI_SETTING_2: "value2"
+  WEBUI_NAME: "Milanchis AI"
+  OLLAMA_ORIGINS: "https://openwebui.milanchis.com"
+  OPENWEBUI_BASE_URL: "https://openwebui.milanchis.com"
+  OPENWEBUI_ALLOW_ORIGINS: "https://openwebui.milanchis.com"
+  CORS_ALLOW_ORIGIN: "https://openwebui.milanchis.com"
+

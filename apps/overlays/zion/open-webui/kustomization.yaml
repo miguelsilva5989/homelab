@@ -15,6 +15,7 @@ resources:
   - configmap.yaml
   - certificate.yaml
   - ingress.yaml
+  - openwebui-sealedsecret.yaml
 
 patches:
   - path: patch-replicas.yaml

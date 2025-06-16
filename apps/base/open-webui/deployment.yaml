@@ -19,11 +19,17 @@ spec:
         image: ghcr.io/open-webui/open-webui:main
         ports:
         - containerPort: 8080
+        env:
+          - name: WEBUI_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: openwebui-credentials
+                key: webuiSecret
         envFrom:
         - configMapRef:
             name: open-webui-configmap
         volumeMounts:
-        - mountPath: /app/backend/data  
+        - mountPath: /app/backend/data
           name: open-webui-storage  
       volumes:  
       - name: open-webui-storage 
