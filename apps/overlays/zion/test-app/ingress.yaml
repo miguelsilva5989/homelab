@@ -75,4 +75,4 @@ spec:
         - name: traefik-outpost
           port: 9000
   tls:
-    certResolver: cloudflare
+    secretName: test-app-certificate-secret
