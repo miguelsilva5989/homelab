@@ -16,7 +16,7 @@ metadata:
   namespace: open-webui
 spec:
   headers:
-    accessControlAllowOrigin:
+    accessControlAllowOriginList:
       - "https://openwebui.milanchis.com"
     accessControlAllowMethods:
       - GET
