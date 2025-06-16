@@ -41,12 +41,12 @@ spec:
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       services:
-        - name: open-webui
+        - name: zion-open-webui
           port: 80
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
       kind: Rule
       services:
-        - name: open-webui
+        - name: zion-open-webui
           port: 80
   tls:
     secretName: open-webui-certificate-secret
