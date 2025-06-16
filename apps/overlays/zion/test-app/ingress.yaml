@@ -72,7 +72,7 @@ spec:
       kind: Rule
       priority: 15
       services:
-        - name: traefik-outpost
+        - name: auth-traefik-outpost
           port: 9000
   tls:
     secretName: test-app-certificate-secret
