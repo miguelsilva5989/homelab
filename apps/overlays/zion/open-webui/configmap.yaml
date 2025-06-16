@@ -8,4 +8,5 @@ data:
   OPENWEBUI_BASE_URL: "https://openwebui.milanchis.com"
   OPENWEBUI_ALLOW_ORIGINS: "https://openwebui.milanchis.com"
   CORS_ALLOW_ORIGIN: "https://openwebui.milanchis.com"
-
+  WEBUI_SESSION_COOKIE_SECURE: true
+  WEBUI_AUTH_COOKIE_SECURE: true
