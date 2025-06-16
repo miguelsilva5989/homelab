@@ -12,4 +12,13 @@ spec:
     metadata:
       labels:
         app: open-webui
+    spec:
+      containers:
+        - name: open-webui
+          env:
+            - name: WEBUI_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-openwebui-credentials
+                  key: webuiSecret
 
