@@ -14,5 +14,23 @@ spec:
           port: 80
       middlewares:
         - name: zion-gitlab-auth-middleware
+    - match: Host(`gitlab.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      priority: 15
+      services:
+        - name: auth-traefik-outpost
+          port: 9000
   tls:
     secretName: gitlab-certificate-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-traefik-outpost
+  namespace: gitlab
+spec:
+  type: ExternalName
+  externalName: auth-traefik-outpost.authentik.svc.cluster.local
+  ports:
+    - port: 9000
+      targetPort: 9000
