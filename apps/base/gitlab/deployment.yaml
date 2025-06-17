@@ -28,7 +28,7 @@ spec:
             # HTTPS
             letsencrypt['enable'] = false
             external_url 'https://gitlab.milanchis.com'
-            gitlab_rails['allowed_hosts'] = ['gitlab.milanchis.com']
+            # gitlab_rails['allowed_hosts'] = ['gitlab.milanchis.com', 'authentik.milanchis.com']
             # gitlab_rails['gitlab_https'] = true
             # gitlab_rails['gitlab_port'] = 443
         # readinessProbe:
