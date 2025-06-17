@@ -30,13 +30,13 @@ spec:
             external_url 'https://gitlab.milanchis.com'
             # gitlab_rails['gitlab_https'] = true
             # gitlab_rails['gitlab_port'] = 443
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          failureThreshold: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 80
+        #   initialDelaySeconds: 60
+        #   periodSeconds: 10
+        #   failureThreshold: 10
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
