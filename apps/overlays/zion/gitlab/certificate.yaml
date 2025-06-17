@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-ingressroute-certificate
+  namespace: gitlab
+spec:
+  # Secret names are always required.
+  secretName: gitlab-certificate-secret
+
+  # Issuer references are always required.
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer
+
+  # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+  dnsNames:
+    - gitlab.milanchis.com
+  

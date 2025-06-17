@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: open-webui
+
+namePrefix:
+  zion-
+
+metadata:  
+  name: open-webui
+  namespace: open-webui
+
+resources:
+  - ../../../base/open-webui
+  - configmap.yaml
+  - certificate.yaml
+  - ingress.yaml
+  - openwebui-sealedsecret.yaml
+  - middleware.yaml
+
+patches:
+  - path: patch-replicas.yaml
+    target:
+      kind: Deployment
