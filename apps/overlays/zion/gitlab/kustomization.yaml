@@ -15,8 +15,9 @@ resources:
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml
+  - gitlab-sealedsecret.yaml
 
-# patches:
-#   - path: patch-replicas.yaml
-#     target:
-#       kind: Deployment
+patches:
+  - path: patch-replicas.yaml
+    target:
+      kind: Deployment
