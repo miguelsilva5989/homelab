@@ -45,3 +45,7 @@ spec:
       - X-authentik-*
     accessControlAllowCredentials: true
     accessControlMaxAge: 100
+    customResponseHeaders:
+      Content-Security-Policy: "frame-ancestors 'self' https://gitlab.milanchis.com"
+      X-Frame-Options: "SAMEORIGIN"
+
