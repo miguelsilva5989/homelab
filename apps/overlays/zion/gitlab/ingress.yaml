@@ -7,13 +7,12 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`gitlab.milanchis.com`) && PathPrefix(`/`)
+    - match: Host(`gitlab.milanchis.com`) && Path(`/-/manifest.json`)
       kind: Rule
       services:
         - name: zion-gitlab
           port: 80
       middlewares:
-        - name: zion-gitlab-auth-middleware
         - name: zion-gitlab-cors
     - match: Host(`gitlab.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
@@ -21,6 +20,13 @@ spec:
       services:
         - name: auth-traefik-outpost
           port: 9000
+      middlewares:
+        - name: zion-gitlab-cors
+    - match: Host(`gitlab.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: zion-gitlab
+          port: 80
       middlewares:
         - name: zion-gitlab-auth-middleware
         - name: zion-gitlab-cors
