@@ -21,3 +21,27 @@ spec:
         - X-authentik-meta-provider
         - X-authentik-meta-app
         - X-authentik-meta-version
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: gitlab-cors
+  namespace: gitlab
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://gitlab.milanchis.com"
+      - "https://authentik.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - OPTIONS
+      - POST
+      - PUT
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - X-Requested-With
+      - X-authentik-*
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
