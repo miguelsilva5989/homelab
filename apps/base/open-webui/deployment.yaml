@@ -25,10 +25,31 @@ spec:
         volumeMounts:
         - mountPath: /app/backend/data
           name: open-webui-storage
+          subPath: openwebui-data
+      
+      - name: redis
+        image: redis:7.4.4-alpine
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - mountPath: /data
+          name: open-webui-storage
+          subPath: redis-data
+
+      - name: ollama
+        image: ghcr.io/ollama/ollama:latest  # Replace with the correct Ollama image
+        ports:
+        - containerPort: 11434
+        volumeMounts:
+        - mountPath: /app/data
+          name: open-webui-storage
+          subPath: ollama-data
+
       volumes:  
       - name: open-webui-storage 
         persistentVolumeClaim:
           claimName: open-webui-pvc
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
