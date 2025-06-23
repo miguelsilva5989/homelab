@@ -67,3 +67,16 @@ spec:
         - X-authentik-meta-provider
         - X-authentik-meta-app
         - X-authentik-meta-version
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: open-webui-sticky-session
+  namespace: open-webui
+spec:
+  sticky:
+    cookie:
+      name: openwebui-stickiness
+      secure: true
+      httpOnly: true
+      sameSite: none
