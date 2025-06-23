@@ -28,7 +28,7 @@ spec:
           subPath: openwebui-data
       
       - name: redis
-        image: redis:7.4.4-alpine
+        image: redis/redis:7.4.4-alpine
         ports:
         - containerPort: 6379
         volumeMounts:
@@ -37,7 +37,7 @@ spec:
           subPath: redis-data
 
       - name: ollama
-        image: ghcr.io/ollama/ollama:latest  # Replace with the correct Ollama image
+        image: ollama/ollama:0.9.2
         ports:
         - containerPort: 11434
         volumeMounts:
