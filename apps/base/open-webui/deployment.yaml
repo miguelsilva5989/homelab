@@ -54,14 +54,14 @@ spec:
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
-                name: openwebui-litellm-credentials
+                name: zion-openwebui-litellm-credentials
                 key: postgresUrl
           - name: STORE_MODEL_IN_DB
             value: "True"    # Note: usually values are strings in quotes
           - name: OPENAI_API_KEY
             valueFrom:
               secretKeyRef:
-                name: openwebui-litellm-credentials
+                name: zion-openwebui-litellm-credentials
                 key: openAiKey
 
       
@@ -77,7 +77,7 @@ spec:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: openwebui-litellm-credentials
+                name: zion-openwebui-litellm-credentials
                 key: postgresPw
         volumeMounts:
           - name: open-webui-storage
