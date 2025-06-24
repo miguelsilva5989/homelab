@@ -34,16 +34,22 @@ spec:
         - mountPath: /data
           name: open-webui-storage
 
-      - name: ollama
-        image: ollama/ollama:0.9.2
+      # - name: ollama
+      #   image: ollama/ollama:0.9.2
+      #   ports:
+      #   - containerPort: 11434
+      #   volumeMounts:
+      #   - mountPath: /app/data
+      #     name: open-webui-storage
+      
+      - name: litellm
+        image: ghcr.io/berriai/litellm:v1.72.6-stable
         ports:
-        - containerPort: 11434
-        env:
-        - name: OLLAMA_MODELS
-          value: "/app/data"
+        - containerPort: 4000
         volumeMounts:
-        - mountPath: /app/data
-          name: open-webui-storage
+        - name: open-webui-storage
+          mountPath: /app/proxy_server_config.yaml
+          subPath: config.yaml
 
       volumes:  
       - name: open-webui-storage 
