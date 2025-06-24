@@ -6,9 +6,6 @@ metadata:
 spec:
   replicas: 1 # because of Longhorn PVC - to check in future how to use my NFS instead
   template:
-    metadata:
-      labels:
-        app: open-webui
     spec:
       containers:
       - name: open-webui
