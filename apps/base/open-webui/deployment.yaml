@@ -63,7 +63,11 @@ spec:
               secretKeyRef:
                 name: zion-openwebui-litellm-credentials
                 key: openAiKey
-
+          - name: MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: masterKey
       
       - name: postgres
         image: postgres:16

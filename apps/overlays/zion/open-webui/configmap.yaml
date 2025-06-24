@@ -18,6 +18,6 @@ data:
   # USE_OLLAMA_DOCKER: "false"
   # OLLAMA_MODELS: "/app/data"
   ENABLE_OLLAMA_API: "false"
-
+  OPENAI_API_BASE_URL: "http://localhost:4000" # litellm
 
  

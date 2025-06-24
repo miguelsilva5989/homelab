@@ -43,6 +43,12 @@ spec:
         # - name: zion-open-webui-forward-headers
         # - name: zion-open-webui-auth-headers
         # - name: zion-open-webui-cors-middleware
+    - match: Host(`litellm.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-open-webui
+          port: 4000
 
     # - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
     #   kind: Rule
