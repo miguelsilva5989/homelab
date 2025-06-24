@@ -9,3 +9,4 @@ resources:
   - configmap_litellm.yaml
   - deployment.yaml
   - service.yaml
+  - sealedsecret.yaml

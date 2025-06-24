@@ -5,7 +5,13 @@ metadata:
   namespace: open-webui
 spec:
   replicas: 1 # because of Longhorn PVC - to check in future how to use my NFS instead
+  selector:
+    matchLabels:
+      app: open-webui
   template:
+    metadata:
+      labels:
+        app: open-webui
     spec:
       containers:
       - name: open-webui
@@ -15,10 +21,3 @@ spec:
             secretKeyRef:
               name: zion-openwebui-credentials
               key: webuiSecret
-      - name: litellm
-        env:
-        - name: OPENAI_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: zion-openwebui-credentials
-              key: openAiKey

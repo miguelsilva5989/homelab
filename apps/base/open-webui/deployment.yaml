@@ -51,8 +51,19 @@ spec:
           mountPath: /app/proxy_server_config.yaml
           subPath: config.yaml
         env:
-          DATABASE_URL: "postgresql://llmproxy:dbpassword9090@postgres.open-webui.svc.cluster.local:5432/litellm"
-          STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: openwebui-litellm-credentials
+                key: postgresUrl
+          - name: STORE_MODEL_IN_DB
+            value: "True"    # Note: usually values are strings in quotes
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: openwebui-litellm-credentials
+                key: openAiKey
+
       
       - name: postgres
         image: postgres:16
@@ -64,7 +75,10 @@ spec:
           - name: POSTGRES_USER
             value: "llmproxy"
           - name: POSTGRES_PASSWORD
-            value: "dbpassword9090"
+            valueFrom:
+              secretKeyRef:
+                name: openwebui-litellm-credentials
+                key: postgresPw
         volumeMounts:
           - name: open-webui-storage
             mountPath: /var/lib/postgresql/data
