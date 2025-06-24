@@ -8,9 +8,11 @@ spec:
   selector:
     app: open-webui
   ports:
-  - protocol: TCP
+  - name: webui-http
+    protocol: TCP
     port: 80
     targetPort: 8080
-  - protocol: TCP
-    port: 4000 # litellm container
-    targetPort: 4000 # litellm container
+  - name: litellm-api
+    protocol: TCP
+    port: 4000
+    targetPort: 4000
