@@ -14,6 +14,18 @@ spec:
       labels:
         app: open-webui
     spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox
+        command:
+          - sh
+          - -c
+          - |
+            until nc -zvw5 localhost 5432; do
+              echo "Waiting for postgres...";
+              sleep 2;
+            done
+
       containers:
       - name: open-webui
         image: ghcr.io/open-webui/open-webui:main
@@ -41,33 +53,6 @@ spec:
       #   volumeMounts:
       #   - mountPath: /app/data
       #     name: open-webui-storage
-      
-      - name: litellm
-        image: ghcr.io/berriai/litellm:v1.72.6-stable
-        ports:
-        - containerPort: 4000
-        volumeMounts:
-        - name: litellm-config-volume
-          mountPath: /app/proxy_server_config.yaml
-          subPath: config.yaml
-        env:
-          - name: DATABASE_URL
-            valueFrom:
-              secretKeyRef:
-                name: zion-openwebui-litellm-credentials
-                key: postgresUrl
-          - name: STORE_MODEL_IN_DB
-            value: "True"    # Note: usually values are strings in quotes
-          - name: OPENAI_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: zion-openwebui-litellm-credentials
-                key: openAiKey
-          - name: MASTER_KEY
-            valueFrom:
-              secretKeyRef:
-                name: zion-openwebui-litellm-credentials
-                key: masterKey
       
       - name: postgres
         image: postgres:16
@@ -101,6 +86,33 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 5
           failureThreshold: 6
+
+      - name: litellm
+        image: ghcr.io/berriai/litellm:v1.72.6-stable
+        ports:
+        - containerPort: 4000
+        volumeMounts:
+        - name: litellm-config-volume
+          mountPath: /app/proxy_server_config.yaml
+          subPath: config.yaml
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: postgresUrl
+          - name: STORE_MODEL_IN_DB
+            value: "True"    # Note: usually values are strings in quotes
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: openAiKey
+          - name: MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: masterKey
 
       volumes:  
       - name: open-webui-storage 
