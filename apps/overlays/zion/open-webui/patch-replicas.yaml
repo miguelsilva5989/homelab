@@ -14,17 +14,17 @@ spec:
         app: open-webui
     spec:
       containers:
-        - name: open-webui
-          env:
-            - name: WEBUI_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: zion-openwebui-credentials
-                  key: webuiSecret
-        - name: litellm
-          env:
-            - name: OPENAI_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: zion-openwebui-credentials
-                  key: openAiKey
+      - name: open-webui
+        env:
+        - name: WEBUI_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: zion-openwebui-credentials
+              key: webuiSecret
+      - name: litellm
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: zion-openwebui-credentials
+              key: openAiKey
