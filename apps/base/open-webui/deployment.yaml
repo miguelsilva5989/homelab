@@ -33,16 +33,17 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: open-webui-storage
-          subPath: redis-data
 
       - name: ollama
         image: ollama/ollama:0.9.2
         ports:
         - containerPort: 11434
+        env:
+        - name: OLLAMA_MODELS
+          value: "/app/data"
         volumeMounts:
         - mountPath: /app/data
           name: open-webui-storage
-          subPath: ollama-data
 
       volumes:  
       - name: open-webui-storage 
