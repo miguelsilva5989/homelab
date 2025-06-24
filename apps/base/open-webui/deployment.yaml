@@ -101,6 +101,16 @@ spec:
               secretKeyRef:
                 name: zion-openwebui-litellm-credentials
                 key: masterKey
+          - name: UI_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: uiUsername
+          - name: UI_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: uiPassword
 
       volumes:  
       - name: open-webui-storage 
