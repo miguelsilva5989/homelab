@@ -27,7 +27,7 @@ spec:
           name: open-webui-storage
       
       - name: redis
-        image: redis/redis:7.4.4-alpine
+        image: redis:7.4.4-alpine
         ports:
         - containerPort: 6379
         volumeMounts:
