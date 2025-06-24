@@ -6,5 +6,6 @@ namespace: open-webui
 resources:
   - pvc.yaml
   - namespace.yaml
+  - configmap_litellm.yaml
   - deployment.yaml
   - service.yaml

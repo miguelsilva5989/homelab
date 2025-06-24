@@ -47,13 +47,47 @@ spec:
         ports:
         - containerPort: 4000
         volumeMounts:
-        - name: open-webui-storage
-          mountPath: /app
+        - name: litellm-config-volume
+          mountPath: /app/proxy_server_config.yaml
+          subPath: config.yaml
+        env:
+          DATABASE_URL: "postgresql://llmproxy:dbpassword9090@postgres.open-webui.svc.cluster.local:5432/litellm"
+          STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
+      
+      - name: postgres
+        image: postgres:16
+        ports:
+          - containerPort: 5432
+        env:
+          - name: POSTGRES_DB
+            value: "litellm"
+          - name: POSTGRES_USER
+            value: "llmproxy"
+          - name: POSTGRES_PASSWORD
+            value: "dbpassword9090"
+        volumeMounts:
+          - name: open-webui-storage
+            mountPath: /var/lib/postgresql/data
+        readinessProbe:
+          exec:
+            command:
+              - pg_isready
+              - "-d"
+              - litellm
+              - "-U"
+              - llmproxy
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
 
       volumes:  
       - name: open-webui-storage 
         persistentVolumeClaim:
           claimName: open-webui-pvc
+      - name: litellm-config-volume
+        configMap:
+          name: litellm-config-file
 
       affinity:
         nodeAffinity:
