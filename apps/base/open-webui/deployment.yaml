@@ -48,8 +48,7 @@ spec:
         - containerPort: 4000
         volumeMounts:
         - name: open-webui-storage
-          mountPath: /app/proxy_server_config.yaml
-          subPath: config.yaml
+          mountPath: /app
 
       volumes:  
       - name: open-webui-storage 
