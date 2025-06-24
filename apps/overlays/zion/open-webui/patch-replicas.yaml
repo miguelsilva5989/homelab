@@ -4,7 +4,7 @@ metadata:
   name: open-webui
   namespace: open-webui
 spec:
-  replicas: 1
+  replicas: 1 # because of Longhorn PVC - to check in future how to use my NFS instead
   selector:
     matchLabels:
       app: open-webui

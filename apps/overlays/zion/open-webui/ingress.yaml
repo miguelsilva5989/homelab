@@ -20,12 +20,12 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      priority: 15
-      services:
-        - name: auth-traefik-outpost
-          port: 9000
+    # - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    #   kind: Rule
+    #   priority: 15
+    #   services:
+    #     - name: auth-traefik-outpost
+    #       port: 9000
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -38,11 +38,11 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
-      middlewares:
-        - name: zion-open-webui-auth-middleware
-        - name: zion-open-webui-forward-headers
-        - name: zion-open-webui-auth-headers
-        - name: zion-open-webui-cors-middleware
+      # middlewares:
+      #   - name: zion-open-webui-auth-middleware
+        # - name: zion-open-webui-forward-headers
+        # - name: zion-open-webui-auth-headers
+        # - name: zion-open-webui-cors-middleware
 
     # - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
     #   kind: Rule
