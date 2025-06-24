@@ -80,7 +80,7 @@ spec:
                 name: zion-openwebui-litellm-credentials
                 key: postgresPw
         volumeMounts:
-          - name: open-webui-storage
+          - name: open-webui-postgres-storage
             mountPath: /var/lib/postgresql/data
         readinessProbe:
           exec:
@@ -99,6 +99,9 @@ spec:
       - name: open-webui-storage 
         persistentVolumeClaim:
           claimName: open-webui-pvc
+      - name: open-webui-postgres-storage
+        persistentVolumeClaim:
+          claimName: open-webui-pvc-postgres
       - name: litellm-config-volume
         configMap:
           name: litellm-config-file
