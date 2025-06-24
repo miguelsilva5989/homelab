@@ -96,11 +96,16 @@ spec:
               secretKeyRef:
                 name: zion-openwebui-litellm-credentials
                 key: openAiKey
-          - name: MASTER_KEY
+          - name: LITELLM_MASTER_KEY
             valueFrom:
               secretKeyRef:
                 name: zion-openwebui-litellm-credentials
                 key: masterKey
+          - name: LITELLM_SALT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-openwebui-litellm-credentials
+                key: saltKey
           - name: UI_USERNAME
             valueFrom:
               secretKeyRef:
