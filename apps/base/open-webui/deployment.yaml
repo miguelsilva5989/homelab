@@ -25,7 +25,6 @@ spec:
         volumeMounts:
         - mountPath: /app/backend/data
           name: open-webui-storage
-          subPath: openwebui-data
       
       - name: redis
         image: redis/redis:7.4.4-alpine
