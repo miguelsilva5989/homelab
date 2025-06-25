@@ -26,6 +26,20 @@ spec:
     #   services:
     #     - name: auth-traefik-outpost
     #       port: 9000
+    - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`ws)
+      kind: Rule
+      priority: 5
+      services:
+        - name: zion-open-webui
+          port: 80
+          sticky:
+            cookie:
+              name: openwebui-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
+        - name: zion-open-webui-ws-headers
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -43,20 +57,6 @@ spec:
         # - name: zion-open-webui-forward-headers
         # - name: zion-open-webui-auth-headers
         # - name: zion-open-webui-cors-middleware
-    - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`ws)
-      kind: Rule
-      priority: 10
-      services:
-        - name: zion-open-webui
-          port: 80
-          sticky:
-            cookie:
-              name: openwebui-stickiness
-              secure: true
-              httpOnly: true
-              sameSite: none
-      middlewares:
-        - name: zion-open-webui-ws-headers
 
     # - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
     #   kind: Rule
