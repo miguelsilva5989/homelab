@@ -9,6 +9,43 @@ spec:
     customRequestHeaders:
       Connection: Upgrade
       Upgrade: websocket
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: open-webui-cors-middleware
+  namespace: open-webui
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://openwebui.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - OPTIONS
+      - PUT
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - X-Requested-With
+      - Origin
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
+    maxAge: 300
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: open-webui-forward-headers
+  namespace: open-webui
+spec:
+  headers:
+    customRequestHeaders:
+      Host: "{http.request.host}"
+      X-Real-Ip: "{http.request.remoteAddr}"
+      X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
+      X-Forwarded-Proto: "{http.request.scheme}"
 
 # ---
 # apiVersion: traefik.io/v1alpha1
@@ -34,19 +71,7 @@ spec:
 #         - X-authentik-meta-provider
 #         - X-authentik-meta-app
 #         - X-authentik-meta-version
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: open-webui-forward-headers
-#   namespace: open-webui
-# spec:
-#   headers:
-#     customRequestHeaders:
-#       Host: "{http.request.host}"
-#       X-Real-Ip: "{http.request.remoteAddr}"
-#       X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
-#       X-Forwarded-Proto: "{http.request.scheme}"
+
 # ---
 # apiVersion: traefik.io/v1alpha1
 # kind: Middleware
@@ -57,25 +82,3 @@ spec:
 #   headers:
 #     customRequestHeaders:
 #       Authorization: "{http.request.header.Authorization}"
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: open-webui-cors-middleware
-#   namespace: open-webui
-# spec:
-#   headers:
-#     accessControlAllowOriginList:
-#       - "https://openwebui.milanchis.com"
-#     accessControlAllowMethods:
-#       - GET
-#       - POST
-#       - OPTIONS
-#       - PUT
-#       - DELETE
-#     accessControlAllowHeaders:
-#       - Authorization
-#       - Content-Type
-#       - X-Requested-With
-#     accessControlAllowCredentials: true
-#     accessControlMaxAge: 100

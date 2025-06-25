@@ -40,6 +40,8 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-open-webui-ws-headers
+        - name: zion-open-webui-cors-middleware
+        - name: zion-open-webui-forward-headers
     - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -52,11 +54,9 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
-      # middlewares:
-      #   - name: zion-open-webui-auth-middleware
-        # - name: zion-open-webui-forward-headers
-        # - name: zion-open-webui-auth-headers
-        # - name: zion-open-webui-cors-middleware
+      middlewares:
+        - name: zion-open-webui-cors-middleware
+        - name: zion-open-webui-forward-headers
 
     # - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/api`)
     #   kind: Rule
