@@ -4,9 +4,7 @@ kind: Kustomization
 namespace: traefik
 
 resources:
-  - namespace.yaml
-  - release.yaml
-  - repository.yaml
+  - ../../base/traefik
   - volume.yaml
   - middleware.yaml
   - cloudflare-api-token-sealedsecret.yaml
