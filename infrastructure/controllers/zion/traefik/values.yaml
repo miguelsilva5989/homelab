@@ -77,6 +77,11 @@ ports:
     tls:
       enabled: true
       certResolver: cloudflare # name of the resolver that we set below -> certificatesResolvers: -> **cloudflare**
+    transport:
+      respondingTimeouts:
+        readTimeout: 420
+        writeTimeout: 420
+        idleTimeout: 420
 
 ingressRoute:
   dashboard:
