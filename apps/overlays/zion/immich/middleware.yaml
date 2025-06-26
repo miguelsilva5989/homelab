@@ -22,3 +22,14 @@ spec:
         - X-authentik-meta-provider
         - X-authentik-meta-app
         - X-authentik-meta-version
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: immich-ws-headers
+  namespace: immich
+spec:
+  headers:
+    customRequestHeaders:
+      Connection: Upgrade
+      Upgrade: websocket

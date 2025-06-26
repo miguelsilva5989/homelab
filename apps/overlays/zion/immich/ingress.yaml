@@ -20,12 +20,20 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`immich.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    - match: Host(`immich.milanchis.com`) && PathPrefix(`/api/socket.io`)
       kind: Rule
-      priority: 15
+      priority: 5
       services:
-        - name: auth-traefik-outpost
-          port: 9000
+        - name: zion-immich
+          port: 80
+          sticky:
+            cookie:
+              name: openwebui-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
+        - name: zion-immich-ws-headers
     - match: Host(`immich.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -40,6 +48,12 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-immich-auth-middleware
+    - match: Host(`immich.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      priority: 15
+      services:
+        - name: auth-traefik-outpost
+          port: 9000
 
   tls:
     secretName: immich-certificate-secret

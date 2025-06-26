@@ -26,7 +26,7 @@ spec:
     #   services:
     #     - name: auth-traefik-outpost
     #       port: 9000
-    - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/`ws)
+    - match: Host(`openwebui.milanchis.com`) && PathPrefix(`/ws`)
       kind: Rule
       priority: 5
       services:
