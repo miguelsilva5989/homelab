@@ -55,7 +55,8 @@ spec:
             value: '--data-checksums'
         volumeMounts:
           - name: db-storage
-            mountPath: /var/lib/postgresql/data
+            mountPath: /var/lib/postgresql/data/pgdata
+            subPath: pgdata
 
       volumes:  
       - name: upload-storage
