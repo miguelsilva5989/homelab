@@ -7,3 +7,4 @@ data:
   # DB_DATA_LOCATION: "/mnt/data/immich_db"
   REDIS_HOSTNAME: "localhost"
   REDIS_PORT: "6379"
+  DB_HOSTNAME: "localhost"
