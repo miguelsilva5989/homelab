@@ -13,6 +13,7 @@ metadata:
 resources:
   - ../../../base/immich
   - sealedsecret.yaml
+  - configmap.yaml
 
 patches:
   - path: patch-env.yaml
