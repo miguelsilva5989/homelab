@@ -21,7 +21,7 @@ spec:
           - containerPort: 2283
         envFrom:
           - configMapRef:
-            name: immich-configmap
+              name: immich-configmap
         volumeMounts:
           - name: upload-storage
             mountPath: /usr/src/app/upload
@@ -33,7 +33,7 @@ spec:
         image: ghcr.io/immich-app/immich-machine-learning:1.135.3
         envFrom:
           - configMapRef:
-            name: immich-configmap
+              name: immich-configmap
         volumeMounts:
           - name: model-cache
             mountPath: /cache
@@ -43,11 +43,11 @@ spec:
         ports:
         - containerPort: 6379
         readinessProbe:
-            exec:
-              command:
-                - redis-cli ping
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          exec:
+            command:
+              - redis-cli ping
+          initialDelaySeconds: 5
+          periodSeconds: 10
       
       - name: postgres
         image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
