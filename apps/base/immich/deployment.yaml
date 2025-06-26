@@ -53,6 +53,8 @@ spec:
         env:
           - name: POSTGRES_INITDB_ARGS
             value: '--data-checksums'
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
         volumeMounts:
           - name: db-storage
             mountPath: /var/lib/postgresql/data/pgdata
