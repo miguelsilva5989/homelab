@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: immich-ingressroute-certificate
+  namespace: immich
+spec:
+  # Secret names are always required.
+  secretName: immich-certificate-secret
+
+  # Issuer references are always required.
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer
+
+  # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+  dnsNames:
+    - immich.milanchis.com
+  
