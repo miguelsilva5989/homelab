@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: immich
-        image: ghcr.io/immich-app/immich-server:1.135.3
+        image: ghcr.io/immich-app/immich-server:commit-7bb5abc48bb420f36c7711be68c0331fe618be05
         ports:
           - containerPort: 2283
         envFrom:
@@ -30,7 +30,7 @@ spec:
             readOnly: true
       
       - name: immich-machine-learning
-        image: ghcr.io/immich-app/immich-machine-learning:1.135.3
+        image: ghcr.io/immich-app/immich-machine-learning:commit-7bb5abc48bb420f36c7711be68c0331fe618be05
         envFrom:
           - configMapRef:
               name: immich-configmap
