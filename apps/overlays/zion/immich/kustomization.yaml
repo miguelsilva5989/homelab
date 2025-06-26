@@ -16,6 +16,7 @@ resources:
   - configmap.yaml
   - certificate.yaml
   - ingress.yaml
+  - middleware.yaml
 
 patches:
   - path: patch-env.yaml
