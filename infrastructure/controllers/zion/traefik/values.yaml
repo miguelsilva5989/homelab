@@ -79,9 +79,14 @@ ports:
       certResolver: cloudflare # name of the resolver that we set below -> certificatesResolvers: -> **cloudflare**
     transport:
       respondingTimeouts:
-        readTimeout: 420
-        writeTimeout: 420
-        idleTimeout: 420
+        readTimeout: "420s"
+        writeTimeout: "420s"
+        idleTimeout: "420s"
+      lifeCycle:
+        requestAcceptGraceTimeout: "5s"
+        graceTimeOut: "10s"
+      keepAliveMaxRequests: 100
+      keepAliveMaxTime: "600s"
 
 ingressRoute:
   dashboard:
