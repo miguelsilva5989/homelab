@@ -34,6 +34,7 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-immich-ws-headers
+        - name: zion-immich-cors
     - match: Host(`immich.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -48,6 +49,7 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-immich-auth-middleware
+        - name: zion-immich-cors
     - match: Host(`immich.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       priority: 15

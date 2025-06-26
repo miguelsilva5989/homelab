@@ -37,3 +37,30 @@ spec:
       X-Real-Ip: "{http.request.remoteAddr}"
       X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
       X-Forwarded-Proto: "{http.request.scheme}"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: immich-cors
+  namespace: immich
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://immich.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - OPTIONS
+      - POST
+      - PUT
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - X-Requested-With
+      - X-authentik-*
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
+    customResponseHeaders:
+      Content-Security-Policy: "frame-ancestors 'self' https://immich.milanchis.com"
+      X-Frame-Options: "SAMEORIGIN"
+
