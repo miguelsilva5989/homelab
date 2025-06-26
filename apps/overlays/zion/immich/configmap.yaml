@@ -5,3 +5,5 @@ metadata:
 data:
   # UPLOAD_LOCATION: "/mnt/data/immich_upload"
   # DB_DATA_LOCATION: "/mnt/data/immich_db"
+  REDIS_HOSTNAME: localhost
+  REDIS_PORT: 6379
