@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+  labels:
+    app: immich
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich
+  template:
+    metadata:
+      labels:
+        app: immich
+    spec:
+      containers:
+      - name: immich
+        image: ghcr.io/immich-app/immich-server:1.135.3
+        ports:
+          - containerPort: 2283
+        envFrom:
+          - configMapRef:
+            name: immich-configmap
+        volumeMounts:
+          - name: upload-storage
+            mountPath: /usr/src/app/upload
+          - name: localtime
+            mountPath: /etc/localtime
+            readOnly: true
+      
+      - name: immich-machine-learning
+        image: ghcr.io/immich-app/immich-machine-learning:1.135.3
+        envFrom:
+          - configMapRef:
+            name: immich-configmap
+        volumeMounts:
+          - name: model-cache
+            mountPath: /cache
+      
+      - name: redis
+        image: docker.io/valkey/valkey:8-bookworm@sha256:fec42f399876eb6faf9e008570597741c87ff7662a54185593e74b09ce83d177
+        ports:
+        - containerPort: 6379
+        readinessProbe:
+            exec:
+              command:
+                - redis-cli ping
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      
+      - name: postgres
+        image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+        ports:
+        - containerPort: 5432
+        envFrom:
+          - configMapRef:
+              name: immich-configmap
+        env:
+          - name: POSTGRES_INITDB_ARGS
+            value: '--data-checksums'
+        volumeMounts:
+          - name: db-storage
+            mountPath: /var/lib/postgresql/data
+
+      volumes:  
+      - name: upload-storage
+        persistentVolumeClaim:
+          claimName: immich-upload-pvc
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: model-cache
+        persistentVolumeClaim:
+          claimName: immich-ml-cache-pvc
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: immich-db-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

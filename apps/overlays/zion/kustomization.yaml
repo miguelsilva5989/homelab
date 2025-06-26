@@ -5,3 +5,4 @@ resources:
   - open-webui
   - test-app
   # - gitlab
+  - immich

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-configmap
+data:
+  # UPLOAD_LOCATION: "/mnt/data/immich_upload"
+  # DB_DATA_LOCATION: "/mnt/data/immich_db"

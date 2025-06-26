@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: immich
+  namespace: immich
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich
+  template:
+    metadata:
+      labels:
+        app: immich
+    spec:
+      containers:
+      - name: immich
+        env:
+        - name: DB_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: zion-immich-credentials
+              key: postgresDatabase
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: zion-immich-credentials
+              key: postgresUser
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: zion-immich-credentials
+              key: postgresPassword

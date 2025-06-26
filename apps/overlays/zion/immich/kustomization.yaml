@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: immich
+
+namePrefix:
+  zion-
+
+metadata:  
+  name: immich
+  namespace: immich
+
+resources:
+  - ../../../base/immich
+  - sealedsecret.yaml
+
+patches:
+  - path: patch-env.yaml
+    target:
+      kind: Deployment
+  - path: patch-env-db.yaml
+    target:
+      kind: Deployment
+
