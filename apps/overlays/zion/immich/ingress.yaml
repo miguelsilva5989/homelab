@@ -39,8 +39,7 @@ spec:
               httpOnly: true
               sameSite: none
       middlewares:
-        - name: zion-immich-cors-middleware
-        - name: zion-immich-forward-headers
+        - name: zion-immich-auth-middleware
 
   tls:
     secretName: immich-certificate-secret
