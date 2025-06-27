@@ -63,16 +63,16 @@ spec:
       volumes:  
       - name: upload-storage
         persistentVolumeClaim:
-          claimName: immich-upload-pvc
+          claimName: nfs-pv
       - name: localtime
         hostPath:
           path: /etc/localtime
       - name: model-cache
         persistentVolumeClaim:
-          claimName: immich-ml-cache-pvc
+          claimName: nfs-pv
       - name: db-storage
         persistentVolumeClaim:
-          claimName: immich-db-pvc
+          claimName: nfs-pv
 
       affinity:
         nodeAffinity:
