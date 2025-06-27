@@ -63,16 +63,16 @@ spec:
       volumes:  
       - name: upload-storage
         persistentVolumeClaim:
-          claimName: nfs-pv
+          claimName: nfs-pvc
       - name: localtime
         hostPath:
           path: /etc/localtime
       - name: model-cache
         persistentVolumeClaim:
-          claimName: nfs-pv
+          claimName: nfs-pvc
       - name: db-storage
         persistentVolumeClaim:
-          claimName: nfs-pv
+          claimName: nfs-pvc
 
       affinity:
         nodeAffinity:
