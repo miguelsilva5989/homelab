@@ -17,6 +17,7 @@ resources:
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml
+  - pvc.yaml
 
 patches:
   - path: patch-env.yaml

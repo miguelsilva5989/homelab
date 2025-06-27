@@ -7,6 +7,7 @@ spec:
     storage: 10Ti  # Adjust this based on your NFS capacity
   accessModes:
     - ReadWriteMany
+  storageClassName: nfs
   nfs:
     path: /mnt/user/prox  # The path on the NFS server
     server: 192.168.69.115  # The NFS server IP
@@ -19,6 +20,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: nfs
   resources:
     requests:
       storage: 10Ti  # Adjust size to your needs
