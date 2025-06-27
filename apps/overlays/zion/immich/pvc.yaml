@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+  namespace: immich
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs  # Ensure this matches the storage class of the PV
+  resources:
+    requests:
+      storage: 2Ti
 # apiVersion: v1
 # kind: PersistentVolumeClaim
 # metadata:
