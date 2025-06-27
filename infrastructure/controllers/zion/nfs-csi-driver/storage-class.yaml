@@ -1,0 +1,15 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs
+provisioner: nfs.csi.k8s.io
+parameters:
+  # path: /mnt/user/prox  # Ensure this matches the NFS server path
+  # server: 192.168.69.115  # Ensure this matches your NFS server address
+  share: 192.168.69.115:/mnt/user/prox
+reclaimPolicy: Retain  # or Delete based on your requirements
+volumeBindingMode: Immediate
+# mountOptions:
+#   - hard
+#   - noatime
