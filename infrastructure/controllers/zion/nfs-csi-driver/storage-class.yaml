@@ -8,7 +8,7 @@ parameters:
   server: 192.168.69.115                     # Mandatory: NFS server address (IP address or DNS name)
   share: /mnt/user/prox                       # Mandatory: NFS share path (the path to the shared directory)
   # Optional parameters
-  # subDir: ""                                  # Optional: subdirectory under the NFS share
+  subDir: k3s_data                                  # Optional: subdirectory under the NFS share
   # mountPermissions: "0"                       # Optional: mounted folder permissions (default is 0)
   # delete: "delete"                           # Optional: maintains the volume on delete (delete, retain)
 reclaimPolicy: Retain  # or Delete based on your requirements
