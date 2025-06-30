@@ -32,14 +32,14 @@ spec:
       volumes:  
       - name: upload-storage
         persistentVolumeClaim:
-          claimName: zion-upload-pvc
+          claimName: upload-pvc
       - name: localtime
         hostPath:
           path: /etc/localtime
       - name: model-cache
         persistentVolumeClaim:
-          claimName: zion-cache-pvc
+          claimName: cache-pvc
       - name: db-storage
         persistentVolumeClaim:
-          claimName: zion-db-pvc
+          claimName: db-pvc
 
