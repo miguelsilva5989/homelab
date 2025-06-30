@@ -9,7 +9,7 @@ parameters:
   share: /mnt/user/prox                       # Mandatory: NFS share path (the path to the shared directory)
   # Optional parameters
   subDir: k3s_data                                  # Optional: subdirectory under the NFS share
-  # mountPermissions: "0"                       # Optional: mounted folder permissions (default is 0)
+  mountPermissions: "0777"  # Ensure the mounted directory is writable
   # delete: "delete"                           # Optional: maintains the volume on delete (delete, retain)
 reclaimPolicy: Retain  # or Delete based on your requirements
 volumeBindingMode: Immediate
