@@ -25,7 +25,7 @@ spec:
         volumeMounts:
           - name: upload-storage
             mountPath: /usr/src/app/upload
-            subPath: uploads
+            subPath: upload
           - name: localtime
             mountPath: /etc/localtime
             readOnly: true
@@ -65,16 +65,16 @@ spec:
       volumes:  
       - name: upload-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc
+          claimName: zion-upload-pvc
       - name: localtime
         hostPath:
           path: /etc/localtime
       - name: model-cache
         persistentVolumeClaim:
-          claimName: nfs-pvc
+          claimName: zion-cache-pvc
       - name: db-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc
+          claimName: zion-db-pvc
 
       affinity:
         nodeAffinity:
