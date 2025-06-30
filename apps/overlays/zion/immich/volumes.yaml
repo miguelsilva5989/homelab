@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+  labels:
+    app: immich
+spec:
+  template:
+    spec:
+      containers:
+      - name: immich
+        volumeMounts:
+          - name: upload-storage
+            mountPath: /usr/src/app/upload
+            subPath: zion-immich/upload
+          - name: localtime
+            mountPath: /etc/localtime
+            readOnly: true
+      
+      - name: immich-machine-learning
+        volumeMounts:
+          - name: model-cache
+            mountPath: /cache
+            subPath: zion-immich/cache
+      
+      - name: postgres
+        volumeMounts:
+          - name: db-storage
+            mountPath: /var/lib/postgresql/data/pgdata
+            subPath: zion-immich/pgdata
+
+      volumes:  
+      - name: upload-storage
+        persistentVolumeClaim:
+          claimName: zion-upload-pvc
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: model-cache
+        persistentVolumeClaim:
+          claimName: zion-cache-pvc
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: zion-db-pvc
+
