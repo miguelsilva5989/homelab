@@ -12,7 +12,6 @@ metadata:
 
 resources:
   - ../../../base/immich
-  - volumes.yaml
   - sealedsecret.yaml
   - configmap.yaml
   - certificate.yaml
@@ -28,3 +27,5 @@ patches:
     target:
       kind: Deployment
 
+patchesStrategicMerge:
+  - patch-volumes.yaml
