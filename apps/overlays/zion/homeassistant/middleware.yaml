@@ -33,6 +33,10 @@ spec:
     customRequestHeaders:
       Connection: Upgrade
       Upgrade: websocket
+      Host: "{http.request.host}"
+      X-Real-Ip: "{http.request.remoteAddr}"
+      X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
+      X-Forwarded-Proto: "{http.request.scheme}"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
