@@ -7,9 +7,8 @@ data:
   configuration.yaml: |
     http:
       use_x_forwarded_for: true
+      cors_allowed_origins:
+        - https://homeassistant.milanchis.com
       trusted_proxies:
         - 127.0.0.1
         - 10.42.0.0/16
-      cors_allowed_origins:
-        - https://homeassistant.milanchis.com
-      use_x_forwarded_for: true

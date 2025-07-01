@@ -22,3 +22,37 @@ spec:
         - X-authentik-meta-provider
         - X-authentik-meta-app
         - X-authentik-meta-version
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: homeassistant-ws-headers
+  namespace: homeassistant
+spec:
+  headers:
+    customRequestHeaders:
+      Connection: Upgrade
+      Upgrade: websocket
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: homeassistant-cors-middleware
+  namespace: homeassistant
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://homeassistant.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - OPTIONS
+      - PUT
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - X-Requested-With
+      - Origin
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
