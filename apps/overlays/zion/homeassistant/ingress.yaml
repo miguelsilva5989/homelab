@@ -32,14 +32,14 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
-      middlewares:
-        - name: zion-homeassistant-auth-middleware
-    - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      priority: 15
-      services:
-        - name: zion-auth-traefik-outpost
-          port: 9000
+      # middlewares:
+      #   - name: zion-homeassistant-auth-middleware
+    # - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    #   kind: Rule
+    #   priority: 15
+    #   services:
+    #     - name: zion-auth-traefik-outpost
+    #       port: 9000
 
   tls:
     secretName: homeassistant-certificate-secret
