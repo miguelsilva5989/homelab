@@ -5,6 +5,7 @@ metadata:
   namespace: homeassistant
 data:
   configuration.yaml: |
+    default_config:
     http:
       use_x_forwarded_for: true
       cors_allowed_origins:
