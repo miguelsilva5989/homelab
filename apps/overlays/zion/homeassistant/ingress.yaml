@@ -20,6 +20,14 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/api/websocket`)  # WebSocket route
+      kind: Rule
+      priority: 5
+      services:
+        - name: homeassistant
+          port: 8123
+      middlewares:
+        - name: zion-homeassistant-ws-headers
     - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
@@ -33,9 +41,8 @@ spec:
               httpOnly: true
               sameSite: none
       # middlewares:
-      #   - name: zion-homeassistant-ws-headers
-      #   - name: zion-homeassistant-cors-middleware
         # - name: zion-homeassistant-auth-middleware
+        # - name: zion-homeassistant-cors-middleware
     # - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
     #   kind: Rule
     #   priority: 15
