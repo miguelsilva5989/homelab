@@ -32,9 +32,9 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
-      middlewares:
-        - name: zion-homeassistant-ws-headers
-        - name: zion-homeassistant-cors-middleware
+      # middlewares:
+      #   - name: zion-homeassistant-ws-headers
+      #   - name: zion-homeassistant-cors-middleware
         # - name: zion-homeassistant-auth-middleware
     # - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
     #   kind: Rule
