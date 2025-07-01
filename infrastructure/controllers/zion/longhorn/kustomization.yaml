@@ -5,4 +5,4 @@ resources:
   - certificate.yaml
   - middleware.yaml
   - ingress.yaml
-  - pv.yaml
+  # - pv.yaml
