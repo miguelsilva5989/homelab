@@ -31,8 +31,8 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      Connection: Upgrade
-      Upgrade: websocket
+      Connection: "Upgrade"
+      Upgrade: "websocket"
       Host: "{http.request.host}"
       X-Real-Ip: "{http.request.remoteAddr}"
       X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
