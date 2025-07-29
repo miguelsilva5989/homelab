@@ -11,4 +11,4 @@ metadata:
   namespace: media
 
 resources:
-  - ../../../base/prowlarr
+  - ../../../base/flaresolverr
