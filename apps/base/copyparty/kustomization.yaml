@@ -7,7 +7,7 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  # - pvc.yaml
+  - pvc.yaml
 
 configMapGenerator:
   - name: copyparty-config-file

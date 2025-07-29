@@ -25,6 +25,9 @@ spec:
         volumeMounts:
           - name: config-volume
             mountPath: /cfg
+            readOnly: true
+          - name: data-volume
+            mountPath: /cfg/copyparty
             # TODO /w - is the path inside the container that gets shared by default, so mount one or more folders to share below there
             
 
@@ -32,6 +35,9 @@ spec:
         - name: config-volume
           configMap:
             name: copyparty-config-file
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: copyparty-pvc
 
       affinity:
         nodeAffinity:
