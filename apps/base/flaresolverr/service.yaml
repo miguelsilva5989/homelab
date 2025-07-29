@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaresolverr
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: flaresolverr
+  ports:
+  - name: flaresolverr
+    protocol: TCP
+    port: 8191
+    targetPort: 8191
