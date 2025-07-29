@@ -109,6 +109,11 @@ postgresql:
 
 redis:
   enabled: true
+  
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 1Gi
 
 # # add this block under the `authentik:` block in your values.yaml file
 # # authentik:
