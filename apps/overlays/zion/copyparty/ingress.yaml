@@ -20,7 +20,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`copyparty.milanchis.com`)
+    - match: Host(`copyparty.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
       services:
@@ -35,6 +35,7 @@ spec:
       middlewares:
         - name: zion-copyparty-auth-middleware
         - name: zion-copyparty-forward-headers
+        - name: copyparty-cors-middleware
     - match: Host(`copyparty.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       priority: 15

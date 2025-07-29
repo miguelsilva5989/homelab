@@ -37,3 +37,26 @@ spec:
       X-Forwarded-Proto: "{http.request.scheme}"
       X-IdP-User: "{http.request.headers.X-authentik-username}"
       X-IdP-Group: "{http.request.headers.X-authentik-groups}"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: copyparty-cors-middleware
+  namespace: copyparty
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://copyparty.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - OPTIONS
+      - PUT
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - X-Requested-With
+      - Origin
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
