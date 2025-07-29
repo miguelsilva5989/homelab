@@ -21,9 +21,9 @@ spec:
           - containerPort: 8989
         env:
           - name: PUID
-            value: 1000
+            value: "1000"
           - name: PGID
-            value: 1000
+            value: "1000"
         volumeMounts:
             - name: config-volume
               mountPath: /config
