@@ -1,15 +1,15 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-traefik-outpost
-  namespace: homeassistant
-spec:
-  type: ExternalName
-  externalName: auth-traefik-outpost.authentik.svc.cluster.local
-  ports:
-    - port: 9000
-      targetPort: 9000
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: auth-traefik-outpost
+#   namespace: homeassistant
+# spec:
+#   type: ExternalName
+#   externalName: auth-traefik-outpost.authentik.svc.cluster.local
+#   ports:
+#     - port: 9000
+#       targetPort: 9000
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
