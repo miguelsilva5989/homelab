@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: prowlarr-ingressroute-certificate
-  namespace: prowlarr
+  namespace: media
 spec:
   # Secret names are always required.
   secretName: prowlarr-certificate-secret

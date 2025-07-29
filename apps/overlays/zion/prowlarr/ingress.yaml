@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: auth-traefik-outpost
-  namespace: prowlarr
+  namespace: media
 spec:
   type: ExternalName
   externalName: auth-traefik-outpost.authentik.svc.cluster.local
@@ -15,7 +15,7 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: prowlarr
-  namespace: prowlarr
+  namespace: media
 spec:
   entryPoints:
     - websecure

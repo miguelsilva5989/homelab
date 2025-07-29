@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: sonarr-ingressroute-certificate
-  namespace: sonarr
+  namespace: media
 spec:
   # Secret names are always required.
   secretName: sonarr-certificate-secret

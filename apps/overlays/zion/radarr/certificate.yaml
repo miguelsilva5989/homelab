@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: radarr-ingressroute-certificate
-  namespace: radarr
+  namespace: media
 spec:
   # Secret names are always required.
   secretName: radarr-certificate-secret
