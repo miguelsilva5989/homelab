@@ -20,7 +20,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`copyparty.milanchis.com`) && PathPrefix(`/`)
+    - match: Host(`copyparty.milanchis.com`)
       kind: Rule
       priority: 10
       services:
