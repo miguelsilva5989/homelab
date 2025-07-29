@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: sonarr
 
 resources:
-  - namespace.yaml
+  # - namespace.yaml # defined in radarr
   - deployment.yaml
   - service.yaml
   - pvc.yaml

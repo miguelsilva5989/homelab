@@ -7,9 +7,9 @@ spec:
   interval: 1m
   retryInterval: 1m
   timeout: 5m
+  prune: true
+  wait: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  prune: true
-  wait: true
   path: ./apps/overlays/zion

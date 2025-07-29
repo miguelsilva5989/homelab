@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: prowlarr
 
 resources:
-  - namespace.yaml
+  # - namespace.yaml # defined in radarr
   - deployment.yaml
   - service.yaml
   - pvc.yaml
