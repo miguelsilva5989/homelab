@@ -30,13 +30,17 @@ metadata:
   namespace: copyparty
 spec:
   headers:
+    requestHeaders:
+      set:
+        X-IdP-User: "{{ .Request.Headers.Get `X-authentik-username` }}"
+        X-IdP-Group: "{{ .Request.Headers.Get `X-authentik-groups` }}"
     customRequestHeaders:
       Host: "{http.host}"
       X-Real-Ip: "{http.request.remoteAddr}"
       X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
       X-Forwarded-Proto: "https"
-      X-IdP-User: "{http.request.headers.X-authentik-username}"
-      X-IdP-Group: "{http.request.headers.X-authentik-groups}"
+      # X-IdP-User: "{http.request.headers.X-authentik-username}"
+      # X-IdP-Group: "{http.request.headers.X-authentik-groups}"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
