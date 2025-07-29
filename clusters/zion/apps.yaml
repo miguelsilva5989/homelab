@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 2m
   prune: true
   wait: true
   sourceRef:
