@@ -9,3 +9,4 @@ resources:
   - homeassistant
   - radarr
   - sonarr
+  - prowlarr
