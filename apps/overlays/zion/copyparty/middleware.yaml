@@ -31,9 +31,9 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      Host: {http.request.host}
-      X-Real-Ip: {http.request.remoteAddr}
+      Host: "{http.request.host}"
+      X-Real-Ip: "{http.request.remoteAddr}"
       X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
-      X-Forwarded-Proto: {http.request.scheme}
-      X-IdP-User: {http.request.headers.X-Authentik-Username}
-      X-IdP-Group: {http.request.headers.X-Authentik-Groups}
+      X-Forwarded-Proto: "{http.request.scheme}"
+      X-IdP-User: "{http.request.headers.X-authentik-username}"
+      X-IdP-Group: "{http.request.headers.X-authentik-groups}"
