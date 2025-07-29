@@ -96,6 +96,16 @@ postgresql:
     # database: authentik-db
     # password: "ThisIsNotASecurePassword"
     existingSecret: authentik-credentials
+  primary:
+    extendedConfiguration: |
+      max_connections = 500
+    resourcesPreset: "none"
+    persistence:
+      enabled: true
+      storageClass: longhorn
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
 
 redis:
   enabled: true
