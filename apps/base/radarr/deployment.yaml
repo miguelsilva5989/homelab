@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  labels:
+    app: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - name: radarr
+        image: lscr.io/linuxserver/radarr:5.26.2.10099-ls279 # check in https://docs.linuxserver.io/images/docker-radarr/#usage
+        ports:
+          - containerPort: 7878
+        env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+        volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            # TODO /downloads and /tv
+
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: radarr-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

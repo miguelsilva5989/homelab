@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: radarr
+  ports:
+  - name: radarr-ui
+    protocol: TCP
+    port: 80
+    targetPort: 7878
