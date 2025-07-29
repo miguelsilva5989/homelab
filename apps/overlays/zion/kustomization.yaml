@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - open-webui
-  - test-app
   # - gitlab
   - immich
   - homeassistant
