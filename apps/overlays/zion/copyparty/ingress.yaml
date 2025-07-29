@@ -34,7 +34,7 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-copyparty-auth-middleware
-        # - name: zion-copyparty-cors-middleware
+        - name: zion-copyparty-forward-headers
     - match: Host(`copyparty.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       priority: 15
