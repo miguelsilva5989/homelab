@@ -29,7 +29,6 @@ spec:
           - name: data-volume
             mountPath: /cfg/copyparty
             # TODO /w - is the path inside the container that gets shared by default, so mount one or more folders to share below there
-            
 
       volumes:
         - name: config-volume
