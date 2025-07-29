@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copyparty
+  labels:
+    app: copyparty
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: copyparty
+  template:
+    metadata:
+      labels:
+        app: copyparty
+    spec:
+      containers:
+      - name: copyparty
+        image: copyparty/ac
+        ports:
+          - containerPort: 3923
+        env:
+          # - name: PUID
+          #   value: "1000"
+        volumeMounts:
+            - name: config-volume
+              mountPath: /cfg
+            # TODO /w - is the path inside the container that gets shared by default, so mount one or more folders to share below there
+
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: copyparty-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: copyparty-ingressroute-certificate
+  namespace: copyparty
+spec:
+  # Secret names are always required.
+  secretName: copyparty-certificate-secret
+
+  # Issuer references are always required.
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer
+
+  # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+  dnsNames:
+    - copyparty.milanchis.com
