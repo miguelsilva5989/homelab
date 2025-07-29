@@ -36,7 +36,7 @@ spec:
             name: copyparty-config-file
         - name: data-volume
           persistentVolumeClaim:
-            claimName: copyparty-pvc
+            claimName: zion-copyparty-pvc
 
       affinity:
         nodeAffinity:
