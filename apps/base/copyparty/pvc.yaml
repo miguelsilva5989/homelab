@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: copypart-pvc
+  name: copyparty-pvc
 spec:
   accessModes:
     - ReadWriteOnce
