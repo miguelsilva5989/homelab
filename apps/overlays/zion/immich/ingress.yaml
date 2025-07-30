@@ -28,12 +28,26 @@ spec:
           port: 80
           sticky:
             cookie:
-              name: openwebui-stickiness
+              name: openwebui-stickiness-ws
               secure: true
               httpOnly: true
               sameSite: none
       middlewares:
         - name: zion-immich-ws-headers
+        - name: zion-immich-cors
+    - match: Host(`immich.milanchis.com`) && PathPrefix(`/api`)
+      kind: Rule
+      priority: 6
+      services:
+        - name: zion-immich
+          port: 80
+          sticky:
+            cookie:
+              name: openwebui-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
         - name: zion-immich-cors
     - match: Host(`immich.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
