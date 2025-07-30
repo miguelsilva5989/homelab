@@ -56,6 +56,8 @@ spec:
       services:
         - name: auth-traefik-outpost
           port: 9000
+      middlewares:
+        - name: zion-immich-cors
 
   tls:
     secretName: immich-certificate-secret
