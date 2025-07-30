@@ -7,12 +7,12 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.69.1.69                  # Mandatory: NFS server address (IP address or DNS name)
   share: /ikea_pool/nfs_media      
+  mountPermissions: "0777"  # Ensure the mounted directory is writable
+  subDir: k3s_data                                  # Optional: subdirectory under the NFS share
   
   # server: 192.168.69.115                     # Mandatory: NFS server address (IP address or DNS name)
   # share: /mnt/user/prox                       # Mandatory: NFS share path (the path to the shared directory)
   # Optional parameters
-  # subDir: k3s_data                                  # Optional: subdirectory under the NFS share
-  # mountPermissions: "0777"  # Ensure the mounted directory is writable
   # delete: "delete"                           # Optional: maintains the volume on delete (delete, retain)
 reclaimPolicy: Retain  # or Delete based on your requirements
 volumeBindingMode: Immediate
