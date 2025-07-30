@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  labels:
+    app: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+      - name: jellyfin
+        image: lscr.io/linuxserver/jellyfin:latest
+        ports:
+          - containerPort: 8096
+        env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+        volumeMounts:
+          # Mount /dev/dri to access Intel GPU devices for hardware acceleration
+          - name: dev-dri
+            mountPath: /dev/dri
+            readOnly: true
+          # - name: config-volume
+          #   mountPath: /config
+          # - name: media-volume
+          #   mountPath: /media
+          # - name: cache-volume
+          #   mountPath: /cache
+      volumes:
+      #   - name: config-volume
+      #     persistentVolumeClaim:
+      #       claimName: jellyfin-config-pvc
+      #   - name: media-volume
+      #     persistentVolumeClaim:
+      #       claimName: jellyfin-media-pvc
+      #   - name: cache-volume
+      #     persistentVolumeClaim:
+      #       claimName: jellyfin-cache-pvc
+      nodeSelector:
+        kubernetes.io/hostname: architect-01

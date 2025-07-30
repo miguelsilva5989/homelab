@@ -28,6 +28,9 @@ spec:
             readOnly: true
           - name: data-volume
             mountPath: /cfg/copyparty
+          - name: share
+            mountPath: /w
+            subPath: .
 
       volumes:
         - name: config-volume
@@ -36,6 +39,9 @@ spec:
         - name: data-volume
           persistentVolumeClaim:
             claimName: copyparty-pvc
+        - name: share
+          persistentVolumeClaim:
+            claimName: copyparty-share-pvc
 
       affinity:
         nodeAffinity:

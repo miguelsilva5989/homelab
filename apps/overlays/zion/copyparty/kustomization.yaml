@@ -15,5 +15,3 @@ resources:
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml
-  - pvc.yaml
-  - patch-volumes.yaml
