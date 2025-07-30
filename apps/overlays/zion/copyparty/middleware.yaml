@@ -39,6 +39,8 @@ spec:
       X-Forwarded-Proto: "https"
       # X-IdP-User: NOTE - These were added via Propery Mapping (Inside Customization)
       # X-IdP-Group: - and then added to the Provider - in Advanced protocol settings - Additional scopes
+      # X-IdP-User: "{http.authenticator.headers.X-IdP-User}"
+      # X-IdP-Group: "{http.authenticator.headers.X-IdP-Group}"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
