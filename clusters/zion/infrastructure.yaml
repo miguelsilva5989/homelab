@@ -11,6 +11,6 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: cert-manager
+    - name: network
   path: ./infrastructure/controllers/zion
   prune: true
