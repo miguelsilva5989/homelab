@@ -8,8 +8,8 @@ resources:
   - release.yaml
   - repository.yaml
   - volume.yaml
-  - middleware.yaml
   - cloudflare-api-token-sealedsecret.yaml
+  # - middleware.yaml
   # - ingress.yaml
 
 configMapGenerator:
