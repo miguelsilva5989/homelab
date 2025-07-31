@@ -10,7 +10,6 @@ resources:
   - volume.yaml
   - middleware.yaml
   - cloudflare-api-token-sealedsecret.yaml
-  - cluster-issuer.yaml
   - ingress.yaml
 
 configMapGenerator:
