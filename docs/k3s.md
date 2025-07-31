@@ -38,6 +38,8 @@ ssh-copy-id mike@10.69.5.3
 ssh-copy-id mike@10.69.5.11
 ssh-copy-id mike@10.69.5.12
 
+ssh-copy-id mike@10.69.6.13
+
 # Master
 k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
 ```
@@ -112,6 +114,7 @@ Join the agents
 ```sh
 k3sup join --ip 10.69.5.11 --server-ip 10.69.69.1 --user mike
 k3sup join --ip 10.69.5.12 --server-ip 10.69.69.1 --user mike
+k3sup join --ip 10.69.6.13 --server-ip 10.69.69.1 --user root --server-user mike
 ```
 
 Check the nodes `kubectl get nodes`
