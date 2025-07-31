@@ -11,7 +11,7 @@ resource "proxmox_vm_qemu" "architect_01" {
 
     cores = 4
     cpu_type = "x86-64-v4"
-    memory = 16384
+    memory = 24000
 
     network {
         id  = 0
