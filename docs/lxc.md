@@ -1,3 +1,4 @@
+# NOPE - not good for kubernetes - problems with longhorn, etc
 # LXC Kubernetes
 
 <https://gist.github.com/triangletodd/02f595cd4c0dc9aac5f7763ca2264185>

@@ -34,14 +34,13 @@ k3sup --help
 ```sh
 ssh-copy-id mike@10.69.5.1
 ssh-copy-id mike@10.69.5.2
-ssh-copy-id mike@10.69.5.3
 ssh-copy-id mike@10.69.5.11
 ssh-copy-id mike@10.69.5.12
-
-ssh-copy-id mike@10.69.6.13
+ssh-copy-id mike@10.69.5.13
 
 # Master
-k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
+# k3sup install --ip 10.69.5.1 --tls-san=10.69.69.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
+k3sup install --ip 10.69.5.1 --cluster --user mike --local-path ~/.kube/config --context k3s-ha --k3s-extra-args '--disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
 ```
 
 ### Kubevip
@@ -89,16 +88,16 @@ kubectl get ds -A
 
 Join the remaining control nodes
 
-```sh
+<!-- ```sh
 # 2nd Server
 # notice servce-ip is the virtual IP
 k3sup join --ip 10.69.5.2 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.2 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
-```
+``` -->
 
-```sh
+<!-- ```sh
 # 3rd Server
 k3sup join --ip 10.69.5.3 --user mike --sudo --k3s-channel stable --server --server-ip 10.69.69.1 --server-user mike --sudo --k3s-extra-args '--node-ip=10.69.5.3 --disable servicelb --disable traefik --write-kubeconfig-mode 640 --write-kubeconfig-group sudo'
-```
+``` -->
 
 Check the nodes `kubectl get nodes`
 
@@ -112,9 +111,12 @@ kubectl get nodes # this should still work after the change
 Join the agents
 
 ```sh
-k3sup join --ip 10.69.5.11 --server-ip 10.69.69.1 --user mike
-k3sup join --ip 10.69.5.12 --server-ip 10.69.69.1 --user mike
-k3sup join --ip 10.69.6.13 --server-ip 10.69.69.1 --user root --server-user mike
+# k3sup join --ip 10.69.5.11 --server-ip 10.69.69.1 --user mike
+# k3sup join --ip 10.69.5.12 --server-ip 10.69.69.1 --user mike
+# k3sup join --ip 10.69.6.13 --server-ip 10.69.69.1 --user root --server-user mike
+k3sup join --ip 10.69.5.11 --server-ip 10.69.5.1 --user mike
+k3sup join --ip 10.69.5.12 --server-ip 10.69.5.1 --user mike
+k3sup join --ip 10.69.5.13 --server-ip 10.69.5.1 --user mike
 ```
 
 Check the nodes `kubectl get nodes`
