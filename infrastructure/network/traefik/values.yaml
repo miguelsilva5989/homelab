@@ -126,6 +126,7 @@ providers:  # @schema additionalProperties: false
     enabled: true
     # -- Allows IngressRoute to reference resources in namespace other than theirs
     allowCrossNamespace: true
+    allowExternalNameServices: true
 
 certificatesResolvers:
   cloudflare:
