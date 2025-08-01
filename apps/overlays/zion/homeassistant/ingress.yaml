@@ -20,14 +20,14 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/api/websocket`)  # WebSocket route
-      kind: Rule
-      priority: 5
-      services:
-        - name: zion-homeassistant
-          port: 8123
-      middlewares:
-        - name: zion-homeassistant-ws-headers
+    # - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/api/websocket`)  # WebSocket route
+    #   kind: Rule
+    #   priority: 5
+    #   services:
+    #     - name: zion-homeassistant
+    #       port: 8123
+    #   middlewares:
+    #     - name: zion-homeassistant-ws-headers
     - match: Host(`homeassistant.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
