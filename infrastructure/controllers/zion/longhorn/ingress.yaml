@@ -33,5 +33,6 @@ spec:
       priority: 15
       services:
         - name: auth-traefik-outpost
+          port: 9000
   tls:
     secretName: longhorn-certificate-secret
