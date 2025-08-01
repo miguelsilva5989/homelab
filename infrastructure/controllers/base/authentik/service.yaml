@@ -1,15 +1,14 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: authentik
-#   labels:
-#     app: authentik
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     app: authentik
-#   ports:
-#   - name: http
-#     protocol: TCP
-#     port: 9000        # Service port
-#     targetPort: 9000  # Container port
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentik
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: authentik
+  ports:
+  - name: authentik-ui
+    protocol: TCP
+    port: 80
+    targetPort: 9000
