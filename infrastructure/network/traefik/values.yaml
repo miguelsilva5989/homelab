@@ -15,46 +15,6 @@ deployment:
 # -- on nodes where no other traefik pods are scheduled.
 # It should be used when hostNetwork: true to prevent port conflicts
 affinity: {}
-#   podAntiAffinity:
-#     requiredDuringSchedulingIgnoredDuringExecution:
-#       - labelSelector:
-#           matchLabels:
-#             app.kubernetes.io/name: traefik
-#             app.kubernetes.io/instance: traefik-traefik
-#         topologyKey: kubernetes.io/hostname
-# affinity:
-  # nodeAffinity:
-  #   requiredDuringSchedulingIgnoredDuringExecution:
-  #     nodeSelectorTerms:
-  #     - matchExpressions:
-  #       - key: kubernetes.io/hostname
-  #         operator: In
-  #         values:
-  #         - master-01
-  #         - master-02
-  #         - master-03
-  # podAntiAffinity:
-  #   requiredDuringSchedulingIgnoredDuringExecution:
-  #   - labelSelector:
-  #       matchLabels:
-  #         app.kubernetes.io/name: traefik
-  #         app.kubernetes.io/instance: traefik-traefik
-  #     topologyKey: kubernetes.io/hostname
-  # podAntiAffinity:
-    # requiredDuringSchedulingIgnoredDuringExecution:
-    # - labelSelector:
-    #     matchLabels:
-    #       app.kubernetes.io/name: traefik
-    #       app.kubernetes.io/instance: traefik-traefik
-    #   topologyKey: kubernetes.io/hostname
-    # preferredDuringSchedulingIgnoredDuringExecution:
-    #   - weight: 100
-    #     podAffinityTerm:
-    #       labelSelector:
-    #         matchLabels:
-    #           app.kubernetes.io/name: traefik
-    #           app.kubernetes.io/instance: traefik-traefik
-    #       topologyKey: kubernetes.io/hostname
 
 service:
   enabled: true

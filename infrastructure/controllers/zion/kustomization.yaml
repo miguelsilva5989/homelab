@@ -5,4 +5,4 @@ resources:
   - longhorn
   - authentik
   - nfs-csi-driver
-  - cluster-issuer
+  - post-network
