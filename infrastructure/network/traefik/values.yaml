@@ -58,14 +58,25 @@ ingressRoute:
   dashboard:
     enabled: true
 
+# persistence:
+#   enabled: true
+#   existingClaim: ssl-certs
+#   path: /ssl-certs
+#   accessMode: ReadWriteOnce
+#   # name: ssl-certs
+#   # size: 1Gi
+#   # path: /ssl-certs
 persistence:
   enabled: true
-  existingClaim: ssl-certs
+  name: ssl-certs
+  existingClaim: ""  # Set to empty to create a new PVC
+  accessMode: ReadWriteMany  # Longhorn supports ReadWriteMany
+  size: 128Mi
+  storageClass: longhorn
+  volumeName: ""  # Let Kubernetes assign a PV
   path: /ssl-certs
-  accessMode: ReadWriteOnce
-  # name: ssl-certs
-  # size: 1Gi
-  # path: /ssl-certs
+  annotations: {}
+  subPath: ""
 
 podSecurityContext:
   runAsUser: 65534   # Run as 'nobody' user
