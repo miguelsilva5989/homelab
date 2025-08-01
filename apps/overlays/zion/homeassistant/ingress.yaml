@@ -24,7 +24,7 @@ spec:
       kind: Rule
       priority: 5
       services:
-        - name: homeassistant
+        - name: zion-homeassistant
           port: 8123
       middlewares:
         - name: zion-homeassistant-ws-headers
