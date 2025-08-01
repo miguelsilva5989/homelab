@@ -62,7 +62,8 @@ service:
   annotations: {}
   labels: {}
   spec:
-    loadBalancerIP: 10.69.69.1 # this should be an IP in the Kube-VIP range
+    # loadBalancerIP: 10.69.69.1 # this should be an IP in the Kube-VIP range
+    loadBalancerIP: 10.69.5.1
   loadBalancerSourceRanges: []
   externalIPs: []
 

@@ -9,7 +9,7 @@ resource "proxmox_vm_qemu" "matrix_01" {
 
     clone = "ubuntu-server-24-noble" # name of the template VM to clone from
 
-    cores = 2
+    cores = 4
     cpu_type = "x86-64-v4"
     memory = 16384
 
