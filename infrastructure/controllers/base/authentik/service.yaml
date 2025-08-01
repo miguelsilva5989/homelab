@@ -6,7 +6,7 @@ spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
   selector:
-    app: authentik
+    app: authentik-server
   ports:
   - name: authentik-ui
     protocol: TCP
