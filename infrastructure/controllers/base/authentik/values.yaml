@@ -62,7 +62,7 @@ worker:
   # -- authentik worker name
   name: worker
   # -- The number of worker pods to run
-  replicas: 5
+  replicas: 3
   env:
     - name: AUTHENTIK_REDIS__HOST
       value: authentik-redis-master
