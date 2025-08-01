@@ -97,9 +97,15 @@ persistence:
   enabled: true
   existingClaim: ssl-certs
   path: /ssl-certs
+  accessMode: ReadWriteOnce
   # name: ssl-certs
   # size: 1Gi
   # path: /ssl-certs
+
+podSecurityContext:
+  runAsUser: 65534   # Run as 'nobody' user
+  runAsGroup: 65534  # Run as 'nogroup' group
+  runAsNonRoot: true
 
 env:
   - name: CF_API_EMAIL
