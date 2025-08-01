@@ -96,6 +96,7 @@ ingressRoute:
 persistence:
   enabled: true
   existingClaim: ssl-certs
+  path: /ssl-certs
   # name: ssl-certs
   # size: 1Gi
   # path: /ssl-certs
