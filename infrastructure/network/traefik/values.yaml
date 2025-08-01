@@ -63,9 +63,9 @@ service:
     metallb.universe.tf/address-pool: default
     metallb.universe.tf/loadBalancerIPs: 10.69.99.69 # Specific IP from the MetalLB poo
   labels: {}
-  spec:
-    clusterIP: 10.43.227.9 # Optional: Pin cluster IP for stability
-    loadBalancerIP: 10.69.99.69 # IP from the MetalLB pool
+  # spec:
+  #   clusterIP: 10.43.227.9 # Optional: Pin cluster IP for stability
+  #   loadBalancerIP: 10.69.99.69 # IP from the MetalLB pool
   #   # loadBalancerIP: 10.69.69.1 # this should be an IP in the Kube-VIP range
   #   loadBalancerIP: 10.69.5.1
   loadBalancerSourceRanges:
