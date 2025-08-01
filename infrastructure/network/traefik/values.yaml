@@ -65,7 +65,7 @@ service:
   labels: {}
   spec:
     clusterIP: 10.43.227.9 # Optional: Pin cluster IP for stability
-    loadBalancerIP: 10.69.70.1 # IP from the MetalLB pool
+    loadBalancerIP: 10.69.99.255 # IP from the MetalLB pool
   #   # loadBalancerIP: 10.69.69.1 # this should be an IP in the Kube-VIP range
   #   loadBalancerIP: 10.69.5.1
   loadBalancerSourceRanges: []
