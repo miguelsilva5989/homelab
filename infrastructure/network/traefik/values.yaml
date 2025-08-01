@@ -6,6 +6,10 @@ deployment:
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
+  dnsConfig:
+    options:
+      - name: ndots
+        value: "1"
   # tolerations:
   #   - key: "node-role.kubernetes.io/master"
   #     operator: "Exists"
@@ -169,4 +173,5 @@ certificatesResolvers:
         #
         resolvers:
         - "1.1.1.1:53"
+        - "8.8.8.8:53"
 

@@ -8,7 +8,7 @@ resources:
   - release.yaml
   - repository.yaml
   # - volume.yaml
-  - cloudflare-api-token-sealedsecret.yaml
+  - sealedsecret.yaml
   # - middleware.yaml
   # - ingress.yaml
 
