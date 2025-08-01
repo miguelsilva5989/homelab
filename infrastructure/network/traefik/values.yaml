@@ -68,8 +68,8 @@ service:
   #   loadBalancerIP: 10.69.99.69 # IP from the MetalLB pool
   #   # loadBalancerIP: 10.69.69.1 # this should be an IP in the Kube-VIP range
   #   loadBalancerIP: 10.69.5.1
-  loadBalancerSourceRanges:
-    - 10.69.70.1-10.69.99.255
+  # loadBalancerSourceRanges:
+  #   - 10.69.70.1-10.69.99.255
   externalIPs: []
 
 ingressClass:
