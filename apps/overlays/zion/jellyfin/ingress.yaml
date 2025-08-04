@@ -23,14 +23,14 @@ spec:
               httpOnly: true
               sameSite: none
       middlewares:
-        - name: zion-jellyfin-auth-middleware
+        # - name: zion-jellyfin-auth-middleware
         # - name: zion-jellyfin-cors-middleware
-    - match: Host(`jellyfin.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      priority: 15
-      services:
-        - name: zion-auth-traefik-outpost
-          port: 9000
+    # - match: Host(`jellyfin.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    #   kind: Rule
+    #   priority: 15
+    #   services:
+    #     - name: zion-auth-traefik-outpost
+    #       port: 9000
 
   tls:
     secretName: jellyfin-certificate-secret

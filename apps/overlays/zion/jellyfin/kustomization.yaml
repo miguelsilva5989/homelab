@@ -14,4 +14,4 @@ resources:
   - ../../../base/jellyfin
   - certificate.yaml
   - ingress.yaml
-  - middleware.yaml
+  # - middleware.yaml
