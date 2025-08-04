@@ -6,8 +6,9 @@ resources:
   # - gitlab
   - immich
   - homeassistant
+  - copyparty
   - radarr
   - sonarr
-  - prowlarr
   - flaresolverr
-  - copyparty
+  - prowlarr
+  - jellyfin

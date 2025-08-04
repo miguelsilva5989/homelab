@@ -28,26 +28,32 @@ spec:
             value: "1000"
           - name: PGID
             value: "1000"
+          - name: JELLYFIN_PublishedServerUrl
+            value: https://jellyfin.milanchis.com
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
             mountPath: /dev/dri
             readOnly: true
-          # - name: config-volume
-          #   mountPath: /config
-          # - name: media-volume
-          #   mountPath: /media
-          # - name: cache-volume
-          #   mountPath: /cache
+          - name: config-volume
+            mountPath: /config
+          - name: series-volume
+            mountPath: /tvshows
+          - name: movies-volume
+            mountPath: /movies
       volumes:
-      #   - name: config-volume
-      #     persistentVolumeClaim:
-      #       claimName: jellyfin-config-pvc
-      #   - name: media-volume
-      #     persistentVolumeClaim:
-      #       claimName: jellyfin-media-pvc
-      #   - name: cache-volume
-      #     persistentVolumeClaim:
-      #       claimName: jellyfin-cache-pvc
+        - name: dev-dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: jellyfin-pvc
+        - name: series-volume
+          persistentVolumeClaim:
+            claimName: series-pvc-jellyfin
+        - name: movies-volume
+          persistentVolumeClaim:
+            claimName: movies-pvc-jellyfin
       nodeSelector:
-        kubernetes.io/hostname: architect-01
+        kubernetes.io/hostname: matrix-01
