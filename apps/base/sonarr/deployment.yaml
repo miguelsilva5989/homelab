@@ -43,7 +43,7 @@ spec:
             claimName: sonarr-pvc
         - name: downloads-volume
           persistentVolumeClaim:
-            claimName: downloads-pvc
+            claimName: downloads-pvc-sonarr
         - name: series-volume
           persistentVolumeClaim:
             claimName: series-pvc
