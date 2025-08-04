@@ -31,9 +31,9 @@ spec:
         volumeMounts:
             - name: config-volume
               mountPath: /config
-            - name: downloads
+            - name: downloads-volume
               mountPath: /downloads
-            - name: movies
+            - name: movies-volume
               mountPath: /movies
 
       volumes:
