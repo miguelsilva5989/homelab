@@ -59,8 +59,3 @@ spec:
             claimName: movies-pvc-jellyfin
       nodeSelector:
         kubernetes.io/hostname: matrix-01
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        supplementalGroups: [100, 44] # render and video groups
