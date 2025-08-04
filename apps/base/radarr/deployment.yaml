@@ -31,12 +31,21 @@ spec:
         volumeMounts:
             - name: config-volume
               mountPath: /config
-            # TODO /downloads and /tv
+            - name: downloads
+              mountPath: /downloads
+            - name: movies
+              mountPath: /movies
 
       volumes:
         - name: config-volume
           persistentVolumeClaim:
             claimName: radarr-pvc
+        - name: downloads-volume
+          persistentVolumeClaim:
+            claimName: downloads-pvc
+        - name: movies-volume
+          persistentVolumeClaim:
+            claimName: movies-pvc
 
       affinity:
         nodeAffinity:
