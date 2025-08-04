@@ -1,0 +1,10 @@
+script to update
+
+cr.hotio.dev/hotio/cloudflareddns
+
+detection mode 
+    dig-whoami.cloudflare
+
+CF_USER xxxx
+CF_API_KEY xxx
+

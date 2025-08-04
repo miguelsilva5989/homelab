@@ -22,7 +22,7 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
-      middlewares:
+      # middlewares:
         # - name: zion-jellyfin-auth-middleware
         # - name: zion-jellyfin-cors-middleware
     # - match: Host(`jellyfin.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
