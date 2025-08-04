@@ -28,8 +28,8 @@ spec:
             value: "1000"
           - name: PGID
             value: "1000"
-          - name: JELLYFIN_PublishedServerUrl
-            value: https://jellyfin.milanchis.com
+          # - name: JELLYFIN_PublishedServerUrl
+          #   value: https://jellyfin.milanchis.com
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
