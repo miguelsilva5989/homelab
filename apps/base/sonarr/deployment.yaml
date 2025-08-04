@@ -31,12 +31,23 @@ spec:
         volumeMounts:
             - name: config-volume
               mountPath: /config
-            # TODO /downloads and /tv
+            - name: downloads-volume
+              mountPath: /downloads
+              subPath: downloads
+            - name: series-volume
+              mountPath: /tv
+              subPath: series
 
       volumes:
         - name: config-volume
           persistentVolumeClaim:
             claimName: sonarr-pvc
+        - name: downloads-volume
+          persistentVolumeClaim:
+            claimName: downloads-pvc
+        - name: series-volume
+          persistentVolumeClaim:
+            claimName: series-pvc
 
       affinity:
         nodeAffinity:
