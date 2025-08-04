@@ -39,8 +39,10 @@ spec:
             mountPath: /config
           - name: series-volume
             mountPath: /tvshows
+            subPath: series
           - name: movies-volume
             mountPath: /movies
+            subPath: movies
       volumes:
         - name: dev-dri
           hostPath:
