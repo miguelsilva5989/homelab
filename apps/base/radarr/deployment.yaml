@@ -33,7 +33,6 @@ spec:
               mountPath: /config
             - name: downloads-volume
               mountPath: /downloads
-              subPath: downloads
             - name: movies-volume
               mountPath: /movies
               subPath: movies
