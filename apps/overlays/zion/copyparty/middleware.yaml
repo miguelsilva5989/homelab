@@ -33,7 +33,6 @@ spec:
     customRequestHeaders:
       Host: "{http.host}"
       X-Real-Ip: "{http.request.remoteAddr}"
-      X-Forwarded-For: "{http.request.headers.X-Forwarded-For}, {http.request.remoteAddr}"
       X-Forwarded-Proto: "https"
 ---
 apiVersion: traefik.io/v1alpha1
