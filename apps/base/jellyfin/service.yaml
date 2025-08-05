@@ -12,3 +12,15 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8096
+  - name: jellyfin-https
+    protocol: TCP
+    port: 8920
+    targetPort: 8920
+  - name: jellyfin-discovery-7359
+    protocol: UDP
+    port: 7359
+    targetPort: 7359
+  - name: jellyfin-discovery-1900
+    protocol: UDP
+    port: 1900
+    targetPort: 1900
