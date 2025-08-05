@@ -28,8 +28,8 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-  tls:
-    secretName: traefik-certificate
+  # tls:
+  #   secretName: traefik-certificate
   # tls:
     # certResolver: cloudflare
 
