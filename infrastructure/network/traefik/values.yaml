@@ -87,7 +87,7 @@ podSecurityContext:
   runAsGroup: 65534  # Run as 'nogroup' group
   runAsNonRoot: true
 
-env:
+envFrom:
   - name: CF_API_EMAIL
     valueFrom:
       secretKeyRef:
