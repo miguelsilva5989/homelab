@@ -87,7 +87,7 @@ podSecurityContext:
   runAsGroup: 65534  # Run as 'nogroup' group
   runAsNonRoot: true
 
-envFrom:
+env:
   - name: CF_API_EMAIL
     valueFrom:
       secretKeyRef:
@@ -98,6 +98,10 @@ envFrom:
       secretKeyRef:
         key: apiKey
         name: cloudflare-credentials
+
+envFrom:
+  - secretRef:
+    name: cloudflare-credentials
 
 
 providers:  # @schema additionalProperties: false
