@@ -43,15 +43,3 @@ spec:
     frameDeny: true
     contentTypeNosniff: true
     customFrameOptionsValue: "allow-from https://jellyfin.milanchis.com"
----
-# middleware-jellyfin-insecure-mw.yaml
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: jellyfin-insecure-mw
-  namespace: media
-spec:
-  redirectScheme:
-    scheme: https
-    port: "9999"
-    permanent: false
