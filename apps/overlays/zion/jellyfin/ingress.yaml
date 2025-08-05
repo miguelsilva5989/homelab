@@ -15,14 +15,15 @@ spec:
       priority: 10
       services:
         - name: zion-jellyfin
-          port: 80
+          port: 8096
           sticky:
             cookie:
               name: jellyfin-stickiness
               secure: true
               httpOnly: true
               sameSite: none
-      # middlewares:
+      middlewares:
+        - name: zion-jellyfin-mw
         # - name: zion-jellyfin-auth-middleware
         # - name: zion-jellyfin-cors-middleware
     # - match: Host(`jellyfin.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
