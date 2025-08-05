@@ -33,12 +33,12 @@ spec:
     customResponseHeaders:
       X-Robots-Tag: "noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex"
       X-XSS-Protection: "1; mode=block"
-    SSLRedirect: true
-    SSLHost: "jellyfin.milanchis.com:9999"
-    SSLForceHost: true
-    STSSeconds: 315360000
-    STSIncludeSubdomains: true
-    STSPreload: true
+    sslRedirect: true
+    sslHost: "jellyfin.milanchis.com:9999"
+    sslForceHost: true
+    stsSeconds: 315360000
+    stsIncludeSubdomains: true
+    stsPreload: true
     forceSTSHeader: true
     frameDeny: true
     contentTypeNosniff: true
