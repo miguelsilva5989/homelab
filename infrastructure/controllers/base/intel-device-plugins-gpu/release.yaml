@@ -11,7 +11,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: longhorn-repo
+        name: intel
       version: 0.32.1
   interval: 1m0s
   valuesFrom:
