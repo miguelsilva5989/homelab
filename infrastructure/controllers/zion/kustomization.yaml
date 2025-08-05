@@ -6,3 +6,4 @@ resources:
   - authentik
   - nfs-csi-driver
   - post-network
+  - intel-device-plugins-gpu
