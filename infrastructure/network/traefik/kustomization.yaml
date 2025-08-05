@@ -11,6 +11,7 @@ resources:
   - sealedsecret.yaml
   # - middleware.yaml
   # - ingress.yaml
+  - certificate.yaml
 
 configMapGenerator:
   - name: traefik-values

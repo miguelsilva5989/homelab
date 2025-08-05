@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-certificate
+  namespace: traefik
+spec:
+  secretName: wildcard-milanchis-com-tls
+  dnsNames:
+    - "milanchis.com"
+    - "*.milanchis.com"
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer

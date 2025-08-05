@@ -87,21 +87,26 @@ podSecurityContext:
   runAsGroup: 65534  # Run as 'nogroup' group
   runAsNonRoot: true
 
-env:
-  - name: CF_API_EMAIL
-    valueFrom:
-      secretKeyRef:
-        key: email
-        name: cloudflare-credentials
-  - name: CF_API_KEY
-    valueFrom:
-      secretKeyRef:
-        key: apiKey
-        name: cloudflare-credentials
+tlsStore:
+  default:
+    defaultCertificate:
+      secretName: wildcard-milanchis-com-tls
 
-envFrom:
-  - secretRef:
-    name: cloudflare-credentials
+# env:
+#   - name: CF_API_EMAIL
+#     valueFrom:
+#       secretKeyRef:
+#         key: email
+#         name: cloudflare-credentials
+#   - name: CF_API_KEY
+#     valueFrom:
+#       secretKeyRef:
+#         key: apiKey
+#         name: cloudflare-credentials
+
+# envFrom:
+#   - secretRef:
+#     name: cloudflare-credentials
 
 
 providers:  # @schema additionalProperties: false
@@ -112,70 +117,70 @@ providers:  # @schema additionalProperties: false
     allowCrossNamespace: true
     allowExternalNameServices: true
 
-certificatesResolvers:
-  cloudflare:
-    # Enable ACME (Let's Encrypt): automatic SSL.
-    acme:
-      # staing server
-      caServer: https://acme-v02.api.letsencrypt.org/directory
-      # Email address used for registration.
-      #
-      # Required
-      #
-      email: "miguelsilva5989@gmail.com"
+# certificatesResolvers:
+#   cloudflare:
+#     # Enable ACME (Let's Encrypt): automatic SSL.
+#     acme:
+#       # staing server
+#       caServer: https://acme-v02.api.letsencrypt.org/directory
+#       # Email address used for registration.
+#       #
+#       # Required
+#       #
+#       email: "miguelsilva5989@gmail.com"
 
-      # File or key used for certificates storage.
-      #
-      # Required
-      #
-      storage: "/ssl-certs/acme-cloudflare.json"
+#       # File or key used for certificates storage.
+#       #
+#       # Required
+#       #
+#       storage: "/ssl-certs/acme-cloudflare.json"
 
-      # Use a TLS-ALPN-01 ACME challenge.
-      #
-      # Optional (but recommended)
-      #
-      # tlsChallenge:
+#       # Use a TLS-ALPN-01 ACME challenge.
+#       #
+#       # Optional (but recommended)
+#       #
+#       # tlsChallenge:
 
-      # Use a HTTP-01 ACME challenge.
-      #
-      # Optional
-      #
-      # httpChallenge:
+#       # Use a HTTP-01 ACME challenge.
+#       #
+#       # Optional
+#       #
+#       # httpChallenge:
 
-        # EntryPoint to use for the HTTP-01 challenges.
-        #
-        # Required
-        #
-        # entryPoint: web
+#         # EntryPoint to use for the HTTP-01 challenges.
+#         #
+#         # Required
+#         #
+#         # entryPoint: web
 
-      # Use a DNS-01 ACME challenge rather than HTTP-01 challenge.
-      # Note: mandatory for wildcard certificate generation.
-      #
-      # Optional
-      #
-      dnsChallenge:
+#       # Use a DNS-01 ACME challenge rather than HTTP-01 challenge.
+#       # Note: mandatory for wildcard certificate generation.
+#       #
+#       # Optional
+#       #
+#       dnsChallenge:
 
-        # DNS provider used.
-        #
-        # Required
-        #
-        provider: cloudflare
+#         # DNS provider used.
+#         #
+#         # Required
+#         #
+#         provider: cloudflare
 
-        # By default, the provider will verify the TXT DNS challenge record before letting ACME verify.
-        # If delayBeforeCheck is greater than zero, this check is delayed for the configured duration in seconds.
-        # Useful if internal networks block external DNS queries.
-        #
-        # Optional
-        # Default: 0
-        #
-        # delayBeforeCheck: 0
+#         # By default, the provider will verify the TXT DNS challenge record before letting ACME verify.
+#         # If delayBeforeCheck is greater than zero, this check is delayed for the configured duration in seconds.
+#         # Useful if internal networks block external DNS queries.
+#         #
+#         # Optional
+#         # Default: 0
+#         #
+#         # delayBeforeCheck: 0
 
-        # Use following DNS servers to resolve the FQDN authority.
-        #
-        # Optional
-        # Default: empty
-        #
-        resolvers:
-        - "1.1.1.1:53"
-        - "8.8.8.8:53"
+#         # Use following DNS servers to resolve the FQDN authority.
+#         #
+#         # Optional
+#         # Default: empty
+#         #
+#         resolvers:
+#         - "1.1.1.1:53"
+#         - "8.8.8.8:53"
 
