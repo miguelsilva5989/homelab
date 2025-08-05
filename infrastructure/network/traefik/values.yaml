@@ -88,10 +88,10 @@ podSecurityContext:
   runAsNonRoot: true
 
 env:
-  - name: CF_API_TOKEN
+  - name: CF_DNS_API_TOKEN
     valueFrom:
       secretKeyRef:
-        key: apiKey
+        key: apiKey # actually this one still is the apiToken
         name: cloudflare-credentials
   # - name: CF_API_EMAIL
   #   valueFrom:
