@@ -113,7 +113,7 @@ certificatesResolvers:
     # Enable ACME (Let's Encrypt): automatic SSL.
     acme:
       # staing server
-      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      caServer: https://acme-v02.api.letsencrypt.org/directory
       # Email address used for registration.
       #
       # Required
