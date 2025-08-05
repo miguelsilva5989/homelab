@@ -33,25 +33,25 @@ spec:
     customResponseHeaders:
       X-Robots-Tag: "noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex"
       X-XSS-Protection: "1; mode=block"
-    sslRedirect: true
-    sslHost: "jellyfin.milanchis.com:9999"
-    sslForceHost: true
-    stsSeconds: 315360000
-    stsIncludeSubdomains: true
-    stsPreload: true
+    SSLRedirect: true
+    SSLHost: "jellyfin.milanchis.com:9999"
+    SSLForceHost: true
+    STSSeconds: 315360000
+    STSIncludeSubdomains: true
+    STSPreload: true
     forceSTSHeader: true
     frameDeny: true
     contentTypeNosniff: true
-    customFrameOptionsValue: "allow-from https://milanchis.com"
-# ---
-# # middleware-jellyfin-insecure-mw.yaml
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: jellyfin-insecure-mw
-#   namespace: media
-# spec:
-#   redirectScheme:
-#     scheme: https
-#     port: "9999"
-#     permanent: false
+    customFrameOptionsValue: "allow-from https://jellyfin.milanchis.com"
+---
+# middleware-jellyfin-insecure-mw.yaml
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: jellyfin-insecure-mw
+  namespace: media
+spec:
+  redirectScheme:
+    scheme: https
+    port: "9999"
+    permanent: false

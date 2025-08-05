@@ -35,3 +35,21 @@ spec:
 
   tls:
     secretName: jellyfin-certificate-secret
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyfin-insecure
+  namespace: media
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`jellyfin.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: noop
+          kind: TraefikService
+      middlewares:
+        - name: zion-jellyfin-insecure-mw
