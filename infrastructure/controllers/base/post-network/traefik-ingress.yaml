@@ -15,6 +15,12 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+          sticky:
+            cookie:
+              name: traefik-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
     - match: Host(`traefik.milanchis.com`) && PathPrefix(`/api`)
       kind: Rule
       middlewares:
