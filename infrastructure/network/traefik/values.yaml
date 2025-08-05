@@ -44,9 +44,9 @@ ports:
   websecure:
     port: 8443
     exposedPort: 443
-    tls:
-      enabled: true
-      certResolver: cloudflare # name of the resolver that we set below -> certificatesResolvers: -> **cloudflare**
+    # tls:
+    #   enabled: true
+    #   certResolver: cloudflare # name of the resolver that we set below -> certificatesResolvers: -> **cloudflare**
     transport:
       respondingTimeouts:
         readTimeout: "420s"
