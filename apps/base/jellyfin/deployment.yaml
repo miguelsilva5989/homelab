@@ -21,10 +21,10 @@ spec:
       podSecurityContext:
         # runAsNonRoot: false
         # fsGroup: 1000
-        seccompProfile:
-          type: RuntimeDefault
-        runAsUser: 1000
-        runAsGroup: 1000
+        # seccompProfile:
+        #   type: RuntimeDefault
+        # runAsUser: 1000
+        # runAsGroup: 1000
         supplementalGroups:
           - 109 # For /dev/dri/renderD128 access (render group)
       containers:
@@ -51,19 +51,19 @@ spec:
         #     gpu.intel.com/i915: "1"
         #   limits:
         #     gpu.intel.com/i915: "1"
-        securityContext:
-          privileged: false
-          allowPrivilegeEscalation: true
-          capabilities:
-            add:
-              - CHOWN
-              - SYS_ADMIN
-            drop:
-              - ALL
-          # readOnlyRootFilesystem: false
-          # runAsNonRoot: false
-          runAsUser: 1000
-          runAsGroup: 1000
+        # securityContext:
+        #   privileged: false
+        #   allowPrivilegeEscalation: true
+        #   capabilities:
+        #     add:
+        #       - CHOWN
+        #       - SYS_ADMIN
+        #     drop:
+        #       - ALL
+        #   # readOnlyRootFilesystem: false
+        #   # runAsNonRoot: false
+        #   runAsUser: 1000
+        #   runAsGroup: 1000
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
