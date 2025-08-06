@@ -34,7 +34,7 @@ spec:
       X-Robots-Tag: "noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex"
       X-XSS-Protection: "1; mode=block"
     sslRedirect: true
-    sslHost: "jellyfin.milanchis.com:9999"
+    sslHost: "jellyfin.milanchis.com"
     sslForceHost: true
     stsSeconds: 315360000
     stsIncludeSubdomains: true
