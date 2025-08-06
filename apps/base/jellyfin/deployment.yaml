@@ -18,6 +18,15 @@ spec:
         options:
           - name: ndots
             value: "1"
+      podSecurityContext:
+        runAsNonRoot: false
+        fsGroup: 64710
+        seccompProfile:
+          type: RuntimeDefault
+        runAsUser: 64710
+        runAsGroup: 64710
+        supplementalGroups:
+          - 109
       containers:
       - name: jellyfin
         image: lscr.io/linuxserver/jellyfin:latest
@@ -32,9 +41,9 @@ spec:
             protocol: UDP
         env:
           - name: PUID
-            value: "1000"
+            value: "64710"
           - name: PGID
-            value: "1000"
+            value: "64710"
           - name: JELLYFIN_PublishedServerUrl
             value: http://jellyfin.milanchis.com
         resources:
