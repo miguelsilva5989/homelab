@@ -19,7 +19,7 @@ spec:
           - name: ndots
             value: "1"
       podSecurityContext:
-        runAsNonRoot: true
+        # runAsNonRoot: false
         # fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
@@ -60,8 +60,8 @@ spec:
               - SYS_ADMIN
             drop:
               - ALL
-          readOnlyRootFilesystem: false
-          runAsNonRoot: true
+          # readOnlyRootFilesystem: false
+          # runAsNonRoot: false
           runAsUser: 1000
           runAsGroup: 1000
         volumeMounts:
