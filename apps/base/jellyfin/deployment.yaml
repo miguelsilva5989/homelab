@@ -19,8 +19,8 @@ spec:
           - name: ndots
             value: "1"
       podSecurityContext:
-        runAsNonRoot: false
-        fsGroup: 1000
+        runAsNonRoot: true
+        # fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
         runAsUser: 1000
@@ -46,19 +46,22 @@ spec:
             value: "1000"
           - name: JELLYFIN_PublishedServerUrl
             value: https://jellyfin.milanchis.com
-        resources:
-          requests:
-            gpu.intel.com/i915: "1"
-          limits:
-            gpu.intel.com/i915: "1"
+        # resources:
+        #   requests:
+        #     gpu.intel.com/i915: "1"
+        #   limits:
+        #     gpu.intel.com/i915: "1"
         securityContext:
-          privileged: true
+          privileged: false
           allowPrivilegeEscalation: true
           capabilities:
+            add:
+              - CHOWN
+              - SYS_ADMIN
             drop:
               - ALL
           readOnlyRootFilesystem: false
-          runAsNonRoot: false
+          runAsNonRoot: true
           runAsUser: 1000
           runAsGroup: 1000
         volumeMounts:
@@ -69,10 +72,10 @@ spec:
           - name: config-volume
             mountPath: /config
           - name: series-volume
-            mountPath: /tvshows
+            mountPath: /data/tvshows
             subPath: series
           - name: movies-volume
-            mountPath: /movies
+            mountPath: /data/movies
             subPath: movies
       volumes:
         - name: dev-dri
