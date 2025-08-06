@@ -20,11 +20,11 @@ spec:
             value: "1"
       podSecurityContext:
         runAsNonRoot: false
-        fsGroup: 64710
+        fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
-        runAsUser: 64710
-        runAsGroup: 64710
+        runAsUser: 1000
+        runAsGroup: 1000
         supplementalGroups:
           - 109 # For /dev/dri/renderD128 access (render group)
       containers:
@@ -41,9 +41,9 @@ spec:
             protocol: UDP
         env:
           - name: PUID
-            value: "64710"
+            value: "1000"
           - name: PGID
-            value: "64710"
+            value: "1000"
           - name: JELLYFIN_PublishedServerUrl
             value: https://jellyfin.milanchis.com
         resources:
@@ -59,8 +59,8 @@ spec:
               - ALL
           readOnlyRootFilesystem: false
           runAsNonRoot: false
-          runAsUser: 64710
-          runAsGroup: 64710
+          runAsUser: 1000
+          runAsGroup: 1000
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
@@ -74,12 +74,6 @@ spec:
           - name: movies-volume
             mountPath: /movies
             subPath: movies
-          - name: run-volume
-            mountPath: /run
-          - name: etc-group-volume
-            mountPath: /etc/group
-          - name: etc-gshadow-volume
-            mountPath: /etc/gshadow
       volumes:
         - name: dev-dri
           hostPath:
@@ -94,14 +88,5 @@ spec:
         - name: movies-volume
           persistentVolumeClaim:
             claimName: movies-pvc-jellyfin
-        - name: run-volume
-          emptyDir:
-            medium: Memory
-        - name: etc-group-volume
-          emptyDir:
-            medium: Memory
-        - name: etc-gshadow-volume
-          emptyDir:
-            medium: Memory
       nodeSelector:
         kubernetes.io/hostname: matrix-01
