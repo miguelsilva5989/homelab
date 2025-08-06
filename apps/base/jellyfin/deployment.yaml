@@ -40,7 +40,7 @@ spec:
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
-            mountPath: /dev/dri
+            mountPath: /dev/dri/renderD128
             readOnly: true
           - name: config-volume
             mountPath: /config
@@ -53,8 +53,8 @@ spec:
       volumes:
         - name: dev-dri
           hostPath:
-            path: /dev/dri
-            type: Directory
+            path: /dev/dri/renderD128
+            type: CharDevice
         - name: config-volume
           persistentVolumeClaim:
             claimName: jellyfin-pvc
