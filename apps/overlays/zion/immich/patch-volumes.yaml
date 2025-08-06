@@ -13,6 +13,9 @@ spec:
           - name: upload-storage
             mountPath: /usr/src/app/upload
             subPath: zion-immich/upload
+          - name: external-library
+            mountPath: /data/import
+            subPath: photos
           - name: localtime
             mountPath: /etc/localtime
             readOnly: true
@@ -33,6 +36,9 @@ spec:
       - name: upload-storage
         persistentVolumeClaim:
           claimName: upload-pvc
+      - name: external-library
+        persistentVolumeClaim:
+          claimName: external-library-pvc
       - name: localtime
         hostPath:
           path: /etc/localtime
