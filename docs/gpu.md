@@ -2,7 +2,14 @@
 
 https://jonathangazeley.com/2025/02/11/intel-gpu-acceleration-on-kubernetes/
 
+the secret sauce was actually this:
+resources:
+  requests:
+    gpu.intel.com/i915: "1"
+  limits:
+    gpu.intel.com/i915: "1"
 
+to really force the container to block assign the GPU
 
 kubectl label node matrix-01 intel.feature.node.kubernetes.io/gpu=true
 kubectl label node matrix-01 gpu.intel.com/device-id.0300-56a5.present=true
