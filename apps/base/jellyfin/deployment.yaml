@@ -26,7 +26,7 @@ spec:
         runAsUser: 64710
         runAsGroup: 64710
         supplementalGroups:
-          - 109
+          - 109 # For /dev/dri/renderD128 access (render group)
       containers:
       - name: jellyfin
         image: lscr.io/linuxserver/jellyfin:latest
@@ -45,7 +45,7 @@ spec:
           - name: PGID
             value: "64710"
           - name: JELLYFIN_PublishedServerUrl
-            value: http://jellyfin.milanchis.com
+            value: https://jellyfin.milanchis.com
         resources:
           requests:
             gpu.intel.com/i915: "1"
@@ -74,6 +74,12 @@ spec:
           - name: movies-volume
             mountPath: /movies
             subPath: movies
+          - name: run-volume
+            mountPath: /run
+          - name: etc-group-volume
+            mountPath: /etc/group
+          - name: etc-gshadow-volume
+            mountPath: /etc/gshadow
       volumes:
         - name: dev-dri
           hostPath:
@@ -88,5 +94,14 @@ spec:
         - name: movies-volume
           persistentVolumeClaim:
             claimName: movies-pvc-jellyfin
+        - name: run-volume
+          emptyDir:
+            medium: Memory
+        - name: etc-group-volume
+          emptyDir:
+            medium: Memory
+        - name: etc-gshadow-volume
+          emptyDir:
+            medium: Memory
       nodeSelector:
         kubernetes.io/hostname: matrix-01
