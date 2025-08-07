@@ -34,6 +34,9 @@ spec:
             - name: downloads-volume
               mountPath: /data/completed/radarr
               subPath: downloads/completed/radarr
+            - name: downloads-volume
+              mountPath: /data/incomplete
+              subPath: downloads/incomplete
             - name: movies-volume
               mountPath: /movies
               subPath: movies
