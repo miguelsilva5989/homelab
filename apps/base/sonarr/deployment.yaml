@@ -34,6 +34,9 @@ spec:
             - name: downloads-volume
               mountPath: /data/completed/sonarr
               subPath: downloads/completed/sonarr
+            - name: downloads-volume
+              mountPath: /data/incomplete
+              subPath: downloads/incomplete
             - name: series-volume
               mountPath: /tv
               subPath: series
