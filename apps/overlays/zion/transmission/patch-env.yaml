@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: transmission
+  namespace: media
+spec:
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+      - name: transmission
+        env:
+        - name: OPENVPN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: zion-transmission-credentials
+              key: openVpnUser
+        - name: OPENVPN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: zion-transmission-credentials
+              key: openVpnPassword

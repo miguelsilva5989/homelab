@@ -20,23 +20,30 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-transmission-5cc9b67c58-89nbf -- curl -v https://skyhook.transmission.tv
       containers:
       - name: transmission
-        image: lscr.io/linuxserver/transmission:4.0.6-R4-LS305
+        image: haugene/transmission-openvpn:latest
         ports:
           - containerPort: 9091
         env:
-          - name: PUID
-            value: "1000"
-          - name: PGID
-            value: "1000"
+          - name: OPENVPN_PROVIDER
+            value: "NORDVPN"
+          - name: OPENVPN_CONFIG
+            value: "spain,france,portugal"
+          - name: NORDVPN_COUNTRY
+            value: "ES"
+          - name: NORDVPN_CATEGORY
+            value: "legacy_p2p"
+          - name: NORDVPN_PROTOCOL
+            value: "tcp"
+          # - name: NORDVPN_SERVER
+          #   value: "EXAMPLE.nordvpn.com"
+          - name: LOCAL_NETWORK
+            value: "10.69.0.0/16"
         volumeMounts:
             - name: config-volume
               mountPath: /config
             - name: downloads-volume
-              mountPath: /downloads
+              mountPath: /data
               subPath: downloads
-            - name: downloads-volume
-              mountPath: /watch
-              subPath: downloads/watch
 
       volumes:
         - name: config-volume
