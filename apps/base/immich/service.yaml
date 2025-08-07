@@ -12,3 +12,16 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 2283
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: immich-machine-learning
+spec:
+  selector:
+    app: immich
+  ports:
+  - name: immich-machine-learning
+    protocol: TCP
+    port: 3003
+    targetPort: 3003
