@@ -33,9 +33,6 @@ spec:
               mountPath: /config
             - name: downloads-volume
               mountPath: /downloads
-            - name: series-volume
-              mountPath: /tv
-              subPath: series
 
       volumes:
         - name: config-volume
