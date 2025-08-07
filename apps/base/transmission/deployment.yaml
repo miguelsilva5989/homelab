@@ -24,6 +24,10 @@ spec:
         ports:
           - containerPort: 9091
         env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
           - name: OPENVPN_PROVIDER
             value: "NORDVPN"
           - name: OPENVPN_CONFIG
@@ -38,6 +42,8 @@ spec:
           #   value: "EXAMPLE.nordvpn.com"
           - name: LOCAL_NETWORK
             value: "10.69.0.0/16"
+          - name: TRANSMISSION_WEB_UI
+            value: "flood-for-transmission"
         volumeMounts:
             - name: config-volume
               mountPath: /config
