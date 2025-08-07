@@ -32,8 +32,8 @@ spec:
             - name: config-volume
               mountPath: /config
             - name: downloads-volume
-              mountPath: /data/completed
-              subPath: downloads
+              mountPath: /data/completed/radarr
+              subPath: downloads/completed/radarr
             - name: movies-volume
               mountPath: /movies
               subPath: movies

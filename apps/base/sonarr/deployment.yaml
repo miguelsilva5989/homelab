@@ -32,8 +32,8 @@ spec:
             - name: config-volume
               mountPath: /config
             - name: downloads-volume
-              mountPath: /data/completed
-              subPath: downloads
+              mountPath: /data/completed/sonarr
+              subPath: downloads/completed/sonarr
             - name: series-volume
               mountPath: /tv
               subPath: series
