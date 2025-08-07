@@ -34,6 +34,9 @@ spec:
             - name: downloads-volume
               mountPath: /downloads
               subPath: downloads
+            - name: downloads-volume
+              mountPath: /watch
+              subPath: downloads/watch
 
       volumes:
         - name: config-volume
