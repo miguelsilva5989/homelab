@@ -41,15 +41,19 @@ spec:
           # - name: NORDVPN_SERVER
           #   value: "EXAMPLE.nordvpn.com"
           - name: LOCAL_NETWORK
-            value: "10.42.0.0/24"
+            value: "10.69.0.0/16"
           - name: TRANSMISSION_WEB_UI
             value: "flood-for-transmission"
         volumeMounts:
-            - name: config-volume
-              mountPath: /config
-            - name: downloads-volume
-              mountPath: /data
-              subPath: downloads
+          - name: config-volume
+            mountPath: /config
+          - name: downloads-volume
+            mountPath: /data
+            subPath: downloads
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
 
       volumes:
         - name: config-volume
