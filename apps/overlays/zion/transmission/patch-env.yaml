@@ -18,10 +18,10 @@ spec:
         - name: OPENVPN_USERNAME
           valueFrom:
             secretKeyRef:
-              name: zion-transmission-credentials
+              name: transmission-credentials
               key: openVpnUser
         - name: OPENVPN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: zion-transmission-credentials
+              name: transmission-credentials
               key: openVpnPassword
