@@ -32,7 +32,7 @@ spec:
             - name: config-volume
               mountPath: /config
             - name: downloads-volume
-              mountPath: /downloads
+              mountPath: /data/completed
               subPath: downloads
             - name: movies-volume
               mountPath: /movies
