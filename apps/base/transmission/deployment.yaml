@@ -41,7 +41,7 @@ spec:
           # - name: NORDVPN_SERVER
           #   value: "EXAMPLE.nordvpn.com"
           - name: LOCAL_NETWORK
-            value: "10.43.0.0/24"
+            value: "10.42.0.0/24"
           - name: TRANSMISSION_WEB_UI
             value: "flood-for-transmission"
         volumeMounts:
