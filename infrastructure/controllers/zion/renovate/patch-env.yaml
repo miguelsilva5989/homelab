@@ -35,3 +35,8 @@ spec:
             secretKeyRef:
               name: renovate-credentials
               key: RENOVATE_PLATFORM
+        - name: RENOVATE_GITHUB_COM_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: renovate-credentials
+              key: RENOVATE_GITHUB_COM_TOKEN
