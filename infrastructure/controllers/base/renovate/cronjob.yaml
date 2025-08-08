@@ -20,7 +20,7 @@ spec:
                   value: debug
               # envFrom:
               #   - secretRef:
-              #       name: renovate-env
+              #       name: renovate-credentials
               volumeMounts:
                 - name: config-volume
                   mountPath: /opt/renovate/

@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: CronJob
 metadata:  
   name: renovate
   namespace: renovate
