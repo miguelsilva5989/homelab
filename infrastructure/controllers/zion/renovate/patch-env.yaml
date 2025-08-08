@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: renovate
+  namespace: renovate
+spec:
+  selector:
+    matchLabels:
+      app: renovate
+  template:
+    metadata:
+      labels:
+        app: renovate
+    spec:
+      containers:
+      - name: renovate
+        env:
+        - name: RENOVATE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: renovate-credentials
+              key: RENOVATE_TOKEN
+        - name: RENOVATE_AUTODISCOVER
+          valueFrom:
+            secretKeyRef:
+              name: renovate-credentials
+              key: RENOVATE_AUTODISCOVER
+        - name: RENOVATE_GIT_AUTHOR
+          valueFrom:
+            secretKeyRef:
+              name: renovate-credentials
+              key: RENOVATE_GIT_AUTHOR
+        - name: RENOVATE_PLATFORM
+          valueFrom:
+            secretKeyRef:
+              name: renovate-credentials
+              key: RENOVATE_PLATFORM

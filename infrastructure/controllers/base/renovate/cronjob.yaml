@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: renovate
+  namespace: renovate
+spec:
+  schedule: "@hourly"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: renovate
+              image: renovate/renovate:41.51.1
+              args:
+                - miguelsilva5989/homelab
+              env:
+                - name: LOG_LEVEL
+                  value: debug
+              # envFrom:
+              #   - secretRef:
+              #       name: renovate-env
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /opt/renovate/
+                - name: work-volume
+                  mountPath: /tmp/renovate/
+          restartPolicy: Never
+
+          volumes:
+            - name: config-volume
+              persistentVolumeClaim:
+                claimName: renovate-pvc
+            - name: work-volume
+              emptyDir: {}

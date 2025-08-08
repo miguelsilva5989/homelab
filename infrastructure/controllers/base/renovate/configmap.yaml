@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-config
+  namespace: renovate
+data:
+  config.json: |-
+    {
+      "repositories": ["miguelsilva5989/homelab"],
+      "dryRun": "full"
+    }

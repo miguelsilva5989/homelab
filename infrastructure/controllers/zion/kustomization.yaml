@@ -7,3 +7,4 @@ resources:
   - nfs-csi-driver
   - post-network
   - intel-device-plugins-gpu
+  - renovate
