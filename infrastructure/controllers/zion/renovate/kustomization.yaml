@@ -11,7 +11,7 @@ metadata:
   namespace: renovate
 
 resources:
-  - ../../../base/renovate
+  - ../../base/renovate
   - sealedsecret.yaml
 
 patches:
