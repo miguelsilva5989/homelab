@@ -18,9 +18,9 @@ spec:
               env:
                 - name: LOG_LEVEL
                   value: debug
-              # envFrom:
-              #   - secretRef:
-              #       name: renovate-credentials
+              envFrom:
+                - secretRef:
+                    name: zion-renovate-credentials
               volumeMounts:
                 - name: config-volume
                   mountPath: /opt/renovate/
