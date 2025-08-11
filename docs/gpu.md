@@ -16,6 +16,27 @@ kubectl label node matrix-01 gpu.intel.com/device-id.0300-56a5.present=true
 kubectl label node matrix-01 gpu.intel.com/device-id.0300-56a5.count=1
 
 
+also the group?
+
+```
+Mounting the whole /dev/dri directory is typical to make all necessary devices available.
+
+Supplemental groups and permissions
+supplementalGroups: [109] is good for the render group (assuming gid 109 corresponds to the render or video group on your node).
+Check on your host (matrix-01) what the group id is for /dev/dri/* devices and which group owns them (ls -l /dev/dri).
+
+For example:
+$ ls -l /dev/dri
+crw-rw----+ 1 root render 226, 0 Aug  1 00:00 card0
+crw-rw----+ 1 root render 226, 128 Aug 1 00:00 renderD128
+Group render is usually GID 226 or sometimes GID 44 or 101. Use the exact GID in supplementalGroups.
+
+You can run on host:
+stat -c "%G %g" /dev/dri/card0
+stat -c "%G %g" /dev/dri/renderD128
+If the group ID is something else, update the supplementalGroups accordingly.
+```
+
 
 
 ### from website just in case it goes down
