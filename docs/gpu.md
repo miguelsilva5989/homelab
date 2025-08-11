@@ -16,7 +16,13 @@ kubectl label node matrix-01 gpu.intel.com/device-id.0300-56a5.present=true
 kubectl label node matrix-01 gpu.intel.com/device-id.0300-56a5.count=1
 
 
-also the group?
+also the supplementalgroups
+
+on container start should see the correct group mount:
+
+**** adding /dev/dri/card0 to video group video with id 44 ****                                                                                         │
+**** creating video group videohfv4 with id 993 ****                                                                                                    │
+**** adding /dev/dri/renderD128 to video group videohfv4 with id 993 **** 
 
 ```
 Mounting the whole /dev/dri directory is typical to make all necessary devices available.

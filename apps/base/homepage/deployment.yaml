@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage
+  labels:
+    app: homepage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homepage
+  template:
+    metadata:
+      labels:
+        app: homepage
+    spec:
+      dnsConfig: # DNS resolver workaround - ndots:5 means only queries with 5 or more dots are considered "FQDN" as-is; others get the search suffix appended. - so here we setup as 1
+        options:
+          - name: ndots
+            value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
+      containers:
+      - name: homepage
+        image: ghcr.io/gethomepage/homepage:latest
+        ports:
+          - containerPort: 3000
+        env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: HOMEPAGE_ALLOWED_HOSTS
+            value: "homepage.milanchis.com"
+        volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: homepage-pvc   
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

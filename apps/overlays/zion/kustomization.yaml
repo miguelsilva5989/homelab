@@ -13,4 +13,5 @@ resources:
   - prowlarr
   - jellyfin
   - transmission
+  - homepage
   - nextcloud
