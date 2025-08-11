@@ -82,7 +82,7 @@ spec:
         - name: dev-dri
           hostPath:
             path: /dev/dri
-            type: CharDevice
+            type: Directory
         - name: config-volume
           persistentVolumeClaim:
             claimName: jellyfin-pvc
