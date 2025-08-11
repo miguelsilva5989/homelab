@@ -15,7 +15,7 @@ spec:
       priority: 10
       services:
         - name: zion-jellyfin
-          port: 8920 # Jellyfin HTTPS port
+          port: 80
           sticky:
             cookie:
               name: jellyfin-stickiness
