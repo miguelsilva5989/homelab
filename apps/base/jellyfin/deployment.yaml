@@ -26,7 +26,8 @@ spec:
         # runAsUser: 1000
         # runAsGroup: 1000
         supplementalGroups:
-          - 109 # For /dev/dri/renderD128 access (render group)
+          - 44    # video group   /dev/dri/card0
+          - 993   # render group  /dev/dri/renderD128
       containers:
       - name: jellyfin
         image: lscr.io/linuxserver/jellyfin:latest
@@ -67,7 +68,7 @@ spec:
         volumeMounts:
           # Mount /dev/dri to access Intel GPU devices for hardware acceleration
           - name: dev-dri
-            mountPath: /dev/dri/renderD128
+            mountPath: /dev/dri
             readOnly: true
           - name: config-volume
             mountPath: /config
@@ -80,7 +81,7 @@ spec:
       volumes:
         - name: dev-dri
           hostPath:
-            path: /dev/dri/renderD128
+            path: /dev/dri
             type: CharDevice
         - name: config-volume
           persistentVolumeClaim:
