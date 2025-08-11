@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  labels:
+    app: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      dnsConfig: # DNS resolver workaround - ndots:5 means only queries with 5 or more dots are considered "FQDN" as-is; others get the search suffix appended. - so here we setup as 1
+        options:
+          - name: ndots
+            value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
+      containers:
+      - name: nextcloud
+        image: lscr.io/linuxserver/nextcloud:31.0.7-ls388 # check in https://docs.linuxserver.io/images/docker-nextcloud/#usage
+        ports:
+          - containerPort: 7878
+        env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+        volumeMounts:
+          - name: config-volume
+            mountPath: /config
+          - name: data-volume
+            mountPath: /data
+            subPath: nextcloud
+
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: nextcloud-pvc
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: data-pvc-nextcloud
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

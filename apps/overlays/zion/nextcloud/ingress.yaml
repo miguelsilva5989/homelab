@@ -1,0 +1,36 @@
+---
+# auth-traefik-outpost - defined in radarr
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nextcloud
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`nextcloud.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-nextcloud
+          port: 80
+          sticky:
+            cookie:
+              name: nextcloud-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
+        - name: zion-nextcloud-auth-middleware
+        # - name: zion-nextcloud-cors-middleware
+    - match: Host(`nextcloud.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      priority: 15
+      services:
+        - name: zion-auth-traefik-outpost
+          port: 9000
+
+  tls:
+    secretName: nextcloud-certificate-secret
