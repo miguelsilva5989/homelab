@@ -50,7 +50,7 @@ spec:
             claimName: registry-pvc
         - name: auth-volume
           secret:
-            secretName: registry-auth-secret
+            secretName: zion-registry-auth-secret
 
       affinity:
         nodeAffinity:
