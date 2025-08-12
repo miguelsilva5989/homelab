@@ -1,7 +1,7 @@
 
 kubeseal --format yaml --scope namespace-wide < secret.yaml > ./cloudflare-api-token-sealedsecret.yaml
 
-kubeseal --format yaml --scope namespace-wide --cert ~/git/pub-cert.pem < secret.yaml > cloudflare-api-token-sealedsecret.yaml
+kubeseal --format yaml --scope namespace-wide --cert ~/git/pub-cert.pem < secret.yaml > sealedsecret.yaml
 
 
 
