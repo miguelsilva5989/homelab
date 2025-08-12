@@ -28,6 +28,8 @@ spec:
             value: "1000"
           - name: PGID
             value: "1000"
+          - name: OTEL_TRACES_EXPORTER
+            value: "none"
         volumeMounts:
           - name: registry-volume
             mountPath: /var/lib/registry
