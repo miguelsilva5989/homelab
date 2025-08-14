@@ -19,4 +19,4 @@ spec:
       containers:
       - name: etl-worker
         image: registry.milanchis.com/etl-worker:latest
-        command: ["./worker"]
+        # command: ["./worker"] # docker file has an entrypoint ["/usr/local/bin/etl-worker"]
