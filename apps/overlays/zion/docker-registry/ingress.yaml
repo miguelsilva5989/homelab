@@ -20,6 +20,8 @@ spec:
               secure: true
               httpOnly: true
               sameSite: none
+      middlewares:
+        - name: zion-registry
 
   tls:
     secretName: registry-certificate-secret
