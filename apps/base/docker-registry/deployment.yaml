@@ -37,7 +37,7 @@ spec:
           - name: REGISTRY_AUTH_HTPASSWD_PATH
             value: /auth/htpasswd
           - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin
-            value: "https://registry-ui.milanchis.com"
+            value: "[https://registry-ui.milanchis.com]"
           - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods
             value: "['HEAD','GET','OPTIONS','DELETE']"
           - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials
