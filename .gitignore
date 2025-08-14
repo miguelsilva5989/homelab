@@ -9,3 +9,5 @@
 # Ansible
 secrets.yml
 secrets.yaml
+
+.env
