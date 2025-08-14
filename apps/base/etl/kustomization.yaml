@@ -13,3 +13,4 @@ resources:
   - service-zookeeper.yaml
   - deployment-kafka.yaml
   - service-kafka.yaml
+  - registry-sealedsecret.yaml

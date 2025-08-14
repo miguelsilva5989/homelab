@@ -12,9 +12,9 @@ cat ~/.docker/config.json
 kubectl create secret generic regcred \
   --from-file=.dockerconfigjson=$HOME/.docker/config.json \
   --type=kubernetes.io/dockerconfigjson \
-  --dry-run=client -o yaml > /home/mike/git/homelab/apps/base/docker-registry/registry-secret.yaml
+  --dry-run=client -o yaml > /home/mike/git/homelab/apps/base/etl/registry-secret.yaml
 
-kubeseal --format yaml --scope cluster-wide --cert ~/git/pub-cert.pem < /home/mike/git/homelab/apps/base/docker-registry/registry-secret.yaml > /home/mike/git/homelab/apps/base/docker-registry/registry-sealedsecret.yaml
+kubeseal --format yaml --scope cluster-wide --cert ~/git/pub-cert.pem < /home/mike/git/homelab/apps/base/etl/registry-secret.yaml > /home/mike/git/homelab/apps/base/etl/registry-sealedsecret.yaml
 ```
 
 now can be used in 
