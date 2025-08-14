@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etl-manager
+  labels:
+    app: etl-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etl-manager
+  template:
+    metadata:
+      labels:
+        app: etl-manager
+    spec:
+      imagePullSecrets:
+      - name: zion-registry-auth-secret
+      containers:
+      - name: etl-manager
+        image: registry.milanchis.com/etl-manager:latest
+        command: ["./manager"]
+        ports:
+          - containerPort: 50051
+            name: grpc
+          - containerPort: 2112
+            name: metrics

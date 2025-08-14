@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etl-worker
+  labels:
+    app: etl-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etl-worker
+  template:
+    metadata:
+      labels:
+        app: etl-worker
+    spec:
+      imagePullSecrets:
+      - name: zion-registry-auth-secret
+      containers:
+      - name: etl-worker
+        image: registry.milanchis.com/etl-worker:latest
+        command: ["./worker"]

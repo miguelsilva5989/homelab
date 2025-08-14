@@ -17,3 +17,4 @@ resources:
   - nextcloud
   - docker-registry
   - docker-registry-ui
+  - etl

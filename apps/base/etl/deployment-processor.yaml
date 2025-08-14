@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etl-processor
+  labels:
+    app: etl-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etl-processor
+  template:
+    metadata:
+      labels:
+        app: etl-processor
+    spec:
+      imagePullSecrets:
+      - name: zion-registry-auth-secret
+      containers:
+      - name: etl-processor
+        image: registry.milanchis.com/etl-processor:latest
+        command: ["./processor", "--type", "kafka"]
