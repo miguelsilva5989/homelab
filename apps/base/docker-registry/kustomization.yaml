@@ -9,3 +9,4 @@ resources:
   - service.yaml
   - pvc.yaml
   - sealedsecret.yaml
+  - registry-sealedsecret.yaml
