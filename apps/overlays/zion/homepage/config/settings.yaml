@@ -1,0 +1,9 @@
+title: Milanchis
+description: Milanchis Homelab
+
+headerStyle: clean
+
+layout:
+  Media:
+    style: row
+    columns: 6

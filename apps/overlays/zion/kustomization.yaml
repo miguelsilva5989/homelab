@@ -16,3 +16,4 @@ resources:
   - homepage
   - nextcloud
   - docker-registry
+  - docker-registry-ui

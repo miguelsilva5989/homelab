@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-ui
+  labels:
+    app: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry-ui
+  template:
+    metadata:
+      labels:
+        app: registry-ui
+    spec:
+      dnsConfig: # DNS resolver workaround - ndots:5 means only queries with 5 or more dots are considered "FQDN" as-is; others get the search suffix appended. - so here we setup as 1
+        options:
+          - name: ndots
+            value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
+      containers:
+      - name: registry-ui
+        image: joxit/docker-registry-ui:main
+        ports:
+          - containerPort: 80
+        env:
+          - name: SINGLE_REGISTRY
+            value: "true"
+          - name: REGISTRY_TITLE
+            value: "Milanchis Registry"
+          - name: DELETE_IMAGES
+            value: "true"
+          - name: SHOW_CONTENT_DIGEST
+            value: "true"
+          - name: NGINX_PROXY_PASS_URL
+            value: "http://registry.milanchis.com"
+          - name: SHOW_CATALOG_NB_TAGS
+            value: "true"
+          - name: CATALOG_MIN_BRANCHES
+            value: "1"
+          - name: CATALOG_MAX_BRANCHES
+            value: "1"
+          - name: TAGLIST_PAGE_SIZE
+            value: "100"
+          - name: REGISTRY_SECURED
+            value: "true"
+          - name: CATALOG_ELEMENTS_LIMIT
+            value: "1000"
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

@@ -7,11 +7,11 @@ namePrefix:
   zion-
 
 metadata:  
-  name: registry
+  name: registry-ui
   namespace: registry
 
 resources:
-  - ../../../base/docker-registry
+  - ../../../base/docker-registry-ui
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml

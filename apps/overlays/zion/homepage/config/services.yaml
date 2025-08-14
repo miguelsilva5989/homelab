@@ -1,0 +1,18 @@
+
+- Sonarr:
+    icon: sonarr.png
+    href: http://sonarr.host.or.ip
+    widget:
+      type: sonarr
+      fields: ["wanted", "queued"]
+      url: http://sonarr.host.or.ip
+      key: apikeyapikeyapikeyapikeyapikey
+
+- Radarr:
+    icon: radarr.png
+    href: http://radarr.host/
+    description: Movie management
+    widget:
+      type: radarr
+      url: http://radarr.host
+      key: apikeyapikeyapikeyapikeyapikey

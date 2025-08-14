@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://registry-ui.milanchis.com"
+    accessControlAllowMethods:
+      - HEAD
+      - GET
+      - OPTIONS
+      - DELETE
+    accessControlAllowHeaders:
+      - Authorization
+      - Accept
+      - Cache-Control
+      - Origin
+    accessControlExposeHeaders:
+      - Docker-Content-Digest
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
