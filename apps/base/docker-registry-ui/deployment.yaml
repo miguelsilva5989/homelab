@@ -33,7 +33,9 @@ spec:
           - name: SHOW_CONTENT_DIGEST
             value: "true"
           - name: NGINX_PROXY_PASS_URL
-            value: "http://registry.milanchis.com"
+            value: "http://registry:5000"
+          - name: REGISTRY_URL
+            value: "http://registry:5000"
           - name: SHOW_CATALOG_NB_TAGS
             value: "true"
           - name: CATALOG_MIN_BRANCHES
