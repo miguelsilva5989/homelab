@@ -33,14 +33,14 @@ spec:
               httpOnly: true
               sameSite: none
       middlewares:
-        - name: zion-registry-ui-auth-middleware
+        # - name: zion-registry-ui-auth-middleware
         - name: zion-registry-ui-middleware
-    - match: Host(`registry-ui.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      priority: 15
-      services:
-        - name: zion-auth-traefik-outpost
-          port: 9000
+    # - match: Host(`registry-ui.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
+    #   kind: Rule
+    #   priority: 15
+    #   services:
+    #     - name: zion-auth-traefik-outpost
+    #       port: 9000
 
   tls:
     secretName: registry-ui-certificate-secret
