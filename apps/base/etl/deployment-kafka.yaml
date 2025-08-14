@@ -41,4 +41,4 @@ spec:
         - name: KAFKA_PROCESS_ROLES
           value: "broker,controller"
         - name: KAFKA_CONTROLLER_QUORUM_VOTERS
-          value: "1@kafka:29093"
+          value: "1@localhost:29093"
