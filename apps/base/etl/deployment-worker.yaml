@@ -15,7 +15,7 @@ spec:
         app: etl-worker
     spec:
       imagePullSecrets:
-      - name: zion-regcred
+      - name: regcred
       containers:
       - name: etl-worker
         image: registry.milanchis.com/etl-worker:latest

@@ -15,7 +15,7 @@ spec:
         app: etl-processor
     spec:
       imagePullSecrets:
-      - name: zion-regcred
+      - name: regcred
       containers:
       - name: etl-processor
         image: registry.milanchis.com/etl-processor:latest

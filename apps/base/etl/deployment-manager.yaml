@@ -15,7 +15,7 @@ spec:
         app: etl-manager
     spec:
       imagePullSecrets:
-      - name: zion-regcred
+      - name: regcred
       containers:
       - name: etl-manager
         image: registry.milanchis.com/etl-manager:latest
