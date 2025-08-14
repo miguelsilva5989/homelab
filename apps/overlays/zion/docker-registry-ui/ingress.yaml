@@ -34,7 +34,7 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-registry-ui-auth-middleware
-        # - name: zion-radarr-cors-middleware
+        - name: zion-registry-ui-middleware
     - match: Host(`registry-ui.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       priority: 15
