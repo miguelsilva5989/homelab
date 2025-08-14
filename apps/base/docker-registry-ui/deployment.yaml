@@ -33,9 +33,9 @@ spec:
           - name: SHOW_CONTENT_DIGEST
             value: "true"
           - name: NGINX_PROXY_PASS_URL
-            value: "http://registry.registry.svc.cluster.local:5000"
+            value: "http://zion-registry.registry.svc.cluster.local:80"
           - name: REGISTRY_URL
-            value: "http://registry.registry.svc.cluster.local:5000"
+            value: "http://zion-registry.registry.svc.cluster.local:80"
           - name: SHOW_CATALOG_NB_TAGS
             value: "true"
           - name: CATALOG_MIN_BRANCHES
