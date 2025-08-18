@@ -20,6 +20,7 @@ spec:
         ports:
           - containerPort: 9092
           - containerPort: 29093
+          - containerPort: 9069
         env:
         - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
           value: "1"
@@ -28,15 +29,15 @@ spec:
         - name: KAFKA_BROKER_ID
           value: "1"
         - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
-          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
         - name: KAFKA_INTER_BROKER_LISTENER_NAME
           value: "PLAINTEXT"
         - name: KAFKA_LISTENERS
-          value: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093"
+          value: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093,EXTERNAL://0.0.0.0:9069"
         - name: KAFKA_CONTROLLER_LISTENER_NAMES
           value: "CONTROLLER"
         - name: KAFKA_ADVERTISED_LISTENERS
-          value: "PLAINTEXT://zion-kafka:9092"
+          value: "PLAINTEXT://zion-kafka:9092,EXTERNAL://localhost:9069"
         - name: KAFKA_PROCESS_ROLES
           value: "broker,controller"
         - name: KAFKA_CONTROLLER_QUORUM_VOTERS

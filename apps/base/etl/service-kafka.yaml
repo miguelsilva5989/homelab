@@ -14,3 +14,7 @@ spec:
     protocol: TCP
     port: 29093
     targetPort: 29093
+  - name: kafka-external
+    protocol: TCP
+    port: 9069
+    targetPort: 9069
