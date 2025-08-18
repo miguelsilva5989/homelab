@@ -20,3 +20,6 @@ spec:
       - name: etl-worker
         image: registry.milanchis.com/etl-worker:latest
         # command: ["./worker"] # docker file has an entrypoint ["/usr/local/bin/etl-worker"]
+      env:
+      - name: KAFKA_BROKER
+        value: "zion-kafka:9092"

@@ -25,3 +25,6 @@ spec:
             name: grpc
           - containerPort: 2112
             name: metrics
+      env:
+      - name: KAFKA_BROKER
+        value: "zion-kafka:9092"
