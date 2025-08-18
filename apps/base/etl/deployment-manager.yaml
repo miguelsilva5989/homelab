@@ -19,6 +19,7 @@ spec:
       containers:
       - name: etl-manager
         image: registry.milanchis.com/etl-manager:latest
+        imagePullPolicy: Always
         # command: ["./manager"] # docker file has an entrypoint ["/usr/local/bin/etl"]
         ports:
           - containerPort: 50051

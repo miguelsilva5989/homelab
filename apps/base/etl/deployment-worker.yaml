@@ -19,6 +19,7 @@ spec:
       containers:
       - name: etl-worker
         image: registry.milanchis.com/etl-worker:latest
+        imagePullPolicy: Always
         # command: ["./worker"] # docker file has an entrypoint ["/usr/local/bin/etl-worker"]
       env:
       - name: KAFKA_BROKER
