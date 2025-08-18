@@ -21,8 +21,8 @@ spec:
         image: registry.milanchis.com/etl-worker:latest
         imagePullPolicy: Always
         # command: ["./worker"] # docker file has an entrypoint ["/usr/local/bin/etl-worker"]
-      env:
-      - name: KAFKA_BROKER
-        value: "zion-kafka:9092"
-      - name: MANAGER_ADDRESS
-        value: "zion-etl-manager:50051"
+        env:
+        - name: KAFKA_BROKER
+          value: "zion-kafka:9092"
+        - name: MANAGER_ADDRESS
+          value: "zion-etl-manager:50051"
