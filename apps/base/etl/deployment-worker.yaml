@@ -23,3 +23,5 @@ spec:
       env:
       - name: KAFKA_BROKER
         value: "zion-kafka:9092"
+      - name: MANAGER_ADDRESS
+        value: "zion-etl-manager:50051"
