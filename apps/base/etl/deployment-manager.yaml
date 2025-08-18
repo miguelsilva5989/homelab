@@ -29,3 +29,11 @@ spec:
         env:
         - name: KAFKA_BROKER
           value: "zion-kafka:9092"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/local/bin/project
+
+      volumes:
+      - name: config-volume
+        configMap:
+          name: etl-manager-config

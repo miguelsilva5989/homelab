@@ -12,3 +12,4 @@ resources:
   - deployment-kafka.yaml
   - service-kafka.yaml
   - registry-sealedsecret.yaml
+  - config-manager.yaml
