@@ -9,8 +9,6 @@ resources:
   - deployment-processor.yaml
   - deployment-worker.yaml
   - service-manager.yaml
-  - deployment-zookeeper.yaml
-  - service-zookeeper.yaml
   - deployment-kafka.yaml
   - service-kafka.yaml
   - registry-sealedsecret.yaml
