@@ -30,8 +30,9 @@ spec:
     #       matches: '^files_to_process$'
     #       as: 'files_to_process'
     #     metricsQuery: 'files_to_process{namespace="etl",job="zion-etl-manager"}'
-      rules:
-        external:
+    rules:
+      custom: []
+      external:
         - seriesQuery: 'files_to_process'
           resources:
             template: <<.Namespace>>
