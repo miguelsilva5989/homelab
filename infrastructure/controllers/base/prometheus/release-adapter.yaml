@@ -29,4 +29,4 @@ spec:
         name:
           matches: '^files_to_process$'
           as: 'files_to_process'
-        metricsQuery: 'files_to_process{namespace="{{.Namespace}}",app="zion-etl-manager"}'
+        metricsQuery: 'files_to_process{namespace="{{.Namespace}}",app="etl-manager"}'
