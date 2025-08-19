@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: etl-manager
+  labels:
+    release: prometheus-stack  # adapt to your Prometheus Operator release label
+spec:
+  selector:
+    matchLabels:
+      app: etl-manager
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 15s

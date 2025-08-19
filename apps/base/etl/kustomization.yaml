@@ -13,3 +13,5 @@ resources:
   - service-kafka.yaml
   - registry-sealedsecret.yaml
   - config-manager.yaml
+  - service-monitor.yaml
+  - hpa.yaml

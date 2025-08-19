@@ -1,0 +1,23 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: etl-worker-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: etl-worker
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: External
+    external:
+      metric:
+        name: files_to_process
+        selector:
+          # optionally filter by app=etl-manager if labels are attached
+          matchLabels:
+            app: etl-manager
+      target:
+        type: AverageValue
+        averageValue: "5"   # example: one pod per 5 files backlog
