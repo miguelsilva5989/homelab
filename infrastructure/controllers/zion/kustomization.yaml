@@ -8,3 +8,4 @@ resources:
   - post-network
   - intel-device-plugins-gpu
   - renovate
+  - prometheus
