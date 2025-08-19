@@ -16,7 +16,7 @@ spec:
   interval: 10m
   values:
     prometheus:
-      url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local"
+      url: "http://kube-prometheus-stack-prometheus"
       port: 9090
       path: ""
     rules:
