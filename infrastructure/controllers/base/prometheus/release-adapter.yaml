@@ -19,22 +19,13 @@ spec:
       url: "http://kube-prometheus-stack-prometheus"
       port: 9090
       path: ""
-    # rules:
-    #   external:
-    #   - seriesQuery: 'files_to_process'
-    #     resources:
-    #       overrides:
-    #         namespace:
-    #           resource: namespace
-    #     name:
-    #       matches: '^files_to_process$'
-    #       as: 'files_to_process'
-    #     metricsQuery: 'files_to_process{namespace="etl",job="zion-etl-manager"}'
     rules:
       external:
       - seriesQuery: 'files_to_process'
         resources:
-          template: <<.Namespace>>
+          overrides:
+            namespace:
+              resource: namespace
         name:
           matches: '^files_to_process$'
           as: 'files_to_process'
