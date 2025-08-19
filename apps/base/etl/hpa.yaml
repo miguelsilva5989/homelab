@@ -20,4 +20,4 @@ spec:
             app: etl-manager
       target:
         type: Value   # AverageValue
-        averageValue: "5"   # example: one pod per 5 files backlog
+        value: "5" # scale up if total backlog > 5 # averageValue: "5"   # example: one pod per 5 files backlog
