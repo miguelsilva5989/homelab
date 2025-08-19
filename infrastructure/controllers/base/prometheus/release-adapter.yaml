@@ -22,10 +22,10 @@ spec:
     rules:
       custom:
       - seriesQuery: 'files_to_process'
-        # resources:
-        #   overrides:
-        #     namespace:
-        #       resource: namespace
+        resources:
+          overrides:
+            namespace:
+              resource: namespace
         name:
           matches: '^files_to_process$'
           as: 'files_to_process'
