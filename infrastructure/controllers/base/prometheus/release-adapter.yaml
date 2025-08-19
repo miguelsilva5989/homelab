@@ -31,11 +31,11 @@ spec:
     #       as: 'files_to_process'
     #     metricsQuery: 'files_to_process{namespace="etl",job="zion-etl-manager"}'
     rules:
-      custom: []
       external:
-        - seriesQuery: 'files_to_process'
-          resources:
-            template: <<.Namespace>>
-          name:
-            external: files_to_process
-          metricsQuery: 'files_to_process{namespace="{{.Namespace}}",job="zion-etl-manager"}'
+      - seriesQuery: 'files_to_process'
+        resources:
+          template: <<.Namespace>>
+        name:
+          matches: '^files_to_process$'
+          as: 'files_to_process'
+        metricsQuery: 'files_to_process{namespace="{{.Namespace}}",job="zion-etl-manager"}'
