@@ -15,6 +15,10 @@ spec:
         namespace: monitoring
   interval: 10m
   values:
+    prometheus:
+      url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local"
+      port: 9090
+      path: ""
     rules:
       custom:
       - seriesQuery: 'files_to_process'
