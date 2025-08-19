@@ -5,6 +5,8 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
+  install:
+    createNamespace: true
   chart:
     spec:
       chart: kube-prometheus-stack
