@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: etl-worker
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 2
   metrics:
   - type: External
     external:
@@ -20,4 +20,4 @@ spec:
             job: zion-etl-manager
       target:
         type: Value   # AverageValue
-        value: "20" # scale up if total backlog > 5 # averageValue: "5"   # example: one pod per 5 files backlog
+        value: "5" # scale up if total backlog > 5 # averageValue: "5"   # example: one pod per 5 files backlog
