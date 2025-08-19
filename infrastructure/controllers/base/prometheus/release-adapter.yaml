@@ -20,6 +20,7 @@ spec:
       port: 9090
       path: ""
     rules:
+      custom: []
       external:
       - seriesQuery: 'files_to_process'
         resources:
