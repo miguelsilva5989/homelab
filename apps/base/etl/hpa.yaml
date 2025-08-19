@@ -19,5 +19,5 @@ spec:
           matchLabels:
             app: etl-manager
       target:
-        type: AverageValue
+        type: Value   # AverageValue
         averageValue: "5"   # example: one pod per 5 files backlog
