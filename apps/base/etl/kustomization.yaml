@@ -14,4 +14,4 @@ resources:
   - registry-sealedsecret.yaml
   - config-manager.yaml
   - service-monitor.yaml
-  - hpa.yaml
+  # - hpa.yaml
