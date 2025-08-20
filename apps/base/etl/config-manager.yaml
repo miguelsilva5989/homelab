@@ -15,17 +15,10 @@ data:
     type = "csv"
     batchSize = 2
 
-    [processor]
-    exe = "ds001_processor" # Processor in Rust
-
-    [config]
+    [fileConfig]
     inputFolder = "./data/ds001/in"
     outputFolder = "./data/ds001/out"
     errorFolder = "./data/ds001/err"
-
-    [config.autoscale]
-    numberOfFiles = 10
-    inputFolderSize = "10Mb"
 
 
   ds002.toml: |-
@@ -36,11 +29,9 @@ data:
     active = true
     [reader]
     type = "kafka"
-
-    [processor]
-    exe = "ds002_processor" # Processor in Rust
+    
     [config]
     topicName = "cenas"
     consumerGroup = "zeca-1"
     partitions = 2
-    [config.autoscale]
+    partitionsPerWorker = 1
