@@ -6,10 +6,10 @@ namespace: etl
 resources:
   - namespace.yaml
   - deployment-manager.yaml
-  - deployment-processor.yaml
   - deployment-worker.yaml
-  - service-manager.yaml
+  - deployment-redis.yaml
   - deployment-kafka.yaml
+  - service-manager.yaml
   - service-kafka.yaml
   - registry-sealedsecret.yaml
   - config-manager.yaml
