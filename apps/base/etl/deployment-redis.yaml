@@ -37,6 +37,8 @@ spec:
         volumeMounts:
         - name: redis-insight-data
           mountPath: /data
+        - name: redis-insight-logs
+          mountPath: /data/logs
         securityContext:
           runAsUser: 999
           runAsGroup: 999
@@ -48,3 +50,14 @@ spec:
         - name: redis-insight-data
           persistentVolumeClaim:
             claimName: redis-insight-pvc
+        - name: redis-insight-logs
+          persistentVolumeClaim:
+            claimName: redis-insight-logs-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
