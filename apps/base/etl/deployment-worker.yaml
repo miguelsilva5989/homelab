@@ -30,3 +30,11 @@ spec:
         image: registry.milanchis.com/etl-processor:latest
         imagePullPolicy: Always
         command: ["./processor", "--type", "kafka"]
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

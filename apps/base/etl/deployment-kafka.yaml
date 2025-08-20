@@ -42,3 +42,11 @@ spec:
           value: "broker,controller"
         - name: KAFKA_CONTROLLER_QUORUM_VOTERS
           value: "1@zion-kafka:29093"
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
