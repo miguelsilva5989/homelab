@@ -27,10 +27,11 @@ data:
     name = "ds002"
     description = "Kafka ds002 cenas"
     active = true
+    
     [reader]
     type = "kafka"
     
-    [config]
+    [kafkaConfig]
     topicName = "cenas"
     consumerGroup = "zeca-1"
     partitions = 2
