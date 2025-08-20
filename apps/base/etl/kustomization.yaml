@@ -11,7 +11,8 @@ resources:
   - deployment-kafka.yaml
   - service-manager.yaml
   - service-kafka.yaml
+  - service-monitor.yaml
+  - service-redis.yaml
   - registry-sealedsecret.yaml
   - config-manager.yaml
-  - service-monitor.yaml
   # - hpa.yaml
