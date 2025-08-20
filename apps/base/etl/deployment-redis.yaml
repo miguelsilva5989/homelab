@@ -19,7 +19,24 @@ spec:
         image: redis:latest
         ports:
         - containerPort: 6379
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
       - name: redis-insight
-        image: redislabs/redisinsight:latest
+        image: redis/redisinsight:latest
         ports:
-        - containerPort: 8001
+        - containerPort: 5540
+        env:
+        - name: RI_REDIS_HOST
+          value: zion-redis
+        volumeMounts:
+        - name: redis-insight-data
+          mountPath: /data
+
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-pvc
+        - name: redis-insight-data
+          persistentVolumeClaim:
+            claimName: redis-insight-pvc
