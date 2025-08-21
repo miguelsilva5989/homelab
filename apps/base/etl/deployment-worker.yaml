@@ -24,8 +24,8 @@ spec:
         env:
         - name: KAFKA_BROKER
           value: "zion-kafka:9092"
-        - name: MANAGER_ADDRESS
-          value: "zion-etl-manager:50051"
+        - name: SERVER_HOST
+          value: "zion-etl-manager"
       - name: etl-processor
         image: registry.milanchis.com/etl-processor:latest
         imagePullPolicy: Always
