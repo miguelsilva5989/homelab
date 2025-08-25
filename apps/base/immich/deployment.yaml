@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: immich
-        image: ghcr.io/immich-app/immich-server:v1.136.0
+        image: ghcr.io/immich-app/immich-server:v1.139.3
         ports:
           - containerPort: 2283
         envFrom:
@@ -24,7 +24,7 @@ spec:
               name: immich-configmap        
       
       - name: immich-machine-learning
-        image: ghcr.io/immich-app/immich-machine-learning:v1.136.0
+        image: ghcr.io/immich-app/immich-machine-learning:v1.139.3
         ports:
           - containerPort: 3003
         envFrom:
