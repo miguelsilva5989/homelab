@@ -32,6 +32,11 @@ spec:
           value: "zion-kafka:9092"
         - name: REDIS_SERVER
           value: "zion-redis:6379"
+        - name: MIN_WORKER_VERSION
+          value: "0.1.0"
+        - name: MAX_WORKER_VERSION
+          value: "0.1.0"
+
         volumeMounts:
         - name: config-volume
           mountPath: /usr/local/bin/project
