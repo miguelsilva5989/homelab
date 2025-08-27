@@ -36,3 +36,19 @@ data:
     consumerGroup = "zeca-1"
     partitions = 2
     partitionsPerWorker = 1
+
+  ds003.toml: |-
+    [core]
+    version = "0.0.1"
+    name = "ds003"
+    description = "Kafka ds003 coiso"
+    active = false
+
+    [reader]
+    type = "kafka"
+
+    [kafkaConfig]
+    topicName = "coiso"
+    consumerGroup = "zeca-2"
+    partitions = 2
+    partitionsPerWorker = 2
