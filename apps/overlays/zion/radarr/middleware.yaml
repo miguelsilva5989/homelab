@@ -22,3 +22,24 @@ spec:
         - X-authentik-meta-provider
         - X-authentik-meta-app
         - X-authentik-meta-version
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: radarr-cors-middleware
+  namespace: media
+spec:
+  headers:
+    accessControlAllowOrigin: "https://radarr.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - OPTIONS
+      - PUT
+      - POST
+      - DELETE
+      - PATCH
+    accessControlAllowHeaders:
+      - Content-Type
+      - Authorization
+      - X-Requested-With
+    accessControlAllowCredentials: true

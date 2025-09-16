@@ -34,7 +34,7 @@ spec:
               sameSite: none
       middlewares:
         - name: zion-radarr-auth-middleware
-        # - name: zion-radarr-cors-middleware
+        - name: zion-radarr-cors-middleware
     - match: Host(`radarr.milanchis.com`) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       priority: 15
