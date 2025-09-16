@@ -30,7 +30,8 @@ metadata:
   namespace: media
 spec:
   headers:
-    accessControlAllowOrigin: "https://radarr.milanchis.com"
+    accessControlAllowOriginList: 
+      - "https://radarr.milanchis.com"
     accessControlAllowMethods:
       - GET
       - OPTIONS
