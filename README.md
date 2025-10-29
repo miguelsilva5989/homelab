@@ -30,7 +30,7 @@ This server is dedicated to running Proxmox VE and hosting the main VM workloads
 | RAM             | 128GB - 4 x 32GB Micron DDR5 4800 MHz       |
 | GPU                  | Intel ARC A380                 |
 | Storage (OS/VM)        | 2x 2TB Samsung 990 Pro NVME (ZFS RAID 1)       |
-| Storage (Media)              | 2 x 16TB Toshiba disks (RAID-like with 1 parity disk) |
+| Storage (Media)              | 2 x 16TB Toshiba disks (ZFS RAID 1) |
 | Case | Silverstone SST-RM44 4U |
 
 ---
