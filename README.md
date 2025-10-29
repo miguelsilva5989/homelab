@@ -28,22 +28,10 @@ This server is dedicated to running Proxmox VE and hosting the main VM workloads
 | Motherboard     | Supermicro MBD-H13SSL-N-O           |
 | CPU             | AMD EPYC 9124 Genoa (16 cores)      |
 | RAM             | 128GB - 4 x 32GB Micron DDR5 4800 MHz       |
-| Storage         | 2x 2TB Samsung 990 Pro NVME (ZFS RAID 1)       |
-| Case | Silverstone SST-RM44 4U |
-
----
-
-### Secondary Server: Existing Hyperconverged Node
-
-Currently running legacy VMs and Docker workloads. Acts as a backup node or experimental environment.
-
-| Component            | Specification                  |
-|----------------------|--------------------------------|
-| OS                   | Unraid 7.0.1                  |
-| CPU                  | AMD Ryzen 5 5600G              |
-| RAM             | 32GB - 2x 16GB       |
 | GPU                  | Intel ARC A380                 |
-| Storage               | 2 x 16TB Toshiba disks (RAID-like with 1 parity disk) |
+| Storage (OS/VM)        | 2x 2TB Samsung 990 Pro NVME (ZFS RAID 1)       |
+| Storage (Media)              | 2 x 16TB Toshiba disks (RAID-like with 1 parity disk) |
+| Case | Silverstone SST-RM44 4U |
 
 ---
 
