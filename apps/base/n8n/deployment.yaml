@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+  labels:
+    app: n8n
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n8n
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+      - name: n8n
+        image: n8n-io/n8n:latest
+        ports:
+          - containerPort: 5678
+            name: http
+        env:
+          - name: N8N_PORT
+            value: "5678"
+          - name: N8N_PROTOCOL
+            value: "https"
+          - name: N8N_HOST
+            value: "n8n.milanchis.com"
+          - name: WEBHOOK_URL
+            value: "https://n8n.milanchis.com/"
+          - name: GENERIC_TIMEZONE
+            value: "America/New_York"
+        volumeMounts:
+          - name: n8n-data
+            mountPath: /home/node/.n8n
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+      volumes:
+        - name: n8n-data
+          persistentVolumeClaim:
+            claimName: n8n-pvc
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
