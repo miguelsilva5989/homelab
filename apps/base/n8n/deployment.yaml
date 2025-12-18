@@ -42,8 +42,6 @@ spec:
             value: "Europe/Madrid"
           - name: TZ
             value: "Europe/Madrid"
-          - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-            value: "true"
           - name: N8N_RUNNERS_ENABLED
             value: "true"
           - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
