@@ -20,7 +20,7 @@ spec:
             value: "1"
       containers:
       - name: n8n
-        image: n8n-io/n8n:latest
+        image: n8nio/n8n:latest
         ports:
           - containerPort: 5678
             name: http
