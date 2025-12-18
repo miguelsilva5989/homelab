@@ -14,8 +14,8 @@ resources:
   - jellyfin
   - transmission
   - homepage
-  - n8n
   - nextcloud
   - docker-registry
   - docker-registry-ui
   - etl
+  # - n8n
