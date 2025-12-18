@@ -38,7 +38,13 @@ spec:
           - name: WEBHOOK_URL
             value: "https://n8n.milanchis.com/"
           - name: GENERIC_TIMEZONE
-            value: "America/New_York"
+            value: "Europe/Madrid"
+          - name: TZ
+            value: "Europe/Madrid"
+          - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+            value: "true"
+          - name: N8N_RUNNERS_ENABLED
+            value: "true"
         volumeMounts:
           - name: n8n-data
             mountPath: /home/node/.n8n
