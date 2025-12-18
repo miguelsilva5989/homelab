@@ -14,7 +14,7 @@ resources:
   - jellyfin
   - transmission
   - homepage
-  - nextcloud
+  # - nextcloud
   - docker-registry
   - docker-registry-ui
   - etl
