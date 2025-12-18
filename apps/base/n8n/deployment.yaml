@@ -15,8 +15,9 @@ spec:
         app: n8n
     spec:
       securityContext:
-        fsGroup: 1000
         runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         runAsNonRoot: true
       dnsConfig:
         options:
@@ -45,6 +46,8 @@ spec:
             value: "true"
           - name: N8N_RUNNERS_ENABLED
             value: "true"
+          - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+            value: "false"
         volumeMounts:
           - name: n8n-data
             mountPath: /home/node/.n8n
