@@ -10,6 +10,7 @@ resources:
   - radarr
   - sonarr
   - flaresolverr
+  - byparr
   - prowlarr
   - jellyfin
   - transmission
@@ -17,5 +18,5 @@ resources:
   # - nextcloud
   - docker-registry
   - docker-registry-ui
-  - etl
+  # - etl
   - n8n
