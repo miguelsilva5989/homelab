@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: "0.15.2"  # specify desired chart version
+      version: "0.15.3"  # specify desired chart version
       sourceRef:
         kind: HelmRepository
         name: metallb
