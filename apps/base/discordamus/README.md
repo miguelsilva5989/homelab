@@ -46,6 +46,34 @@ To read back the current password from the cluster:
 kubectl get secret discordamus-secret -n discordamus -o jsonpath='{.data.DISCORDAMUS_PASSWORD}' | base64 -d
 ```
 
+## Registry Credentials
+
+The kubelet needs auth to pull from `registry.milanchis.com`. Create a `regcred` sealed secret for this namespace (same as ETL app):
+
+```sh
+kubectl create secret generic regcred \
+  --from-file=.dockerconfigjson=$HOME/.docker/config.json \
+  --type=kubernetes.io/dockerconfigjson \
+  --namespace=discordamus \
+  --dry-run=client -o yaml | \
+  kubeseal \
+    --controller-name=sealed-secrets-controller \
+    --controller-namespace=kube-system \
+    --format yaml \
+    --scope namespace-wide > /home/mike/workspace/git/homelab/apps/base/discordamus/registry-sealedsecret.yaml
+```
+
+Then add to `kustomization.yaml` resources and add `imagePullSecrets` to the deployment:
+
+```yaml
+# deployment.yaml
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: zion-regcred
+```
+
 ## Kubernetes Resources
 
 - **Namespace**: `discordamus`
