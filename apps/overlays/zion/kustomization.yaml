@@ -20,3 +20,4 @@ resources:
   - docker-registry-ui
   # - etl
   - n8n
+  - discordamus

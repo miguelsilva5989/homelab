@@ -1,0 +1,27 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: discordamus
+  namespace: discordamus
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`discordamus.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-discordamus
+          port: 80
+          sticky:
+            cookie:
+              name: discordamus-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
+        - name: zion-discordamus-cors-middleware
+
+  tls:
+    secretName: discordamus-certificate-secret

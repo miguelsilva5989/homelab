@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discordamus
+  labels:
+    app: discordamus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discordamus
+  template:
+    metadata:
+      labels:
+        app: discordamus
+    spec:
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+      - name: discordamus
+        image: registry.milanchis.com/discordamus:latest
+        ports:
+          - containerPort: 8080
+        env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: DISCORDAMUS_DB_PATH
+            value: /app/data/discordamus.db
+          - name: DISCORDAMUS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: zion-discordamus-secret
+                key: DISCORDAMUS_PASSWORD
+        volumeMounts:
+          - name: data-volume
+            mountPath: /app/data
+
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: discordamus-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

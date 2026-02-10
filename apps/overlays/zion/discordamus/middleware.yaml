@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: discordamus-cors-middleware
+  namespace: discordamus
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://discordamus.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - OPTIONS
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - Accept
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
