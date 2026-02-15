@@ -11,7 +11,7 @@ spec:
       - name: immich
         volumeMounts:
           - name: upload-storage
-            mountPath: /usr/src/app/upload
+            mountPath: /data
             subPath: zion-immich/upload
           - name: external-library
             mountPath: /data/import
