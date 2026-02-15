@@ -26,6 +26,8 @@ spec:
         volumeMounts:
           - name: cache-volume
             mountPath: /app/cache
+          - name: shm
+            mountPath: /dev/shm
         securityContext:
           runAsNonRoot: false
           allowPrivilegeEscalation: true
@@ -44,6 +46,10 @@ spec:
         - name: cache-volume
           persistentVolumeClaim:
             claimName: byparr-pvc
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 512Mi
 
       affinity:
         nodeAffinity:
