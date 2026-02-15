@@ -14,7 +14,6 @@ spec:
       labels:
         app: byparr
     spec:
-      shareProcessNamespace: true # equivalent of Docker's init: true - reaps zombie Chromium processes
       dnsConfig: # DNS resolver workaround
         options:
           - name: ndots
@@ -29,12 +28,6 @@ spec:
             mountPath: /app/cache
           - name: shm
             mountPath: /dev/shm
-        securityContext:
-          runAsNonRoot: false
-          allowPrivilegeEscalation: true
-          capabilities:
-            add:
-              - SYS_ADMIN
         startupProbe:
           httpGet:
             path: /
