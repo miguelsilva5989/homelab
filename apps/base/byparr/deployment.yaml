@@ -26,6 +26,19 @@ spec:
         volumeMounts:
           - name: cache-volume
             mountPath: /app/cache
+        securityContext:
+          runAsNonRoot: false
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+              - SYS_ADMIN
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
 
       volumes:
         - name: cache-volume
