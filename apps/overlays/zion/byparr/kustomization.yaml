@@ -12,3 +12,6 @@ metadata:
 
 resources:
   - ../../../base/byparr
+  - certificate.yaml
+  - ingress.yaml
+  - middleware.yaml

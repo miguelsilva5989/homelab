@@ -20,9 +20,17 @@ spec:
             value: "1"
       containers:
       - name: byparr
-        image: ghcr.io/thephaseless/byparr:latest
+        image: ghcr.io/thephaseless/byparr:v2.1.0
         ports:
           - containerPort: 8191
+        volumeMounts:
+          - name: cache-volume
+            mountPath: /app/cache
+
+      volumes:
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: byparr-pvc
 
       affinity:
         nodeAffinity:

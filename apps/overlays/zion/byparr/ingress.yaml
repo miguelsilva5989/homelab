@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: byparr
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`byparr.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-byparr
+          port: 8191
+      middlewares:
+        - name: zion-byparr-auth-middleware
+
+  tls:
+    secretName: byparr-certificate-secret
