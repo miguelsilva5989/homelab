@@ -14,6 +14,7 @@ spec:
       labels:
         app: byparr
     spec:
+      shareProcessNamespace: true # equivalent of Docker's init: true - reaps zombie Chromium processes
       dnsConfig: # DNS resolver workaround
         options:
           - name: ndots
@@ -34,13 +35,19 @@ spec:
           capabilities:
             add:
               - SYS_ADMIN
+        startupProbe:
+          httpGet:
+            path: /
+            port: 8191
+          failureThreshold: 30
+          periodSeconds: 10
         resources:
           requests:
             memory: "512Mi"
             cpu: "500m"
           limits:
-            memory: "1Gi"
-            cpu: "1000m"
+            memory: "2Gi"
+            cpu: "2000m"
 
       volumes:
         - name: cache-volume
