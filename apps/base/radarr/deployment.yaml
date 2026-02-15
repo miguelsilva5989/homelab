@@ -20,7 +20,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
       containers:
       - name: radarr
-        image: lscr.io/linuxserver/radarr:6.1.1.10317-ls305 # check in https://docs.linuxserver.io/images/docker-radarr/#usage
+        image: lscr.io/linuxserver/radarr:6.0.4.10291-ls292 # check in https://docs.linuxserver.io/images/docker-radarr/#usage
         ports:
           - containerPort: 7878
         env:

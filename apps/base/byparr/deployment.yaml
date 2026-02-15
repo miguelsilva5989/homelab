@@ -20,7 +20,7 @@ spec:
             value: "1"
       containers:
       - name: byparr
-        image: ghcr.io/thephaseless/byparr:v2.1.0
+        image: ghcr.io/thephaseless/byparr:latest
         ports:
           - containerPort: 8191
         volumeMounts:
