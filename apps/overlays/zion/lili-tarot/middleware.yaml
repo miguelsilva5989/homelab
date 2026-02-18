@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: lili-tarot-cors-middleware
+  namespace: lili-tarot
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://tarot.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - OPTIONS
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - Accept
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100

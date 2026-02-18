@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: lili-tarot
+
+namePrefix:
+  zion-
+
+metadata:
+  name: lili-tarot
+  namespace: lili-tarot
+
+resources:
+  - ../../../base/lili-tarot
+  - certificate.yaml
+  - ingress.yaml
+  - middleware.yaml

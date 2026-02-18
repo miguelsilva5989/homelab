@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: lili-tarot
+  namespace: lili-tarot
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tarot.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-lili-tarot
+          port: 80
+      middlewares:
+        - name: zion-lili-tarot-cors-middleware
+
+  tls:
+    secretName: lili-tarot-certificate-secret

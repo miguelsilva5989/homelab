@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lili-tarot-ingressroute-certificate
+  namespace: lili-tarot
+spec:
+  secretName: lili-tarot-certificate-secret
+
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer
+
+  dnsNames:
+    - tarot.milanchis.com
