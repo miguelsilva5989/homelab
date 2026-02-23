@@ -1,17 +1,17 @@
-# Streamamus Relay
+# Rawclip Relay
 
-Cloud relay server for Streamamus — proxies API calls and SSE events between remote browsers (mods/editors) and the streamer's local agent. Never touches video.
+Cloud relay server for Rawclip — proxies API calls and SSE events between remote browsers (mods/editors) and the streamer's local agent. Never touches video.
 
 **Stack:** Bun + Hono + Better Auth + SQLite
 
 ## Build & Push
 
 ```sh
-cd ~/workspace/git/streamamus/relay
+cd ~/workspace/git/rawclip/relay
 
-docker build -t registry.milanchis.com/streamamus-relay:latest .
+docker build -t registry.milanchis.com/rawclip-relay:latest .
 
-docker push registry.milanchis.com/streamamus-relay:latest
+docker push registry.milanchis.com/rawclip-relay:latest
 ```
 
 ## Configuration
@@ -35,7 +35,7 @@ All config via environment variables:
 
 1. Go to https://dev.twitch.tv/console/apps
 2. Create a new application
-3. Set redirect URI to `https://streamamus-relay.milanchis.com/api/auth/callback/twitch`
+3. Set redirect URI to `https://rawclip-relay.milanchis.com/api/auth/callback/twitch`
 4. Copy the Client ID and Client Secret into the sealed secret below
 
 ## Sealed Secret
@@ -43,9 +43,9 @@ All config via environment variables:
 Generate the app secrets:
 
 ```sh
-kubectl create secret generic streamamus-secret \
+kubectl create secret generic rawclip-secret \
   --dry-run=client \
-  --namespace=streamamus \
+  --namespace=rawclip \
   --from-literal=BETTER_AUTH_SECRET="$(openssl rand -hex 32)" \
   --from-literal=TWITCH_CLIENT_ID='your-twitch-client-id' \
   --from-literal=TWITCH_CLIENT_SECRET='your-twitch-client-secret' \
@@ -59,14 +59,14 @@ kubectl create secret generic streamamus-secret \
     --controller-name=sealed-secrets-controller \
     --controller-namespace=kube-system \
     --format yaml \
-    --scope namespace-wide > /home/mike/workspace/git/homelab/apps/base/streamamus/sealedsecret.yaml
+    --scope namespace-wide > /home/mike/workspace/git/homelab/apps/base/rawclip/sealedsecret.yaml
 ```
 
 To read back values from the cluster:
 
 ```sh
-kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.BETTER_AUTH_SECRET}' | base64 -d
-kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.TWITCH_CLIENT_ID}' | base64 -d
+kubectl get secret rawclip-secret -n rawclip -o jsonpath='{.data.BETTER_AUTH_SECRET}' | base64 -d
+kubectl get secret rawclip-secret -n rawclip -o jsonpath='{.data.TWITCH_CLIENT_ID}' | base64 -d
 ```
 
 ## Registry Credentials
@@ -77,13 +77,13 @@ The kubelet needs auth to pull from `registry.milanchis.com`:
 kubectl create secret generic regcred \
   --from-file=.dockerconfigjson=$HOME/.docker/config.json \
   --type=kubernetes.io/dockerconfigjson \
-  --namespace=streamamus \
+  --namespace=rawclip \
   --dry-run=client -o yaml | \
   kubeseal \
     --controller-name=sealed-secrets-controller \
     --controller-namespace=kube-system \
     --format yaml \
-    --scope namespace-wide > /home/mike/workspace/git/homelab/apps/base/streamamus/registry-sealedsecret.yaml
+    --scope namespace-wide > /home/mike/workspace/git/homelab/apps/base/rawclip/registry-sealedsecret.yaml
 ```
 
 ## DNS
@@ -91,33 +91,33 @@ kubectl create secret generic regcred \
 Add a CNAME or A record in Cloudflare:
 
 ```
-streamamus-relay.milanchis.com → cluster IP (10.69.99.69)
+rawclip-relay.milanchis.com → cluster IP (10.69.99.69)
 ```
 
 Or use the existing wildcard `*.milanchis.com` if configured.
 
 ## Kubernetes Resources
 
-- **Namespace**: `streamamus`
-- **Deployment**: single replica, image from `registry.milanchis.com/streamamus-relay:latest`
+- **Namespace**: `rawclip`
+- **Deployment**: single replica, image from `registry.milanchis.com/rawclip-relay:latest`
 - **Service**: port 80 → 9430
 - **PVC**: 200Mi Longhorn for SQLite persistence at `/app/data`
 - **SealedSecret**: OAuth credentials + auth secret + owner email
-- **Ingress** (overlay): `streamamus-relay.milanchis.com` via Traefik with TLS
+- **Ingress** (overlay): `rawclip-relay.milanchis.com` via Traefik with TLS
 - **Certificate**: auto-issued by cert-manager via Cloudflare DNS-01
 
 ## Post-Deploy Verification
 
 ```sh
 # Check pod is running
-kubectl get pods -n streamamus
+kubectl get pods -n rawclip
 
 # Check logs
-kubectl logs -n streamamus -l app=streamamus
+kubectl logs -n rawclip -l app=rawclip
 
 # Health check
-curl https://streamamus-relay.milanchis.com/api/health
+curl https://rawclip-relay.milanchis.com/api/health
 
 # Test pairing endpoint
-curl -s -X POST https://streamamus-relay.milanchis.com/api/pair/init | jq .
+curl -s -X POST https://rawclip-relay.milanchis.com/api/pair/init | jq .
 ```

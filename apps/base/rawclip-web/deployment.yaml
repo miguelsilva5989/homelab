@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rawclip-web
+  labels:
+    app: rawclip-web
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rawclip-web
+  template:
+    metadata:
+      labels:
+        app: rawclip-web
+    spec:
+      imagePullSecrets:
+        - name: zion-regcred
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+        - name: rawclip-web
+          image: registry.milanchis.com/rawclip-web:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist

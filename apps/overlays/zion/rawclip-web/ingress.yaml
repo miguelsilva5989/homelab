@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rawclip-web
+  namespace: rawclip-web
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`rawclip.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-rawclip-web
+          port: 80
+      middlewares:
+        - name: zion-rawclip-web-cors-middleware
+  tls:
+    secretName: rawclip-web-certificate-secret

@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: rawclip-web-cors-middleware
+  namespace: rawclip-web
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://rawclip.milanchis.com"
+      - "https://rawclip-relay.milanchis.com"
+    accessControlAllowMethods:
+      - GET
+      - OPTIONS
+    accessControlAllowHeaders:
+      - Content-Type
+      - Accept
+    accessControlMaxAge: 100

@@ -22,4 +22,5 @@ resources:
   - n8n
   - discordamus
   - lili-tarot
-  - streamamus
+  - rawclip
+  - rawclip-web

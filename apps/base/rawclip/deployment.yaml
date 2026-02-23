@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: streamamus
+  name: rawclip
   labels:
-    app: streamamus
+    app: rawclip
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: streamamus
+      app: rawclip
   template:
     metadata:
       labels:
-        app: streamamus
+        app: rawclip
     spec:
       imagePullSecrets:
       - name: zion-regcred
@@ -23,8 +23,8 @@ spec:
           - name: ndots
             value: "1"
       containers:
-      - name: streamamus
-        image: registry.milanchis.com/streamamus-relay:latest
+      - name: rawclip
+        image: registry.milanchis.com/rawclip-relay:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 9430
@@ -32,46 +32,46 @@ spec:
           - name: RELAY_PORT
             value: "9430"
           - name: BETTER_AUTH_URL
-            value: "https://streamamus-relay.milanchis.com"
+            value: "https://rawclip-relay.milanchis.com"
           - name: BETTER_AUTH_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: BETTER_AUTH_SECRET
           - name: TWITCH_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: TWITCH_CLIENT_ID
           - name: TWITCH_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: TWITCH_CLIENT_SECRET
           - name: GOOGLE_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: GOOGLE_CLIENT_ID
           - name: GOOGLE_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: GOOGLE_CLIENT_SECRET
           - name: KICK_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: KICK_CLIENT_ID
           - name: KICK_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: KICK_CLIENT_SECRET
           - name: RELAY_OWNER_EMAIL
             valueFrom:
               secretKeyRef:
-                name: zion-streamamus-secret
+                name: zion-rawclip-secret
                 key: RELAY_OWNER_EMAIL
         volumeMounts:
           - name: data-volume
@@ -80,7 +80,7 @@ spec:
       volumes:
         - name: data-volume
           persistentVolumeClaim:
-            claimName: streamamus-pvc
+            claimName: rawclip-pvc
 
       affinity:
         nodeAffinity:
