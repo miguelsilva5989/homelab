@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: streamamus-ingressroute-certificate
+  namespace: streamamus
+spec:
+  secretName: streamamus-certificate-secret
+
+  issuerRef:
+    name: cloudflare-clusterissuer
+    kind: ClusterIssuer
+
+  dnsNames:
+    - streamamus-relay.milanchis.com

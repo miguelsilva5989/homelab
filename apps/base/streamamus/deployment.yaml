@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamamus
+  labels:
+    app: streamamus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streamamus
+  template:
+    metadata:
+      labels:
+        app: streamamus
+    spec:
+      imagePullSecrets:
+      - name: zion-regcred
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+      - name: streamamus
+        image: registry.milanchis.com/streamamus-relay:latest
+        ports:
+          - containerPort: 9430
+        env:
+          - name: RELAY_PORT
+            value: "9430"
+          - name: BETTER_AUTH_URL
+            value: "https://streamamus-relay.milanchis.com"
+          - name: BETTER_AUTH_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: BETTER_AUTH_SECRET
+          - name: TWITCH_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: TWITCH_CLIENT_ID
+          - name: TWITCH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: TWITCH_CLIENT_SECRET
+          - name: GOOGLE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: GOOGLE_CLIENT_ID
+          - name: GOOGLE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: GOOGLE_CLIENT_SECRET
+          - name: KICK_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: KICK_CLIENT_ID
+          - name: KICK_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: KICK_CLIENT_SECRET
+          - name: RELAY_OWNER_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RELAY_OWNER_EMAIL
+        volumeMounts:
+          - name: data-volume
+            mountPath: /app/data
+
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: streamamus-pvc
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

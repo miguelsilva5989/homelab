@@ -1,0 +1,27 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: streamamus
+  namespace: streamamus
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`streamamus-relay.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-streamamus
+          port: 80
+          sticky:
+            cookie:
+              name: streamamus-stickiness
+              secure: true
+              httpOnly: true
+              sameSite: none
+      middlewares:
+        - name: zion-streamamus-cors-middleware
+
+  tls:
+    secretName: streamamus-certificate-secret

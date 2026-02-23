@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: streamamus-cors-middleware
+  namespace: streamamus
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://streamamus-relay.milanchis.com"
+      - "https://streamamus.com"
+      - "http://localhost:5173"
+      - "http://localhost:9420"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    accessControlAllowHeaders:
+      - Authorization
+      - Content-Type
+      - Accept
+      - Cookie
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 100
