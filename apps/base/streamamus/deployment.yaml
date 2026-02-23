@@ -6,6 +6,8 @@ metadata:
     app: streamamus
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: streamamus
@@ -23,6 +25,7 @@ spec:
       containers:
       - name: streamamus
         image: registry.milanchis.com/streamamus-relay:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 9430
         env:
