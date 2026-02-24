@@ -3,7 +3,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: rawclip-cors-middleware
-  namespace: rawclip
+  namespace: streamamus
 spec:
   headers:
     accessControlAllowOriginList:

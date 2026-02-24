@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: rawclip
+namespace: streamamus
 
 namePrefix:
   zion-
 
 metadata:
   name: rawclip
-  namespace: rawclip
+  namespace: streamamus
 
 resources:
   - ../../../base/rawclip

@@ -36,42 +36,42 @@ spec:
           - name: BETTER_AUTH_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: BETTER_AUTH_SECRET
           - name: TWITCH_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: TWITCH_CLIENT_ID
           - name: TWITCH_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: TWITCH_CLIENT_SECRET
           - name: GOOGLE_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: GOOGLE_CLIENT_ID
           - name: GOOGLE_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: GOOGLE_CLIENT_SECRET
           - name: KICK_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: KICK_CLIENT_ID
           - name: KICK_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: KICK_CLIENT_SECRET
           - name: RELAY_OWNER_EMAIL
             valueFrom:
               secretKeyRef:
-                name: zion-rawclip-secret
+                name: zion-streamamus-secret
                 key: RELAY_OWNER_EMAIL
         volumeMounts:
           - name: data-volume
@@ -80,7 +80,7 @@ spec:
       volumes:
         - name: data-volume
           persistentVolumeClaim:
-            claimName: rawclip-pvc
+            claimName: streamamus-pvc
 
       affinity:
         nodeAffinity:

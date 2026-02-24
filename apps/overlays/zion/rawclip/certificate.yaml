@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: rawclip-ingressroute-certificate
-  namespace: rawclip
+  namespace: streamamus
 spec:
   secretName: rawclip-certificate-secret
 

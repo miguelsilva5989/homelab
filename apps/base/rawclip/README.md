@@ -7,11 +7,13 @@ Cloud relay server for Rawclip — proxies API calls and SSE events between remo
 ## Build & Push
 
 ```sh
-cd ~/workspace/git/rawclip/relay
+cd ~/workspace/git/streamamus
 
-docker build -t registry.milanchis.com/rawclip-relay:latest .
-
+docker build -t registry.milanchis.com/rawclip-relay:latest -f relay/Dockerfile .
 docker push registry.milanchis.com/rawclip-relay:latest
+
+docker build -t registry.milanchis.com/rawclip-web:latest -f website/Dockerfile .
+docker push registry.milanchis.com/rawclip-web:latest
 ```
 
 ## Configuration
@@ -43,9 +45,9 @@ All config via environment variables:
 Generate the app secrets:
 
 ```sh
-kubectl create secret generic rawclip-secret \
+kubectl create secret generic streamamus-secret \
   --dry-run=client \
-  --namespace=rawclip \
+  --namespace=streamamus \
   --from-literal=BETTER_AUTH_SECRET="$(openssl rand -hex 32)" \
   --from-literal=TWITCH_CLIENT_ID='your-twitch-client-id' \
   --from-literal=TWITCH_CLIENT_SECRET='your-twitch-client-secret' \
@@ -65,8 +67,8 @@ kubectl create secret generic rawclip-secret \
 To read back values from the cluster:
 
 ```sh
-kubectl get secret rawclip-secret -n rawclip -o jsonpath='{.data.BETTER_AUTH_SECRET}' | base64 -d
-kubectl get secret rawclip-secret -n rawclip -o jsonpath='{.data.TWITCH_CLIENT_ID}' | base64 -d
+kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.BETTER_AUTH_SECRET}' | base64 -d
+kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.TWITCH_CLIENT_ID}' | base64 -d
 ```
 
 ## Registry Credentials
@@ -77,7 +79,7 @@ The kubelet needs auth to pull from `registry.milanchis.com`:
 kubectl create secret generic regcred \
   --from-file=.dockerconfigjson=$HOME/.docker/config.json \
   --type=kubernetes.io/dockerconfigjson \
-  --namespace=rawclip \
+  --namespace=streamamus \
   --dry-run=client -o yaml | \
   kubeseal \
     --controller-name=sealed-secrets-controller \
@@ -98,7 +100,7 @@ Or use the existing wildcard `*.milanchis.com` if configured.
 
 ## Kubernetes Resources
 
-- **Namespace**: `rawclip`
+- **Namespace**: `streamamus`
 - **Deployment**: single replica, image from `registry.milanchis.com/rawclip-relay:latest`
 - **Service**: port 80 → 9430
 - **PVC**: 200Mi Longhorn for SQLite persistence at `/app/data`
@@ -110,10 +112,10 @@ Or use the existing wildcard `*.milanchis.com` if configured.
 
 ```sh
 # Check pod is running
-kubectl get pods -n rawclip
+kubectl get pods -n streamamus
 
 # Check logs
-kubectl logs -n rawclip -l app=rawclip
+kubectl logs -n streamamus -l app=rawclip
 
 # Health check
 curl https://rawclip-relay.milanchis.com/api/health
