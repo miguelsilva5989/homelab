@@ -68,6 +68,11 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: KICK_CLIENT_SECRET
+          - name: RAWCLIP_LICENSE_SIGNING_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RAWCLIP_LICENSE_SIGNING_KEY
           - name: RELAY_OWNER_EMAIL
             valueFrom:
               secretKeyRef:
