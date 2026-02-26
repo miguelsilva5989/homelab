@@ -78,26 +78,26 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: RELAY_OWNER_EMAIL
-          - name: POLAR_ACCESS_TOKEN
+          - name: PADDLE_WEBHOOK_SECRET
             valueFrom:
               secretKeyRef:
                 name: zion-streamamus-secret
-                key: POLAR_ACCESS_TOKEN
-          - name: POLAR_WEBHOOK_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: zion-streamamus-secret
-                key: POLAR_WEBHOOK_SECRET
-          - name: POLAR_SUCCESS_URL
-            value: "https://rawclip.milanchis.com/success?checkout_id={CHECKOUT_ID}"
+                key: PADDLE_WEBHOOK_SECRET
+          - name: RELAY_DB_PATH
+            value: /app/data/relay.sqlite
         volumeMounts:
           - name: data-volume
             mountPath: /app/data
+          - name: backups-volume
+            mountPath: /app/data/backups
 
       volumes:
         - name: data-volume
           persistentVolumeClaim:
             claimName: streamamus-pvc
+        - name: backups-volume
+          persistentVolumeClaim:
+            claimName: rawclip-backups-pvc
 
       affinity:
         nodeAffinity:
