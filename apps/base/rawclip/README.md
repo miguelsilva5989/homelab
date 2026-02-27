@@ -9,11 +9,11 @@ Cloud relay server for StreamSquire — proxies API calls and SSE events between
 ```sh
 cd ~/workspace/git/streamamus
 
-docker build -t registry.streamsquire.app/streamsquire-relay:latest -f relay/Dockerfile .
-docker push registry.streamsquire.app/streamsquire-relay:latest
+docker build -t registry.milanchis.com/streamsquire-relay:latest -f relay/Dockerfile .
+docker push registry.milanchis.com/streamsquire-relay:latest
 
-docker build -t registry.streamsquire.app/streamsquire-web:latest -f website/Dockerfile .
-docker push registry.streamsquire.app/streamsquire-web:latest
+docker build -t registry.milanchis.com/streamsquire-web:latest -f website/Dockerfile .
+docker push registry.milanchis.com/streamsquire-web:latest
 ```
 
 ## Configuration
@@ -75,7 +75,7 @@ kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.TWITCH_CL
 
 ## Registry Credentials
 
-The kubelet needs auth to pull from `registry.streamsquire.app`:
+The kubelet needs auth to pull from `registry.milanchis.com`:
 
 ```sh
 kubectl create secret generic regcred \
@@ -103,7 +103,7 @@ Or use the existing wildcard `*.streamsquire.app` if configured.
 ## Kubernetes Resources
 
 - **Namespace**: `streamamus`
-- **Deployment**: single replica, image from `registry.streamsquire.app/streamsquire-relay:latest`
+- **Deployment**: single replica, image from `registry.milanchis.com/streamsquire-relay:latest`
 - **Service**: port 80 → 9430
 - **PVC**: 200Mi Longhorn for SQLite persistence at `/app/data`
 - **SealedSecret**: OAuth credentials + auth secret + owner email + license signing key

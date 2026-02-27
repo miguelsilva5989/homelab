@@ -24,7 +24,7 @@ spec:
             value: "1"
       containers:
       - name: streamsquire-relay
-        image: registry.streamsquire.app/streamsquire-relay:latest
+        image: registry.milanchis.com/streamsquire-relay:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 9430

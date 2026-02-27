@@ -24,7 +24,7 @@ spec:
             value: "1"
       containers:
         - name: streamsquire-web
-          image: registry.streamsquire.app/streamsquire-web:latest
+          image: registry.milanchis.com/streamsquire-web:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
