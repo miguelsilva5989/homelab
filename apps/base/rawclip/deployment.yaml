@@ -32,7 +32,7 @@ spec:
           - name: RELAY_PORT
             value: "9430"
           - name: BETTER_AUTH_URL
-            value: "https://rawclip-relay.milanchis.com"
+            value: "https://streamsquire-relay.milanchis.com"
           - name: BETTER_AUTH_SECRET
             valueFrom:
               secretKeyRef:
