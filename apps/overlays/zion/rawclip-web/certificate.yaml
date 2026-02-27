@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: streamsquire-web-certificate
+  name: rawclip-web-ingressroute-certificate
   namespace: rawclip-web
 spec:
-  secretName: streamsquire-web-certificate-secret
+  secretName: rawclip-web-certificate-secret
   issuerRef:
     name: cloudflare-clusterissuer
     kind: ClusterIssuer

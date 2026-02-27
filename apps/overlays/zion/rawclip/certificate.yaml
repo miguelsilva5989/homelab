@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: streamsquire-relay-certificate
+  name: rawclip-ingressroute-certificate
   namespace: streamamus
 spec:
-  secretName: streamsquire-relay-certificate-secret
+  secretName: rawclip-certificate-secret
 
   issuerRef:
     name: cloudflare-clusterissuer

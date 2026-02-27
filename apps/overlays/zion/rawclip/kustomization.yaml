@@ -7,7 +7,7 @@ namePrefix:
   zion-
 
 metadata:
-  name: streamsquire-relay
+  name: rawclip
   namespace: streamamus
 
 resources:

@@ -1,7 +1,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: streamsquire-web
+  name: rawclip-web
   namespace: rawclip-web
 spec:
   entryPoints:
@@ -11,9 +11,9 @@ spec:
       kind: Rule
       priority: 10
       services:
-        - name: zion-streamsquire-web
+        - name: zion-rawclip-web
           port: 80
       middlewares:
-        - name: zion-streamsquire-web-cors-middleware
+        - name: zion-rawclip-web-cors-middleware
   tls:
-    secretName: streamsquire-web-certificate-secret
+    secretName: rawclip-web-certificate-secret

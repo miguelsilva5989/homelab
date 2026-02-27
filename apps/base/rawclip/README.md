@@ -1,4 +1,4 @@
-# StreamSquire Relay
+# Rawclip Relay
 
 Cloud relay server for StreamSquire — proxies API calls and SSE events between remote browsers (mods/editors) and the streamer's local agent. Never touches video.
 
@@ -117,7 +117,7 @@ Or use the existing wildcard `*.streamsquire.app` if configured.
 kubectl get pods -n streamamus
 
 # Check logs
-kubectl logs -n streamamus -l app=streamsquire-relay
+kubectl logs -n streamamus -l app=rawclip
 
 # Health check
 curl https://relay.streamsquire.app/api/health

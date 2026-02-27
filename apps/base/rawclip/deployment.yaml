@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: streamsquire-relay
+  name: rawclip
   labels:
-    app: streamsquire-relay
+    app: rawclip
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: streamsquire-relay
+      app: rawclip
   template:
     metadata:
       labels:
-        app: streamsquire-relay
+        app: rawclip
     spec:
       imagePullSecrets:
       - name: zion-regcred
@@ -23,7 +23,7 @@ spec:
           - name: ndots
             value: "1"
       containers:
-      - name: streamsquire-relay
+      - name: rawclip
         image: registry.milanchis.com/streamsquire-relay:latest
         imagePullPolicy: Always
         ports:
