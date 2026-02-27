@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: rawclip-ingressroute-certificate
+  name: streamsquire-relay-certificate
   namespace: streamamus
 spec:
-  secretName: rawclip-certificate-secret
+  secretName: streamsquire-relay-certificate-secret
 
   issuerRef:
     name: cloudflare-clusterissuer
     kind: ClusterIssuer
 
   dnsNames:
-    - streamsquire-relay.milanchis.com
+    - relay.streamsquire.app

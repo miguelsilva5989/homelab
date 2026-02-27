@@ -2,26 +2,26 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: rawclip
+  name: streamsquire-relay
   namespace: streamamus
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`streamsquire-relay.milanchis.com`) && PathPrefix(`/`)
+    - match: Host(`relay.streamsquire.app`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
       services:
-        - name: zion-rawclip
+        - name: zion-streamsquire-relay
           port: 80
           sticky:
             cookie:
-              name: rawclip-stickiness
+              name: streamsquire-relay-stickiness
               secure: true
               httpOnly: true
               sameSite: none
       middlewares:
-        - name: zion-rawclip-cors-middleware
+        - name: zion-streamsquire-relay-cors-middleware
 
   tls:
-    secretName: rawclip-certificate-secret
+    secretName: streamsquire-relay-certificate-secret

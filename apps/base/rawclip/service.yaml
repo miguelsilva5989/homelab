@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rawclip
+  name: streamsquire-relay
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
   selector:
-    app: rawclip
+    app: streamsquire-relay
   ports:
   - name: http
     protocol: TCP

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rawclip-web
+  name: streamsquire-web
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
   selector:
-    app: rawclip-web
+    app: streamsquire-web
   ports:
     - name: http
       protocol: TCP

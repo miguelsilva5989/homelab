@@ -1,13 +1,13 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: rawclip-web-cors-middleware
+  name: streamsquire-web-cors-middleware
   namespace: rawclip-web
 spec:
   headers:
     accessControlAllowOriginList:
-      - "https://streamsquire.milanchis.com"
-      - "https://streamsquire-relay.milanchis.com"
+      - "https://streamsquire.app"
+      - "https://relay.streamsquire.app"
     accessControlAllowMethods:
       - GET
       - OPTIONS

@@ -1,6 +1,6 @@
-# Rawclip Relay
+# StreamSquire Relay
 
-Cloud relay server for Rawclip — proxies API calls and SSE events between remote browsers (mods/editors) and the streamer's local agent. Never touches video.
+Cloud relay server for StreamSquire — proxies API calls and SSE events between remote browsers (mods/editors) and the streamer's local agent. Never touches video.
 
 **Stack:** Bun + Hono + Better Auth + SQLite
 
@@ -9,11 +9,11 @@ Cloud relay server for Rawclip — proxies API calls and SSE events between remo
 ```sh
 cd ~/workspace/git/streamamus
 
-docker build -t registry.milanchis.com/rawclip-relay:latest -f relay/Dockerfile .
-docker push registry.milanchis.com/rawclip-relay:latest
+docker build -t registry.streamsquire.app/streamsquire-relay:latest -f relay/Dockerfile .
+docker push registry.streamsquire.app/streamsquire-relay:latest
 
-docker build -t registry.milanchis.com/rawclip-web:latest -f website/Dockerfile .
-docker push registry.milanchis.com/rawclip-web:latest
+docker build -t registry.streamsquire.app/streamsquire-web:latest -f website/Dockerfile .
+docker push registry.streamsquire.app/streamsquire-web:latest
 ```
 
 ## Configuration
@@ -38,7 +38,7 @@ All config via environment variables:
 
 1. Go to https://dev.twitch.tv/console/apps
 2. Create a new application
-3. Set redirect URI to `https://rawclip-relay.milanchis.com/api/auth/callback/twitch`
+3. Set redirect URI to `https://relay.streamsquire.app/api/auth/callback/twitch`
 4. Copy the Client ID and Client Secret into the sealed secret below
 
 ## Sealed Secret
@@ -75,7 +75,7 @@ kubectl get secret streamamus-secret -n streamamus -o jsonpath='{.data.TWITCH_CL
 
 ## Registry Credentials
 
-The kubelet needs auth to pull from `registry.milanchis.com`:
+The kubelet needs auth to pull from `registry.streamsquire.app`:
 
 ```sh
 kubectl create secret generic regcred \
@@ -95,19 +95,19 @@ kubectl create secret generic regcred \
 Add a CNAME or A record in Cloudflare:
 
 ```
-rawclip-relay.milanchis.com → cluster IP (10.69.99.69)
+relay.streamsquire.app → cluster IP (10.69.99.69)
 ```
 
-Or use the existing wildcard `*.milanchis.com` if configured.
+Or use the existing wildcard `*.streamsquire.app` if configured.
 
 ## Kubernetes Resources
 
 - **Namespace**: `streamamus`
-- **Deployment**: single replica, image from `registry.milanchis.com/rawclip-relay:latest`
+- **Deployment**: single replica, image from `registry.streamsquire.app/streamsquire-relay:latest`
 - **Service**: port 80 → 9430
 - **PVC**: 200Mi Longhorn for SQLite persistence at `/app/data`
 - **SealedSecret**: OAuth credentials + auth secret + owner email + license signing key
-- **Ingress** (overlay): `rawclip-relay.milanchis.com` via Traefik with TLS
+- **Ingress** (overlay): `relay.streamsquire.app` via Traefik with TLS
 - **Certificate**: auto-issued by cert-manager via Cloudflare DNS-01
 
 ## Post-Deploy Verification
@@ -117,16 +117,16 @@ Or use the existing wildcard `*.milanchis.com` if configured.
 kubectl get pods -n streamamus
 
 # Check logs
-kubectl logs -n streamamus -l app=rawclip
+kubectl logs -n streamamus -l app=streamsquire-relay
 
 # Health check
-curl https://rawclip-relay.milanchis.com/api/health
+curl https://relay.streamsquire.app/api/health
 
 # Test pairing endpoint
-curl -s -X POST https://rawclip-relay.milanchis.com/api/pair/init | jq .
+curl -s -X POST https://relay.streamsquire.app/api/pair/init | jq .
 
 # Test license endpoint (should include signed token)
-curl -s -X POST https://rawclip-relay.milanchis.com/api/license/activate \
+curl -s -X POST https://relay.streamsquire.app/api/license/activate \
   -H 'Content-Type: application/json' \
   -d '{"email":"test@example.com"}' | jq .
 # Expect: { "premium": false, "tier": "free", ..., "token": "eyJ..." }
@@ -224,13 +224,13 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d 2>/dev/null | jq .
 # 5. Build and run the Rust agent against a licensed email
 cd ~/workspace/git/streamamus/rust_agent
 cargo build
-# In .env set: RAWCLIP_LICENSE_EMAIL=pro@test.com  RAWCLIP_RELAY_URL=http://localhost:9430
+# In .env set: STREAMSQUIRE_LICENSE_EMAIL=pro@test.com  STREAMSQUIRE_RELAY_URL=http://localhost:9430
 # Check agent logs for:
 #   "License token signature verified"
 #   "License: tier=pro, features=[\"relay\", \"ai_summary\"]"
 
 # 6. Tamper test: edit license_cache in SQLite directly
-sqlite3 data/rawclip.db "UPDATE license_cache SET tier='agency_ai', features='[\"relay\",\"ai_summary\",\"managed_ai\",\"cloud_transcription\",\"team_access\",\"multi_streamer\",\"api_webhooks\"]'"
+sqlite3 data/streamsquire.db "UPDATE license_cache SET tier='agency_ai', features='[\"relay\",\"ai_summary\",\"managed_ai\",\"cloud_transcription\",\"team_access\",\"multi_streamer\",\"api_webhooks\"]'"
 # Restart agent — should log "Cached license token invalid" and degrade to free
 # (the signed token still says "pro", so the tampered columns are rejected)
 

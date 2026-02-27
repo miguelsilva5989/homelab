@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rawclip
+  name: streamsquire-relay
   labels:
-    app: rawclip
+    app: streamsquire-relay
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: rawclip
+      app: streamsquire-relay
   template:
     metadata:
       labels:
-        app: rawclip
+        app: streamsquire-relay
     spec:
       imagePullSecrets:
       - name: zion-regcred
@@ -23,8 +23,8 @@ spec:
           - name: ndots
             value: "1"
       containers:
-      - name: rawclip
-        image: registry.milanchis.com/rawclip-relay:latest
+      - name: streamsquire-relay
+        image: registry.streamsquire.app/streamsquire-relay:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 9430
@@ -32,7 +32,7 @@ spec:
           - name: RELAY_PORT
             value: "9430"
           - name: BETTER_AUTH_URL
-            value: "https://streamsquire-relay.milanchis.com"
+            value: "https://relay.streamsquire.app"
           - name: BETTER_AUTH_SECRET
             valueFrom:
               secretKeyRef:
