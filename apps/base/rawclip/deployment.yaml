@@ -83,6 +83,21 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: PADDLE_WEBHOOK_SECRET
+          - name: RELAY_AI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RELAY_AI_API_KEY
+          - name: RELAY_AI_MODEL
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RELAY_AI_MODEL
+          - name: RELAY_AI_BASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RELAY_AI_BASE_URL
           - name: RELAY_DB_PATH
             value: /app/data/relay.sqlite
         volumeMounts:
