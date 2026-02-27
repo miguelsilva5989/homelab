@@ -6,8 +6,8 @@ metadata:
 spec:
   headers:
     accessControlAllowOriginList:
-      - "https://rawclip.milanchis.com"
-      - "https://rawclip-relay.milanchis.com"
+      - "https://streamsquire.milanchis.com"
+      - "https://streamsquire-relay.milanchis.com"
     accessControlAllowMethods:
       - GET
       - OPTIONS

@@ -8,7 +8,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`rawclip-relay.milanchis.com`) && PathPrefix(`/`)
+    - match: Host(`streamsquire-relay.milanchis.com`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
       services:

@@ -9,4 +9,4 @@ spec:
     name: cloudflare-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - rawclip.milanchis.com
+    - streamsquire.milanchis.com

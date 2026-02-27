@@ -7,8 +7,8 @@ metadata:
 spec:
   headers:
     accessControlAllowOriginList:
-      - "https://rawclip-relay.milanchis.com"
-      - "https://rawclip.com"
+      - "https://streamsquire-relay.milanchis.com"
+      - "https://streamsquire.com"
       - "http://localhost:5173"
       - "http://localhost:9420"
     accessControlAllowMethods:
