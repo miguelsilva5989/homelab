@@ -112,6 +112,8 @@ spec:
             value: "StreamSquire <noreply@mail.streamsquire.app>"
           - name: RESEND_AUDIENCE_ID
             value: "e65e27df-2878-4edc-a4cc-c68d9b923422"
+          - name: R2_PUBLIC_URL
+            value: "https://releases.streamsquire.app"
           - name: RELAY_DB_PATH
             value: /app/data/relay.sqlite
         volumeMounts:
