@@ -68,16 +68,21 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: KICK_CLIENT_SECRET
-          - name: RAWCLIP_LICENSE_SIGNING_KEY
+          - name: STREAMSQUIRE_LICENSE_SIGNING_KEY
             valueFrom:
               secretKeyRef:
                 name: zion-streamamus-secret
-                key: RAWCLIP_LICENSE_SIGNING_KEY
+                key: STREAMSQUIRE_LICENSE_SIGNING_KEY
           - name: RELAY_OWNER_EMAIL
             valueFrom:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: RELAY_OWNER_EMAIL
+          - name: PADDLE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: PADDLE_API_KEY
           - name: PADDLE_WEBHOOK_SECRET
             valueFrom:
               secretKeyRef:
@@ -105,6 +110,11 @@ spec:
                 key: RESEND_API_KEY
           - name: RESEND_FROM
             value: "StreamSquire <noreply@mail.streamsquire.app>"
+          - name: RESEND_AUDIENCE_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RESEND_AUDIENCE_ID
           - name: RELAY_DB_PATH
             value: /app/data/relay.sqlite
         volumeMounts:
