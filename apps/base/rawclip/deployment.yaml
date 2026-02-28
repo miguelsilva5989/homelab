@@ -98,6 +98,13 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: RELAY_AI_BASE_URL
+          - name: RESEND_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: RESEND_API_KEY
+          - name: RESEND_FROM
+            value: "StreamSquire <noreply@mail.streamsquire.app>"
           - name: RELAY_DB_PATH
             value: /app/data/relay.sqlite
         volumeMounts:
