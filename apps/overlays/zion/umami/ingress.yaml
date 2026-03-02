@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: umami
+  namespace: umami
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`analytics.streamsquire.app`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-umami
+          port: 80
+  tls:
+    secretName: umami-certificate-secret
