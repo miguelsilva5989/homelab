@@ -78,16 +78,28 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: RELAY_OWNER_EMAIL
-          - name: PADDLE_API_KEY
+          - name: PADDLE_SANDBOX
+            value: "true"   # flip to "false" to go live
+          - name: PADDLE_API_KEY_TEST
             valueFrom:
               secretKeyRef:
                 name: zion-streamamus-secret
-                key: PADDLE_API_KEY
+                key: PADDLE_API_KEY_TEST
+          - name: PADDLE_API_KEY_LIVE
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: PADDLE_API_KEY_LIVE
           - name: PADDLE_WEBHOOK_SECRET
             valueFrom:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: PADDLE_WEBHOOK_SECRET
+          - name: ELEVENLABS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: ELEVENLABS_API_KEY
           - name: RELAY_AI_API_KEY
             valueFrom:
               secretKeyRef:
@@ -126,6 +138,36 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: R2_SECRET_ACCESS_KEY
+          - name: DISCORD_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_CLIENT_ID
+          - name: DISCORD_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_CLIENT_SECRET
+          - name: DISCORD_BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_BOT_TOKEN
+          - name: DISCORD_GUILD_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_GUILD_ID
+          - name: DISCORD_ROLE_KNIGHT
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_ROLE_KNIGHT
+          - name: DISCORD_ROLE_SOVEREIGN
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: DISCORD_ROLE_SOVEREIGN
           - name: RELAY_DB_PATH
             value: /app/data/relay.sqlite
         volumeMounts:
