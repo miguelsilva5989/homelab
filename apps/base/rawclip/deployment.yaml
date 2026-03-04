@@ -171,7 +171,7 @@ spec:
                 name: zion-streamamus-secret
                 key: POSTGRES_PASSWORD
           - name: POSTGRES_URL
-            value: "postgresql://streamsquire:$(POSTGRES_PASSWORD)@streamsquire-db:5432/streamsquire"
+            value: "postgresql://streamsquire:$(POSTGRES_PASSWORD)@zion-streamsquire-db:5432/streamsquire"
         volumeMounts:
           - name: backups-volume
             mountPath: /app/backups
