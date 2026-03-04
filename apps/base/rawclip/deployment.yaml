@@ -106,10 +106,7 @@ spec:
                 name: zion-streamamus-secret
                 key: RELAY_AI_API_KEY
           - name: RELAY_AI_MODEL
-            valueFrom:
-              secretKeyRef:
-                name: zion-streamamus-secret
-                key: RELAY_AI_MODEL
+            value: "gemini-3.1-flash-lite-preview"
           - name: RELAY_AI_BASE_URL
             valueFrom:
               secretKeyRef:
