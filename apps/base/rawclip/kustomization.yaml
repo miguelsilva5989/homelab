@@ -10,3 +10,4 @@ resources:
   - pvc.yaml
   - sealedsecret.yaml
   - registry-sealedsecret.yaml
+  - streamsquire-db.yaml

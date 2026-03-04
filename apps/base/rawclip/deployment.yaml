@@ -7,7 +7,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
   selector:
     matchLabels:
       app: rawclip
@@ -165,18 +165,18 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: DISCORD_ROLE_SOVEREIGN
-          - name: RELAY_DB_PATH
-            value: /app/data/relay.sqlite
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_URL
+            value: "postgresql://streamsquire:$(POSTGRES_PASSWORD)@streamsquire-db:5432/streamsquire"
         volumeMounts:
-          - name: data-volume
-            mountPath: /app/data
           - name: backups-volume
-            mountPath: /app/data/backups
+            mountPath: /app/backups
 
       volumes:
-        - name: data-volume
-          persistentVolumeClaim:
-            claimName: streamamus-pvc
         - name: backups-volume
           persistentVolumeClaim:
             claimName: rawclip-backups-pvc
