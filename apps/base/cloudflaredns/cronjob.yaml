@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloudflaredns
+  namespace: cloudflaredns
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cloudflaredns
+              image: alpine:3.21
+              command: ["sh", "/scripts/update-dns.sh"]
+              env:
+                - name: CF_API_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflaredns-secret
+                      key: CF_API_TOKEN
+                - name: CF_ZONE_MILANCHIS
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflaredns-secret
+                      key: CF_ZONE_MILANCHIS
+                - name: CF_ZONE_STREAMSQUIRE
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflaredns-secret
+                      key: CF_ZONE_STREAMSQUIRE
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+          restartPolicy: Never
+          volumes:
+            - name: script
+              configMap:
+                name: cloudflaredns-script
+                defaultMode: 0755
