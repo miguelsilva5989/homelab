@@ -15,6 +15,7 @@ spec:
           containers:
             - name: cloudflaredns
               image: alpine:3.21
+              imagePullPolicy: IfNotPresent
               command: ["sh", "/scripts/update-dns.sh"]
               env:
                 - name: CF_API_TOKEN
