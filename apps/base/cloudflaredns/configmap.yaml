@@ -9,7 +9,7 @@ data:
     set -e
 
     # Get current public IP
-    CURRENT_IP=$(wget -qO- https://1.1.1.1/cdn-cgi/trace | grep 'ip=' | cut -d= -f2)
+    CURRENT_IP=$(curl -sf https://1.1.1.1/cdn-cgi/trace | grep 'ip=' | cut -d= -f2)
     if [ -z "$CURRENT_IP" ]; then
       echo "ERROR: Failed to get current public IP"
       exit 1
@@ -21,9 +21,9 @@ data:
       RECORD_NAME=$2
 
       # Get record ID and current IP
-      RECORD_DATA=$(wget -qO- \
-        --header="Authorization: Bearer $CF_API_TOKEN" \
-        --header="Content-Type: application/json" \
+      RECORD_DATA=$(curl -sf \
+        -H "Authorization: Bearer $CF_API_TOKEN" \
+        -H "Content-Type: application/json" \
         "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?type=A&name=$RECORD_NAME")
 
       RECORD_ID=$(echo "$RECORD_DATA" | sed -n 's/.*"id":"\([^"]*\)".*/\1/p' | head -1)
@@ -40,11 +40,10 @@ data:
       fi
 
       echo "UPDATING: $RECORD_NAME from $RECORD_IP to $CURRENT_IP"
-      RESULT=$(wget -qO- \
-        --header="Authorization: Bearer $CF_API_TOKEN" \
-        --header="Content-Type: application/json" \
-        --method=PATCH \
-        --body-data="{\"content\":\"$CURRENT_IP\"}" \
+      RESULT=$(curl -sf -X PATCH \
+        -H "Authorization: Bearer $CF_API_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d "{\"content\":\"$CURRENT_IP\"}" \
         "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID")
 
       if echo "$RESULT" | grep -q '"success":true'; then
