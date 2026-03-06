@@ -16,9 +16,20 @@ spec:
             options:
               - name: ndots
                 value: "1"
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                    - architect-01
           containers:
             - name: cloudflaredns
-              image: ghcr.io/alpine/curl:latest
+              image: curlimages/curl:latest
               command: ["sh", "/scripts/update-dns.sh"]
               env:
                 - name: CF_API_TOKEN
