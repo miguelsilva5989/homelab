@@ -11,7 +11,7 @@ spec:
       kind: Rule
       priority: 10
       middlewares:
-        - name: umami-noindex
+        - name: zion-umami-noindex
           namespace: umami
       services:
         - name: zion-umami
