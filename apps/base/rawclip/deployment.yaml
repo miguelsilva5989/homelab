@@ -79,7 +79,7 @@ spec:
                 name: zion-streamamus-secret
                 key: RELAY_OWNER_EMAIL
           - name: PADDLE_SANDBOX
-            value: "true"   # flip to "false" to go live
+            value: "false"
           - name: PADDLE_API_KEY_TEST
             valueFrom:
               secretKeyRef:

@@ -10,6 +10,9 @@ spec:
     - match: Host(`analytics.streamsquire.app`) && PathPrefix(`/`)
       kind: Rule
       priority: 10
+      middlewares:
+        - name: umami-noindex
+          namespace: umami
       services:
         - name: zion-umami
           port: 80

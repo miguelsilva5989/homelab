@@ -9,6 +9,7 @@ resources:
   - ../../../base/umami
   - certificate.yaml
   - ingress.yaml
+  - middleware.yaml
   - pvc.yaml
 
 patchesStrategicMerge:
