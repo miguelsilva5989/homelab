@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: glyphforge
+  namespace: glyphforge
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`glyphforge.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-glyphforge
+          port: 80
+      middlewares:
+        - name: zion-glyphforge-cors-middleware
+  tls:
+    secretName: glyphforge-certificate-secret
