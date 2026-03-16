@@ -170,6 +170,16 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: DISCORD_ROLE_MONARCH
+          - name: TIKTOK_CLIENT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: TIKTOK_CLIENT_KEY
+          - name: TIKTOK_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: TIKTOK_CLIENT_SECRET
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
