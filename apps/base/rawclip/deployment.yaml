@@ -180,6 +180,16 @@ spec:
               secretKeyRef:
                 name: zion-streamamus-secret
                 key: TIKTOK_CLIENT_SECRET
+          - name: META_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: META_APP_ID
+          - name: META_APP_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zion-streamamus-secret
+                key: META_APP_SECRET
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
