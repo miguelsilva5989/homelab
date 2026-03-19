@@ -8,13 +8,28 @@ data:
     #!/bin/sh
     set -e
 
-    # Get current public IP
-    CURRENT_IP=$(curl -sf https://1.1.1.1/cdn-cgi/trace | grep 'ip=' | cut -d= -f2)
+    # Get current public IP from multiple sources for validation
+    IP1=$(curl -sf --max-time 5 https://1.1.1.1/cdn-cgi/trace | grep 'ip=' | cut -d= -f2)
+    IP2=$(curl -sf --max-time 5 https://api.ipify.org)
+    IP3=$(curl -sf --max-time 5 https://ifconfig.me)
+
+    # Require at least 2 sources to agree
+    if [ "$IP1" = "$IP2" ]; then
+      CURRENT_IP="$IP1"
+    elif [ "$IP1" = "$IP3" ]; then
+      CURRENT_IP="$IP1"
+    elif [ "$IP2" = "$IP3" ]; then
+      CURRENT_IP="$IP2"
+    else
+      echo "ERROR: IP sources disagree: ip1=$IP1 ip2=$IP2 ip3=$IP3"
+      exit 1
+    fi
+
     if [ -z "$CURRENT_IP" ]; then
       echo "ERROR: Failed to get current public IP"
       exit 1
     fi
-    echo "Current public IP: $CURRENT_IP"
+    echo "Current public IP: $CURRENT_IP (verified by 2+ sources)"
 
     update_record() {
       ZONE_ID=$1
