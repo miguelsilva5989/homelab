@@ -3,7 +3,7 @@ image:
   repository: aip/page-manager
   tag: 4.0.1
   pullSecrets:
-    - name: zion-regcred
+    - zion-regcred
 
 volumePermissions:
   image:

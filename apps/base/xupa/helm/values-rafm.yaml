@@ -3,7 +3,7 @@ image:
   repository: aip/rafm
   tag: 8.0.1
   pullSecrets:
-    - name: zion-regcred
+    - zion-regcred
 
 volumePermissions:
   image:
