@@ -18,7 +18,7 @@ deployment:
 # Product config inline — chart generates a secret from these values automatically
 product-config:
   DbDatabase: raid
-  DbHost: xupa-db
+  DbHost: zion-xupa-db
   DbPort: 5432
   DbRdbms: Postgresql
   DbCreateUsers: false
@@ -41,7 +41,7 @@ product-config:
   DbTablespacesSmallIndex: pg_default
   DbTablespacesLOB: pg_default
   EnablePartitioning: false
-  AuthServerURL: "http://xupa-keycloak:8080/keycloak"
+  AuthServerURL: "http://zion-xupa-keycloak:8080/keycloak"
   Realm: mobileum
   ClientId: mobileum
   KeycloakAdminUser: adm

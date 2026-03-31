@@ -28,7 +28,7 @@ spec:
         - name: KC_DB
           value: postgres
         - name: KC_DB_URL
-          value: jdbc:postgresql://xupa-db:5432/keycloak
+          value: jdbc:postgresql://zion-xupa-db:5432/keycloak
         - name: KC_DB_USERNAME
           value: keycloak
         - name: KC_DB_PASSWORD
