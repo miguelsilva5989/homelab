@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xupa-keycloak
+  labels:
+    app: xupa-keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xupa-keycloak
+  template:
+    metadata:
+      labels:
+        app: xupa-keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:25.0.6
+        args:
+        - start-dev
+        - --import-realm
+        - --features=persistent-user-sessions
+        - --health-enabled=true
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KC_DB
+          value: postgres
+        - name: KC_DB_URL
+          value: jdbc:postgresql://xupa-db:5432/keycloak
+        - name: KC_DB_USERNAME
+          value: keycloak
+        - name: KC_DB_PASSWORD
+          value: keycloak
+        - name: KEYCLOAK_ADMIN
+          value: admin
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: admin
+        - name: KC_HOSTNAME
+          value: xupa.milanchis.com
+        - name: KC_HTTP_RELATIVE_PATH
+          value: /keycloak
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_HTTP_ENABLED
+          value: "true"
+        - name: KC_PROXY_HEADERS
+          value: xforwarded
+        volumeMounts:
+        - name: realm
+          mountPath: /opt/keycloak/data/import
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 10
+      volumes:
+      - name: realm
+        configMap:
+          name: xupa-keycloak-realm
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist

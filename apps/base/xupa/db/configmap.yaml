@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xupa-db-init
+data:
+  init.sql: |
+    -- RAID 9.3 Database Initialization
+    -- Single raid DB, separate schemas for RAFM (ras_*) and Page Manager (pm_*)
+    -- DbCreateUsers=false in product configs.
+
+    -- Keycloak
+    CREATE USER keycloak WITH PASSWORD 'keycloak';
+    CREATE DATABASE keycloak OWNER keycloak ENCODING 'UTF8';
+
+    -- Extensions
+    CREATE EXTENSION btree_gin;
+
+    -- ============================================================
+    -- RAFM users/schemas/roles (ras_*)
+    -- ============================================================
+    CREATE ROLE "ras_adm_SysPriv"; CREATE ROLE "ras_adm_S"; CREATE ROLE "ras_adm_SIUD";
+    CREATE ROLE "ras_app_SysPriv"; CREATE ROLE "ras_dat_SysPriv";
+    CREATE ROLE "ras_dat_S"; CREATE ROLE "ras_dat_SIUD";
+
+    CREATE USER "ras_adm" WITH PASSWORD 'ras_adm';
+    CREATE SCHEMA "ras_adm";
+    GRANT USAGE ON SCHEMA "ras_adm" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "ras_adm" TO "ras_adm";
+    GRANT CREATE ON TABLESPACE pg_default TO "ras_adm";
+    GRANT "ras_adm_SysPriv" TO "ras_adm";
+    ALTER USER "ras_adm" SET SEARCH_PATH = "ras_adm", PUBLIC;
+
+    CREATE USER "ras_app" WITH PASSWORD 'ras_app';
+    CREATE SCHEMA "ras_app";
+    GRANT USAGE ON SCHEMA "ras_app" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "ras_app" TO "ras_app";
+    GRANT CREATE ON TABLESPACE pg_default TO "ras_app";
+    GRANT "ras_adm_SIUD" TO "ras_app";
+    GRANT "ras_dat_SIUD" TO "ras_app";
+    GRANT "ras_app_SysPriv" TO "ras_app";
+
+    CREATE USER "ras_dat" WITH PASSWORD 'ras_dat';
+    CREATE SCHEMA "ras_dat";
+    GRANT USAGE ON SCHEMA "ras_dat" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "ras_dat" TO "ras_dat";
+    GRANT CREATE ON TABLESPACE pg_default TO "ras_dat";
+    GRANT "ras_adm_SIUD" TO "ras_dat";
+    GRANT "ras_dat_SIUD" TO "ras_dat";
+    GRANT "ras_dat_SysPriv" TO "ras_dat";
+
+    ALTER USER "ras_app" SET SEARCH_PATH = "ras_app", "ras_dat", "ras_adm", PUBLIC;
+    ALTER USER "ras_dat" SET SEARCH_PATH = "ras_dat", "ras_adm", "ras_app", PUBLIC;
+
+    -- ============================================================
+    -- Page Manager users/schemas/roles (pm_*)
+    -- ============================================================
+    CREATE ROLE "pm_adm_SysPriv"; CREATE ROLE "pm_adm_S"; CREATE ROLE "pm_adm_SIUD";
+    CREATE ROLE "pm_app_SysPriv"; CREATE ROLE "pm_dat_SysPriv";
+    CREATE ROLE "pm_dat_S"; CREATE ROLE "pm_dat_SIUD";
+
+    CREATE USER "pm_adm" WITH PASSWORD 'pm_adm';
+    CREATE SCHEMA "pm_adm";
+    GRANT USAGE ON SCHEMA "pm_adm" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "pm_adm" TO "pm_adm";
+    GRANT CREATE ON TABLESPACE pg_default TO "pm_adm";
+    GRANT "pm_adm_SysPriv" TO "pm_adm";
+    ALTER USER "pm_adm" SET SEARCH_PATH = "pm_adm", PUBLIC;
+
+    CREATE USER "pm_app" WITH PASSWORD 'pm_app';
+    CREATE SCHEMA "pm_app";
+    GRANT USAGE ON SCHEMA "pm_app" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "pm_app" TO "pm_app";
+    GRANT CREATE ON TABLESPACE pg_default TO "pm_app";
+    GRANT "pm_adm_SIUD" TO "pm_app";
+    GRANT "pm_dat_SIUD" TO "pm_app";
+    GRANT "pm_app_SysPriv" TO "pm_app";
+
+    CREATE USER "pm_dat" WITH PASSWORD 'pm_dat';
+    CREATE SCHEMA "pm_dat";
+    GRANT USAGE ON SCHEMA "pm_dat" TO PUBLIC;
+    GRANT CREATE ON SCHEMA "pm_dat" TO "pm_dat";
+    GRANT CREATE ON TABLESPACE pg_default TO "pm_dat";
+    GRANT "pm_adm_SIUD" TO "pm_dat";
+    GRANT "pm_dat_SIUD" TO "pm_dat";
+    GRANT "pm_dat_SysPriv" TO "pm_dat";
+
+    ALTER USER "pm_app" SET SEARCH_PATH = "pm_app", "pm_dat", "pm_adm", PUBLIC;
+    ALTER USER "pm_dat" SET SEARCH_PATH = "pm_dat", "pm_adm", "pm_app", PUBLIC;

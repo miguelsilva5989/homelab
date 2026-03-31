@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: xupa-db
+  labels:
+    app: xupa-db
+spec:
+  serviceName: xupa-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xupa-db
+  template:
+    metadata:
+      labels:
+        app: xupa-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16.13-alpine
+        ports:
+        - containerPort: 5432
+        args:
+        - postgres
+        - -c
+        - max_connections=500
+        - -c
+        - shared_buffers=4GB
+        - -c
+        - work_mem=40MB
+        - -c
+        - max_wal_size=3GB
+        env:
+        - name: POSTGRES_USER
+          value: raid
+        - name: POSTGRES_PASSWORD
+          value: raid
+        - name: TZ
+          value: Europe/Berlin
+        - name: PGTZ
+          value: Europe/Berlin
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+        - name: init-sql
+          mountPath: /docker-entrypoint-initdb.d
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "5Gi"
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - raid
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+      volumes:
+      - name: init-sql
+        configMap:
+          name: xupa-db-init
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 10Gi

@@ -1,0 +1,451 @@
+apiVersion: v1
+data:
+  RAID_default_realm.json: "{\n\t\"roles\": {\n\t\t\"client\": {\n\t\t\t\"account\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"view-profile\",\n\t\t\t\t\t\"description\":
+    \"${role_view-profile}\",\n\t\t\t\t\t\"composite\": false,\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"manage-account-links\",\n\t\t\t\t\t\"description\": \"${role_manage-account-links}\",\n\t\t\t\t\t\"composite\":
+    false,\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\": {}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"manage-account\",\n\t\t\t\t\t\"description\": \"${role_manage-account}\",\n\t\t\t\t\t\"composite\":
+    true,\n\t\t\t\t\t\"composites\": {\n\t\t\t\t\t\t\"client\": {\n\t\t\t\t\t\t\t\"account\":
+    [\n\t\t\t\t\t\t\t\t\"manage-account-links\"\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"view-groups\",\n\t\t\t\t\t\"description\": \"${role_view-groups}\",\n\t\t\t\t\t\"composite\":
+    false,\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\": {}\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"mobileum\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"Administrator\",\n\t\t\t\t\t\"description\":
+    \"Administrators are super users who can do anything.\",\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t1\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Regular
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Guest\",\n\t\t\t\t\t\"description\": \"Unauthenticated users always have this
+    role.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\":
+    [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\": [\n\t\t\t\t\t\t\t1\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\":
+    [\n\t\t\t\t\t\t\t\"Regular Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\":
+    [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Organization Administrator\",\n\t\t\t\t\t\"description\": \"Organization Administrators
+    are super users of their organization but cannot make other users into Organization
+    Administrators.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\":
+    {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t3\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Organization
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Organization Owner\",\n\t\t\t\t\t\"description\": \"Organization Owners are
+    super users of their organization and can assign organization roles to users.\",\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t3\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Organization
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Organization User\",\n\t\t\t\t\t\"description\": \"All users who belong to an
+    organization have this role within that organization.\",\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t3\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Organization
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Owner\",\n\t\t\t\t\t\"description\": \"This is an implied role with respect
+    to the objects users create.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\":
+    {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t1\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Regular
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Power User\",\n\t\t\t\t\t\"description\": \"Power Users have their own personal
+    site.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\":
+    [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\": [\n\t\t\t\t\t\t\t1\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\":
+    [\n\t\t\t\t\t\t\t\"Regular Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\":
+    [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Site Administrator\",\n\t\t\t\t\t\"description\": \"Site Administrators are
+    super users of their site but cannot make other users into Site Administrators.\",\n\t\t\t\t\t\"clientRole\":
+    true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t2\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Site
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Site Member\",\n\t\t\t\t\t\"description\": \"All users who belong to a site
+    have this role within that site.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\":
+    {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t2\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Site
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"Site Owner\",\n\t\t\t\t\t\"description\": \"Site Owners are super users of their
+    site and can assign site roles to users.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\":
+    {\n\t\t\t\t\t\t\"descriptionLanguage\": [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\":
+    [\n\t\t\t\t\t\t\t2\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\": [\n\t\t\t\t\t\t\t\"Site
+    Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\": [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"User\",\n\t\t\t\t\t\"description\": \"Authenticated users should be assigned
+    this role.\",\n\t\t\t\t\t\"clientRole\": true,\n\t\t\t\t\t\"attributes\": {\n\t\t\t\t\t\t\"descriptionLanguage\":
+    [\n\t\t\t\t\t\t\t\"en\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"titleLanguage\": [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"title\":
+    [\n\t\t\t\t\t\t\t\"\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"typeId\": [\n\t\t\t\t\t\t\t1\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"type\":
+    [\n\t\t\t\t\t\t\t\"Regular Role\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"companyName\":
+    [\n\t\t\t\t\t\t\t\"mobileum.com\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t\"realm\":
+    [\n\t\t\t{\n\t\t\t\t\"name\": \"default-roles-mobileum\",\n\t\t\t\t\"description\":
+    \"${role_default-roles}\",\n\t\t\t\t\"clientRole\": false,\n\t\t\t\t\"composite\":
+    true,\n\t\t\t\t\"composites\": {\n\t\t\t\t\t\"client\": {\n\t\t\t\t\t\t\"account\":
+    [\n\t\t\t\t\t\t\t\"view-profile\",\n\t\t\t\t\t\t\t\"manage-account\"\n\t\t\t\t\t\t],\n\t\t\t\t\t\t\"mobileum\":
+    [\n\t\t\t\t\t\t\t\"User\",\n\t\t\t\t\t\t\t\"Power User\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n\t\"groups\":
+    [],\n\t\"users\": [\n\t\t{\n\t\t\t\"username\": \"adm\",\n\t\t\t\"firstName\":
+    \"Admin\",\n\t\t\t\"lastName\": \"User\",\n\t\t\t\"email\": \"adm@mobileum.com\",\n\t\t\t\"emailVerified\":
+    true,\n\t\t\t\"createdTimestamp\": 1722466800000,\n\t\t\t\"enabled\": true,\n\t\t\t\"realmRoles\":
+    [\n\t\t\t\t\"default-roles-mobileum\"\n\t\t\t],\n\t\t\t\"clientRoles\": {\n\t\t\t\t\"mobileum\":
+    [\n\t\t\t\t\t\"Administrator\",\n\t\t\t\t\t\"Power User\",\n\t\t\t\t\t\"User\"\n\t\t\t\t],\n\t\t\t\t\"realm-management\":
+    [\n\t\t\t\t\t\"realm-admin\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"groups\": [],\n\t\t\t\"credentials\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"type\": \"password\",\n\t\t\t\t\t\"secretData\": \"{\\\"value\\\":\\\"MZnRh/nWqcXHjiXn2DJ6Nt3FrKdWtPCzD6paasnN+tw=\\\",\\\"salt\\\":\\\"Wd6tawrBafAUkNJwUTRsLRu5q/95PLmvEP7/Xl4EZxQ=\\\"}\",\n\t\t\t\t\t\"credentialData\":
+    \"{\\\"hashIterations\\\":50000,\\\"algorithm\\\":\\\"pbkdf2-sha256\\\"}\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"middleName\": [\n\t\t\t\t\t\"User\"\n\t\t\t\t],\n\t\t\t\t\"locale\":
+    [\n\t\t\t\t\t\"en\"\n\t\t\t\t]\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"username\": \"internal\",\n\t\t\t\"firstName\":
+    \"Internal\",\n\t\t\t\"lastName\": \"User\",\n\t\t\t\"email\": \"internal@mobileum.com\",\n\t\t\t\"emailVerified\":
+    false,\n\t\t\t\"createdTimestamp\": 1722466800000,\n\t\t\t\"enabled\": true,\n\t\t\t\"realmRoles\":
+    [\n\t\t\t\t\"default-roles-mobileum\"\n\t\t\t],\n\t\t\t\"clientRoles\": {\n\t\t\t\t\"mobileum\":
+    [\n\t\t\t\t\t\"Power User\",\n\t\t\t\t\t\"User\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"groups\":
+    [],\n\t\t\t\"credentials\": [\n\t\t\t\t{\n\t\t\t\t\t\"type\": \"password\",\n\t\t\t\t\t\"secretData\":
+    \"{\\\"value\\\":\\\"525BcE8JMlGozUPmtPG8rRqqn3dE1UfR97WIhd+ww5E=\\\",\\\"salt\\\":\\\"aBx6NG7yPT3KkJOzr1z9bp8m5mFLpSjR6qd0Oc9W3Cg=\\\"}\",\n\t\t\t\t\t\"credentialData\":
+    \"{\\\"hashIterations\\\":50000,\\\"algorithm\\\":\\\"pbkdf2-sha256\\\"}\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"middleName\": [\n\t\t\t\t\t\"User\"\n\t\t\t\t],\n\t\t\t\t\"locale\":
+    [\n\t\t\t\t\t\"en\"\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t],\n\t\"clients\": [\n\t\t{\n\t\t\t\"clientId\":
+    \"account\",\n\t\t\t\"name\": \"${client_account}\",\n\t\t\t\"rootUrl\": \"${authBaseUrl}\",\n\t\t\t\"baseUrl\":
+    \"/realms/mobileum/account/\",\n\t\t\t\"surrogateAuthRequired\": false,\n\t\t\t\"enabled\":
+    true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [\n\t\t\t\t\"/realms/mobileum/account/*\"\n\t\t\t],\n\t\t\t\"webOrigins\":
+    [],\n\t\t\t\"notBefore\": 0,\n\t\t\t\"bearerOnly\": false,\n\t\t\t\"consentRequired\":
+    false,\n\t\t\t\"standardFlowEnabled\": true,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    false,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": true,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"post.logout.redirect.uris\":
+    \"+\"\n\t\t\t},\n\t\t\t\"authenticationFlowBindingOverrides\": {},\n\t\t\t\"fullScopeAllowed\":
+    false,\n\t\t\t\"nodeReRegistrationTimeout\": 0,\n\t\t\t\"defaultClientScopes\":
+    [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"account-console\",\n\t\t\t\"name\": \"${client_account-console}\",\n\t\t\t\"rootUrl\":
+    \"${authBaseUrl}\",\n\t\t\t\"baseUrl\": \"/realms/mobileum/account/\",\n\t\t\t\"surrogateAuthRequired\":
+    false,\n\t\t\t\"enabled\": true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [\n\t\t\t\t\"/realms/mobileum/account/*\"\n\t\t\t],\n\t\t\t\"webOrigins\":
+    [],\n\t\t\t\"notBefore\": 0,\n\t\t\t\"bearerOnly\": false,\n\t\t\t\"consentRequired\":
+    false,\n\t\t\t\"standardFlowEnabled\": true,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    false,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": true,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"post.logout.redirect.uris\":
+    \"+\",\n\t\t\t\t\"pkce.code.challenge.method\": \"S256\"\n\t\t\t},\n\t\t\t\"authenticationFlowBindingOverrides\":
+    {},\n\t\t\t\"fullScopeAllowed\": false,\n\t\t\t\"nodeReRegistrationTimeout\":
+    0,\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"audience resolve\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-audience-resolve-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {}\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"defaultClientScopes\":
+    [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"admin-cli\",\n\t\t\t\"name\": \"${client_admin-cli}\",\n\t\t\t\"surrogateAuthRequired\":
+    false,\n\t\t\t\"enabled\": true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [],\n\t\t\t\"webOrigins\": [],\n\t\t\t\"notBefore\":
+    0,\n\t\t\t\"bearerOnly\": false,\n\t\t\t\"consentRequired\": false,\n\t\t\t\"standardFlowEnabled\":
+    false,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    true,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": true,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {},\n\t\t\t\"authenticationFlowBindingOverrides\":
+    {},\n\t\t\t\"fullScopeAllowed\": false,\n\t\t\t\"nodeReRegistrationTimeout\":
+    0,\n\t\t\t\"defaultClientScopes\": [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"broker\",\n\t\t\t\"name\": \"${client_broker}\",\n\t\t\t\"surrogateAuthRequired\":
+    false,\n\t\t\t\"enabled\": true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [],\n\t\t\t\"webOrigins\": [],\n\t\t\t\"notBefore\":
+    0,\n\t\t\t\"bearerOnly\": true,\n\t\t\t\"consentRequired\": false,\n\t\t\t\"standardFlowEnabled\":
+    true,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    false,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": false,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {},\n\t\t\t\"authenticationFlowBindingOverrides\":
+    {},\n\t\t\t\"fullScopeAllowed\": false,\n\t\t\t\"nodeReRegistrationTimeout\":
+    0,\n\t\t\t\"defaultClientScopes\": [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"realm-management\",\n\t\t\t\"name\": \"${client_realm-management}\",\n\t\t\t\"surrogateAuthRequired\":
+    false,\n\t\t\t\"enabled\": true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [],\n\t\t\t\"webOrigins\": [],\n\t\t\t\"notBefore\":
+    0,\n\t\t\t\"bearerOnly\": true,\n\t\t\t\"consentRequired\": false,\n\t\t\t\"standardFlowEnabled\":
+    true,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    false,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": false,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {},\n\t\t\t\"authenticationFlowBindingOverrides\":
+    {},\n\t\t\t\"fullScopeAllowed\": false,\n\t\t\t\"nodeReRegistrationTimeout\":
+    0,\n\t\t\t\"defaultClientScopes\": [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"security-admin-console\",\n\t\t\t\"name\": \"${client_security-admin-console}\",\n\t\t\t\"rootUrl\":
+    \"${authAdminUrl}\",\n\t\t\t\"baseUrl\": \"/admin/mobileum/console/\",\n\t\t\t\"surrogateAuthRequired\":
+    false,\n\t\t\t\"enabled\": true,\n\t\t\t\"alwaysDisplayInConsole\": false,\n\t\t\t\"clientAuthenticatorType\":
+    \"client-secret\",\n\t\t\t\"redirectUris\": [\n\t\t\t\t\"/admin/mobileum/console/*\"\n\t\t\t],\n\t\t\t\"webOrigins\":
+    [\n\t\t\t\t\"+\"\n\t\t\t],\n\t\t\t\"notBefore\": 0,\n\t\t\t\"bearerOnly\": false,\n\t\t\t\"consentRequired\":
+    false,\n\t\t\t\"standardFlowEnabled\": true,\n\t\t\t\"implicitFlowEnabled\": false,\n\t\t\t\"directAccessGrantsEnabled\":
+    false,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"publicClient\": true,\n\t\t\t\"frontchannelLogout\":
+    false,\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"post.logout.redirect.uris\":
+    \"+\",\n\t\t\t\t\"pkce.code.challenge.method\": \"S256\"\n\t\t\t},\n\t\t\t\"authenticationFlowBindingOverrides\":
+    {},\n\t\t\t\"fullScopeAllowed\": false,\n\t\t\t\"nodeReRegistrationTimeout\":
+    0,\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"locale\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"locale\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"locale\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"defaultClientScopes\":
+    [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"clientId\":
+    \"mobileum\",\n\t\t\t\"name\": \"mobileum\",\n\t\t\t\"enabled\": true,\n\t\t\t\"directAccessGrantsEnabled\":
+    true,\n\t\t\t\"serviceAccountsEnabled\": false,\n\t\t\t\"authorizationServicesEnabled\":
+    false,\n\t\t\t\"publicClient\": true,\n\t\t\t\"webOrigins\": [\n\t\t\t\t\"*\"\n\t\t\t],\n\t\t\t\"redirectUris\":
+    [\n\t\t\t\t\"*\"\n\t\t\t],\n\t\t\t\"attributes\": {\n\t\t\t\t\"post.logout.redirect.uris\":
+    \"*\"\n\t\t\t},\n\t\t\t\"defaultClientScopes\": [\n\t\t\t\t\"web-origins\",\n\t\t\t\t\"acr\",\n\t\t\t\t\"roles\",\n\t\t\t\t\"profile\",\n\t\t\t\t\"client_roles\",\n\t\t\t\t\"groups\",\n\t\t\t\t\"basic\",\n\t\t\t\t\"email\",\n\t\t\t\t\"username\",\n\t\t\t\t\"last_name\"\n\t\t\t],\n\t\t\t\"optionalClientScopes\":
+    [\n\t\t\t\t\"address\",\n\t\t\t\t\"phone\",\n\t\t\t\t\"offline_access\",\n\t\t\t\t\"microprofile-jwt\"\n\t\t\t]\n\t\t}\n\t],\n\t\"components\":
+    {\n\t\t\"org.keycloak.userprofile.UserProfileProvider\": [\n\t\t\t{\n\t\t\t\t\"providerId\":
+    \"declarative-user-profile\",\n\t\t\t\t\"config\": {\n\t\t\t\t\t\"kc.user.profile.config\":
+    [\n\t\t\t\t\t\t\"{\\\"attributes\\\":[{\\\"name\\\":\\\"username\\\",\\\"displayName\\\":\\\"${username}\\\",\\\"validations\\\":{\\\"length\\\":{\\\"min\\\":3,\\\"max\\\":255},\\\"username-prohibited-characters\\\":{},\\\"up-username-not-idn-homograph\\\":{}},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false},{\\\"name\\\":\\\"email\\\",\\\"displayName\\\":\\\"${email}\\\",\\\"validations\\\":{\\\"email\\\":{},\\\"length\\\":{\\\"max\\\":255}},\\\"required\\\":{\\\"roles\\\":[\\\"user\\\"]},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false},{\\\"name\\\":\\\"firstName\\\",\\\"displayName\\\":\\\"${firstName}\\\",\\\"validations\\\":{\\\"length\\\":{\\\"max\\\":255},\\\"person-name-prohibited-characters\\\":{}},\\\"required\\\":{\\\"roles\\\":[\\\"user\\\"]},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false},{\\\"name\\\":\\\"lastName\\\",\\\"displayName\\\":\\\"${lastName}\\\",\\\"validations\\\":{\\\"length\\\":{\\\"max\\\":255},\\\"person-name-prohibited-characters\\\":{}},\\\"required\\\":{\\\"roles\\\":[\\\"user\\\"]},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false},{\\\"name\\\":\\\"middleName\\\",\\\"displayName\\\":\\\"${middleName}\\\",\\\"validations\\\":{},\\\"annotations\\\":{},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false},{\\\"name\\\":\\\"locale\\\",\\\"displayName\\\":\\\"${locale}\\\",\\\"validations\\\":{},\\\"annotations\\\":{},\\\"permissions\\\":{\\\"view\\\":[\\\"admin\\\",\\\"user\\\"],\\\"edit\\\":[\\\"admin\\\",\\\"user\\\"]},\\\"multivalued\\\":false,\\\"selector\\\":{\\\"scopes\\\":[\\\"info_not_display\\\"]}}],\\\"groups\\\":[{\\\"name\\\":\\\"user-metadata\\\",\\\"displayHeader\\\":\\\"User
+    metadata\\\",\\\"displayDescription\\\":\\\"Attributes, which refer to user metadata\\\"}],\\\"unmanagedAttributePolicy\\\":\\\"ENABLED\\\"}\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n\t\"clientScopes\":
+    [\n\t\t{\n\t\t\t\"name\": \"web-origins\",\n\t\t\t\"description\": \"OpenID Connect
+    scope for add allowed web origins to the access token\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"false\",\n\t\t\t\t\"consent.screen.text\": \"\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"false\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"allowed web origins\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-allowed-origins-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"groups\",\n\t\t\t\"description\":
+    \"OpenID Connect built-in scope: groups\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"false\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"true\",\n\t\t\t\t\"gui.order\": \"\",\n\t\t\t\t\"consent.screen.text\": \"\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"groups\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-group-membership-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"full.path\": \"false\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\": \"true\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"lightweight.claim\": \"false\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"claim.name\": \"groups\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"role_list\",\n\t\t\t\"description\": \"SAML role list\",\n\t\t\t\"protocol\":
+    \"saml\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"consent.screen.text\": \"${samlRoleListScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"role list\",\n\t\t\t\t\t\"protocol\": \"saml\",\n\t\t\t\t\t\"protocolMapper\":
+    \"saml-role-list-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"single\": \"false\",\n\t\t\t\t\t\t\"attribute.nameformat\": \"Basic\",\n\t\t\t\t\t\t\"attribute.name\":
+    \"Role\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"roles\",\n\t\t\t\"description\":
+    \"OpenID Connect scope for add user roles to the access token\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"false\",\n\t\t\t\t\"consent.screen.text\": \"${rolesScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"client roles\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-client-role-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"user.attribute\": \"foo\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"resource_access.${client_id}.roles\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\",\n\t\t\t\t\t\t\"multivalued\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"audience resolve\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-audience-resolve-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"realm roles\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-usermodel-realm-role-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {\n\t\t\t\t\t\t\"user.attribute\": \"foo\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"realm_access.roles\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\",\n\t\t\t\t\t\t\"multivalued\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"offline_access\",\n\t\t\t\"description\":
+    \"OpenID Connect built-in scope: offline_access\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"consent.screen.text\": \"${offlineAccessScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"true\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"name\": \"email\",\n\t\t\t\"description\":
+    \"OpenID Connect built-in scope: email\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"true\",\n\t\t\t\t\"consent.screen.text\":
+    \"${emailScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\": \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"email\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"email\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"email\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"email verified\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-property-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"emailVerified\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"email_verified\",\n\t\t\t\t\t\t\"jsonType.label\": \"boolean\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"microprofile-jwt\",\n\t\t\t\"description\": \"Microprofile - JWT built-in scope\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"true\",\n\t\t\t\t\"display.on.consent.screen\": \"false\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"upn\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"username\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"upn\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"groups\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-realm-role-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"multivalued\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"foo\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"groups\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"basic\",\n\t\t\t\"description\": \"OpenID Connect scope for add all basic claims
+    to the token\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"false\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"false\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"sub\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-sub-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"auth_time\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-usersessionmodel-note-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {\n\t\t\t\t\t\t\"user.session.note\": \"AUTH_TIME\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"claim.name\": \"auth_time\",\n\t\t\t\t\t\t\"jsonType.label\":
+    \"long\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"address\",\n\t\t\t\"description\":
+    \"OpenID Connect built-in scope: address\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"true\",\n\t\t\t\t\"consent.screen.text\":
+    \"${addressScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\": \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"address\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-address-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"user.attribute.formatted\": \"formatted\",\n\t\t\t\t\t\t\"user.attribute.country\":
+    \"country\",\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"user.attribute.postal_code\":
+    \"postal_code\",\n\t\t\t\t\t\t\"userinfo.token.claim\": \"true\",\n\t\t\t\t\t\t\"user.attribute.street\":
+    \"street\",\n\t\t\t\t\t\t\"id.token.claim\": \"true\",\n\t\t\t\t\t\t\"user.attribute.region\":
+    \"region\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"user.attribute.locality\":
+    \"locality\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"acr\",\n\t\t\t\"description\": \"OpenID Connect scope for add acr (authentication
+    context class reference) to the token\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"false\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"false\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"acr loa level\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-acr-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"id.token.claim\": \"true\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"profile\",\n\t\t\t\"description\": \"OpenID Connect built-in scope: profile\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"true\",\n\t\t\t\t\"consent.screen.text\": \"${profileScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\": [\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"family name\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"lastName\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"family_name\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"birthdate\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"birthdate\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"birthdate\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"username\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"username\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"preferred_username\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"middle name\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"middleName\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"middle_name\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"website\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"website\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"website\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"nickname\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"nickname\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"nickname\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"zoneinfo\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"zoneinfo\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"zoneinfo\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"gender\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"gender\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"gender\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"given name\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"firstName\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"given_name\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"full name\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-full-name-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"id.token.claim\": \"true\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"picture\",\n\t\t\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\": \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\":
+    false,\n\t\t\t\t\t\"config\": {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"picture\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"picture\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"locale\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"locale\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"locale\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"updated at\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"updatedAt\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"updated_at\",\n\t\t\t\t\t\t\"jsonType.label\": \"long\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"profile\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"profile\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"profile\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"client_roles\",\n\t\t\t\"description\": \"OpenID Connect built-in scope: client_roles\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"false\",\n\t\t\t\t\"display.on.consent.screen\": \"true\",\n\t\t\t\t\"gui.order\":
+    \"\",\n\t\t\t\t\"consent.screen.text\": \"\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"client roles\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-client-role-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"multivalued\":
+    \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\": \"false\",\n\t\t\t\t\t\t\"user.attribute\":
+    \"foo\",\n\t\t\t\t\t\t\"id.token.claim\": \"false\",\n\t\t\t\t\t\t\"lightweight.claim\":
+    \"false\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"roles\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"username\",\n\t\t\t\"description\": \"OpenID Connect built-in scope: username\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"false\",\n\t\t\t\t\"display.on.consent.screen\": \"true\",\n\t\t\t\t\"gui.order\":
+    \"\",\n\t\t\t\t\"consent.screen.text\": \"\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"username\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"aggregate.attrs\": \"false\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"multivalued\": \"false\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"username\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"lightweight.claim\": \"false\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"claim.name\": \"username\",\n\t\t\t\t\t\t\"jsonType.label\":
+    \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"phone\",\n\t\t\t\"description\":
+    \"OpenID Connect built-in scope: phone\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"true\",\n\t\t\t\t\"consent.screen.text\":
+    \"${phoneScopeConsentText}\",\n\t\t\t\t\"display.on.consent.screen\": \"true\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"phone number\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"phoneNumber\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"phone_number\",\n\t\t\t\t\t\t\"jsonType.label\": \"String\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"name\":
+    \"phone number verified\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"introspection.token.claim\": \"true\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"phoneNumberVerified\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"access.token.claim\": \"true\",\n\t\t\t\t\t\t\"claim.name\":
+    \"phone_number_verified\",\n\t\t\t\t\t\t\"jsonType.label\": \"boolean\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\":
+    \"last_name\",\n\t\t\t\"description\": \"OpenID Connect built-in scope: last_name\",\n\t\t\t\"protocol\":
+    \"openid-connect\",\n\t\t\t\"attributes\": {\n\t\t\t\t\"include.in.token.scope\":
+    \"false\",\n\t\t\t\t\"display.on.consent.screen\": \"false\",\n\t\t\t\t\"gui.order\":
+    \"\",\n\t\t\t\t\"consent.screen.text\": \"\"\n\t\t\t},\n\t\t\t\"protocolMappers\":
+    [\n\t\t\t\t{\n\t\t\t\t\t\"name\": \"family name\",\n\t\t\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\t\t\"protocolMapper\":
+    \"oidc-usermodel-attribute-mapper\",\n\t\t\t\t\t\"consentRequired\": false,\n\t\t\t\t\t\"config\":
+    {\n\t\t\t\t\t\t\"aggregate.attrs\": \"false\",\n\t\t\t\t\t\t\"introspection.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"multivalued\": \"false\",\n\t\t\t\t\t\t\"userinfo.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"user.attribute\": \"lastName\",\n\t\t\t\t\t\t\"id.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"lightweight.claim\": \"false\",\n\t\t\t\t\t\t\"access.token.claim\":
+    \"true\",\n\t\t\t\t\t\t\"claim.name\": \"last_name\",\n\t\t\t\t\t\t\"jsonType.label\":
+    \"String\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"name\": \"info_not_display\",\n\t\t\t\"description\":
+    \"Fields not to be displayed at login for the user\",\n\t\t\t\"protocol\": \"openid-connect\",\n\t\t\t\"attributes\":
+    {\n\t\t\t\t\"include.in.token.scope\": \"false\",\n\t\t\t\t\"display.on.consent.screen\":
+    \"false\",\n\t\t\t\t\"gui.order\": \"\",\n\t\t\t\t\"consent.screen.text\": \"\"\n\t\t\t}\n\t\t}\n\t],\n\t\"defaultDefaultClientScopes\":
+    [\n\t\t\"role_list\",\n\t\t\"profile\",\n\t\t\"email\",\n\t\t\"roles\",\n\t\t\"web-origins\",\n\t\t\"acr\",\n\t\t\"basic\",\n\t\t\"client_roles\",\n\t\t\"groups\",\n\t\t\"username\",\n\t\t\"last_name\"\n\t],\n\t\"defaultOptionalClientScopes\":
+    [\n\t\t\"offline_access\",\n\t\t\"address\",\n\t\t\"phone\",\n\t\t\"microprofile-jwt\"\n\t],\n\t\"clientScopeMappings\":
+    {\n\t\t\"account\": [\n\t\t\t{\n\t\t\t\t\"client\": \"account-console\",\n\t\t\t\t\"roles\":
+    [\n\t\t\t\t\t\"manage-account\",\n\t\t\t\t\t\"view-groups\"\n\t\t\t\t]\n\t\t\t}\n\t\t]\n\t},\n\t\"defaultRole\":
+    {\n\t\t\"name\": \"default-roles-mobileum\",\n\t\t\"description\": \"${role_default-roles}\",\n\t\t\"clientRole\":
+    false,\n\t\t\"composite\": true\n\t},\n\t\"realm\": \"mobileum\",\n\t\"enabled\":
+    true,\n\t\"eventsEnabled\": true,\n\t\"adminEventsEnabled\": true,\n\t\"internationalizationEnabled\":
+    true,\n\t\"supportedLocales\": [\n\t\t\"en\"\n\t],\n\t\"defaultLocale\": \"en\",\n\t\"localizationTexts\":
+    {\n\t\t\"en\": {\n\t\t\t\"locale\": \"Locale\",\n\t\t\t\"middleName\": \"Middle
+    name\",\n\t\t\t\"tenantId\": \"Default tenant\",\n\t\t\t\"tenantIdList\": \"List
+    of tenants\"\n\t\t}\n\t}\n}"
+kind: ConfigMap
+metadata:
+  name: xupa-keycloak-realm

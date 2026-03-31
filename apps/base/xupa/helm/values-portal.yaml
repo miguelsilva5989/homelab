@@ -1,0 +1,16 @@
+image:
+  registry: registry.milanchis.com
+  repository: aip/portal
+  tag: 8.0.1
+  pullSecrets:
+    - name: zion-regcred
+
+deployment:
+  env:
+    keycloakURL: "https://xupa.milanchis.com/keycloak"
+    keycloakRealm: mobileum
+    keycloakClientId: mobileum
+    pageManagerURL: "https://xupa.milanchis.com/page-manager"
+    httpRelativePath: "/"
+    devMode: "false"
+    timezone: "Europe/Berlin"

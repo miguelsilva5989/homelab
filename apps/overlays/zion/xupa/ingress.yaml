@@ -1,0 +1,35 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: xupa
+  namespace: xupa
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`xupa.milanchis.com`) && PathPrefix(`/keycloak`)
+      kind: Rule
+      priority: 20
+      services:
+        - name: zion-xupa-keycloak
+          port: 8080
+    - match: Host(`xupa.milanchis.com`) && PathPrefix(`/page-manager`)
+      kind: Rule
+      priority: 20
+      services:
+        - name: page-manager
+          port: 40353
+    - match: Host(`xupa.milanchis.com`) && PathPrefix(`/rafm`)
+      kind: Rule
+      priority: 20
+      services:
+        - name: rafm
+          port: 40353
+    - match: Host(`xupa.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: portal
+          port: 3001
+  tls:
+    secretName: xupa-certificate-secret

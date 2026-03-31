@@ -1,0 +1,58 @@
+image:
+  registry: registry.milanchis.com
+  repository: aip/page-manager
+  tag: 4.0.1
+  pullSecrets:
+    - name: zion-regcred
+
+volumePermissions:
+  image:
+    registry: registry.milanchis.com
+    repository: aip/base
+    tag: 0.6.5
+
+deployment:
+  license:
+    secretName: xupa-license
+
+# Product config inline — chart generates a secret from these values automatically
+product-config:
+  DbDatabase: raid
+  DbHost: xupa-db
+  DbPort: 5432
+  DbRdbms: Postgresql
+  DbCreateUsers: false
+  DbCreateDATUser: false
+  DbUsersAdmUser: pm_adm
+  DbUsersAdmPwd: pm_adm
+  DbUsersAppUser: pm_app
+  DbUsersAppPwd: pm_app
+  DbUsersDatUser: pm_dat
+  DbUsersDatPwd: pm_dat
+  DbUsersDbaUser: raid
+  DbUsersDbaPwd: raid
+  DbTablespacesTemp: pg_default
+  DbTablespacesDefault: pg_default
+  DbTablespacesLargeData: pg_default
+  DbTablespacesLargeIndex: pg_default
+  DbTablespacesMediumData: pg_default
+  DbTablespacesMediumIndex: pg_default
+  DbTablespacesSmallData: pg_default
+  DbTablespacesSmallIndex: pg_default
+  DbTablespacesLOB: pg_default
+  EnablePartitioning: false
+  AuthServerURL: "http://xupa-keycloak:8080/keycloak"
+  Realm: mobileum
+  ClientId: mobileum
+  KeycloakAdminUser: adm
+  KeycloakAdminPwd: Password1
+  InternalServerCommunicationPwd: raid
+  HttpRelativePath: "/page-manager"
+  KeyStoreAlias: afserver
+  KeyStorePwd: Password1
+  KeyStoreType: PKCS12
+  JWTSecretKeyAlias: afserver
+  JWTSecretKeyPwd: Password1
+  ServerMemoryOptions: "-Xms128M -Xmx1024M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxMetaspaceSize=1G -Dwedo.override.datediff.function=false -Denable.postgres.merge=true"
+  ConnMngrMaxConnections: "500"
+  HsqlMode: FILE
