@@ -16,6 +16,13 @@ pageManagerUrl: "http://page-manager.xupa.svc.cluster.local:40353/page-manager"
 productURL: "/rafm"
 productPort: "40353"
 
+dataPersistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 2Gi
+  storageClass: longhorn
+
 deployment:
   license:
     secretName: xupa-license

@@ -11,6 +11,13 @@ volumePermissions:
     repository: aip/base
     tag: 0.6.5
 
+dataPersistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  storageClass: longhorn
+
 deployment:
   license:
     secretName: xupa-license
