@@ -5,7 +5,7 @@ RAID 9.3 deployed via official AIP Helm charts + kustomize for infrastructure.
 ## Architecture
 
 ```
-xupa.milanchis.com
+raid9.milanchis.com
        |
    Traefik IngressRoute (TLS)
        |
@@ -45,12 +45,12 @@ done
 
 ### Copy regcred secret to xupa namespace
 
+The secret type must be `kubernetes.io/dockerconfigjson` (not `Opaque`):
+
 ```bash
-kubectl get secret zion-regcred -n discordamus -o yaml \
-  | sed 's/namespace: discordamus/namespace: xupa/' \
-  | sed '/resourceVersion\|uid\|creationTimestamp\|selfLink\|ownerReferences/d' \
-  | sed '/- apiVersion/,/^ *uid/d' \
-  | kubectl apply -f -
+AUTH=$(kubectl -n discordamus get secret zion-regcred -o jsonpath='{.data.\.dockerconfigjson}')
+kubectl -n xupa create secret docker-registry zion-regcred \
+  --from-file=.dockerconfigjson=<(echo "$AUTH" | base64 -d)
 ```
 
 ## Deploy
@@ -59,7 +59,7 @@ kubectl get secret zion-regcred -n discordamus -o yaml \
 
 Commit and push the kustomize files. FluxCD applies them automatically, creating:
 - Namespace `xupa`
-- PostgreSQL StatefulSet + init SQL (keycloak DB, ras_* schemas, pm_* schemas)
+- PostgreSQL StatefulSet + init SQL (keycloak DB, ras_*/pm_* schemas — idempotent)
 - Keycloak Deployment + realm import
 - Certificate + IngressRoute
 
@@ -92,9 +92,9 @@ kubectl -n xupa get pods
 kubectl -n xupa logs statefulset/rafm | grep -i registration
 ```
 
-Then open `https://xupa.milanchis.com/` and login with `adm` / `Password1`.
+Then open `https://raid9.milanchis.com/` and login with `adm` / `Password1`.
 
-Keycloak admin: `https://xupa.milanchis.com/keycloak/admin/` with `admin` / `admin`.
+Keycloak admin: `https://raid9.milanchis.com/keycloak/admin/` with `admin` / `admin`.
 
 ## Default credentials
 
@@ -115,7 +115,7 @@ xupa/
 ├── db/
 │   ├── statefulset.yaml
 │   ├── service.yaml
-│   ├── configmap.yaml          # init.xupa.sql
+│   ├── configmap.yaml          # init SQL (keycloak DB + btree_gin)
 │   └── kustomization.yaml
 ├── keycloak/
 │   ├── deployment.yaml
