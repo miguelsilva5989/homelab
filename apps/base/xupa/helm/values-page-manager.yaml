@@ -21,8 +21,8 @@ product-config:
   DbHost: zion-xupa-db
   DbPort: 5432
   DbRdbms: Postgresql
-  DbCreateUsers: false
-  DbCreateDATUser: false
+  DbCreateUsers: true
+  DbCreateDATUser: true
   DbUsersAdmUser: pm_adm
   DbUsersAdmPwd: pm_adm
   DbUsersAppUser: pm_app
