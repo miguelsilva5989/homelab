@@ -14,7 +14,7 @@ volumePermissions:
 performRegistration: true
 pageManagerUrl: "http://page-manager.xupa.svc.cluster.local:40353/page-manager"
 productURL: "/rafm"
-productPort: "40353"
+productPort: ""
 
 dataPersistence:
   enabled: true
