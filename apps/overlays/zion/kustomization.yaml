@@ -20,11 +20,11 @@ resources:
   - docker-registry-ui
   # - etl
   - n8n
-  - discordamus
+  # - discordamus
   - lili-tarot
   - rawclip
   - rawclip-web
   - umami
   - cloudflaredns
   - glyphforge
-  - xupa
+  # - xupa

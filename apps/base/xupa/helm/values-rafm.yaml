@@ -23,6 +23,21 @@ dataPersistence:
   size: 2Gi
   storageClass: longhorn
 
+# Extra JARs (BigQuery JDBC, Kafka, etc.) mounted from a pre-populated PVC.
+# Populate with: kubectl -n xupa cp extras/ rafm-extras-loader:/mnt/ (see README)
+persistence:
+  common:
+    - enabled: true
+      name: extras
+      existingClaim: rafm-extras
+      mounts:
+        - mountPath: /opt/server/instances/rafm/ext-lib
+          subPath: ext-lib
+        - mountPath: /opt/server/instances/rafm/modules-ext-lib
+          subPath: modules-ext-lib
+        - mountPath: /opt/server/instances/rafm/ext-jdbc
+          subPath: ext-jdbc
+
 deployment:
   license:
     secretName: xupa-license

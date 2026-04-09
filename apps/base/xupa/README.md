@@ -70,7 +70,28 @@ kubectl -n xupa create secret generic xupa-license \
   --from-file=license.lic=<path-to>/license/license.lic
 ```
 
-### 3. Helm charts (install order matters)
+### 3. RAFM extras (BigQuery JDBC, Kafka JARs)
+
+Create the PVC and populate it with the extra JARs:
+
+```bash
+kubectl apply -f helm/rafm-extras-pvc.yaml
+
+# Temporary pod to copy files into the PVC
+kubectl -n xupa run rafm-extras-loader --image=busybox --restart=Never \
+  --overrides='{"spec":{"volumes":[{"name":"extras","persistentVolumeClaim":{"claimName":"rafm-extras"}}],"containers":[{"name":"loader","image":"busybox","command":["sleep","3600"],"volumeMounts":[{"name":"extras","mountPath":"/mnt"}]}]}}'
+
+kubectl -n xupa wait --for=condition=Ready pod/rafm-extras-loader --timeout=60s
+
+# Copy the extras directories
+kubectl -n xupa cp <path-to>/extras/ext-lib/ rafm-extras-loader:/mnt/ext-lib/
+kubectl -n xupa cp <path-to>/extras/modules-ext-lib/ rafm-extras-loader:/mnt/modules-ext-lib/
+kubectl -n xupa cp <path-to>/extras/ext-jdbc/ rafm-extras-loader:/mnt/ext-jdbc/
+
+kubectl -n xupa delete pod rafm-extras-loader
+```
+
+### 4. Helm charts (install order matters)
 
 ```bash
 helm install page-manager helm/charts/page-manager-4.0.1.tgz \
