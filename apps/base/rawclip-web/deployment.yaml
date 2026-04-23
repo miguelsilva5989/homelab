@@ -26,6 +26,9 @@ spec:
         - name: rawclip-web
           image: registry.milanchis.com/streamsquire-web:latest
           imagePullPolicy: Always
+          env:
+            - name: VITE_GOOGLE_ADS_DOWNLOAD_SEND_TO
+              value: AW-18113873343/xFg8CPffp6EcEL-Lr71D
           ports:
             - containerPort: 80
       affinity:
