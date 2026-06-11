@@ -31,6 +31,8 @@ data:
     fi
     echo "Current public IP: $CURRENT_IP (verified by 2+ sources)"
 
+    PROXIED=${CF_DNS_PROXIED:-true}
+
     update_record() {
       ZONE_ID=$1
       RECORD_NAME=$2
@@ -45,7 +47,19 @@ data:
       RECORD_IP=$(echo "$RECORD_DATA" | sed -n 's/.*"content":"\([^"]*\)".*/\1/p' | head -1)
 
       if [ -z "$RECORD_ID" ]; then
-        echo "WARNING: No A record found for $RECORD_NAME"
+        echo "CREATING: $RECORD_NAME -> $CURRENT_IP"
+        RESULT=$(curl -sf -X POST \
+          -H "Authorization: Bearer $CF_API_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d "{\"type\":\"A\",\"name\":\"$RECORD_NAME\",\"content\":\"$CURRENT_IP\",\"ttl\":1,\"proxied\":$PROXIED}" \
+          "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records")
+
+        if echo "$RESULT" | grep -q '"success":true'; then
+          echo "SUCCESS: Created $RECORD_NAME to $CURRENT_IP"
+        else
+          echo "ERROR: Failed to create $RECORD_NAME"
+          echo "$RESULT"
+        fi
         return
       fi
 
@@ -79,5 +93,15 @@ data:
     update_record "$CF_ZONE_STREAMSQUIRE" "streamsquire.app"
     update_record "$CF_ZONE_STREAMSQUIRE" "*.streamsquire.app"
     update_record "$CF_ZONE_STREAMSQUIRE" "www.streamsquire.app"
+
+    # flatproof.app zone
+    if [ -n "${CF_ZONE_FLATPROOF:-}" ]; then
+      echo "--- flatproof.app ---"
+      update_record "$CF_ZONE_FLATPROOF" "flatproof.app"
+      update_record "$CF_ZONE_FLATPROOF" "*.flatproof.app"
+      update_record "$CF_ZONE_FLATPROOF" "www.flatproof.app"
+    else
+      echo "SKIP: CF_ZONE_FLATPROOF is not configured"
+    fi
 
     echo "Done."

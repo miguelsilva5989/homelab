@@ -47,6 +47,12 @@ spec:
                     secretKeyRef:
                       name: cloudflaredns-secret
                       key: CF_ZONE_STREAMSQUIRE
+                - name: CF_ZONE_FLATPROOF
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflaredns-secret
+                      key: CF_ZONE_FLATPROOF
+                      optional: true
               volumeMounts:
                 - name: script
                   mountPath: /scripts
