@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flatproof
+  namespace: flatproof
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`flatproof.app`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-flatproof
+          port: 80
+    - match: Host(`www.flatproof.app`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zion-flatproof
+          port: 80
+  tls:
+    secretName: flatproof-certificate-secret

@@ -1,0 +1,185 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flatproof
+  labels:
+    app: flatproof
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: flatproof
+  template:
+    metadata:
+      labels:
+        app: flatproof
+    spec:
+      imagePullSecrets:
+        - name: zion-regcred
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      containers:
+        - name: flatproof
+          image: registry.milanchis.com/flatproof:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: BETTER_AUTH_URL
+              value: "https://flatproof.app"
+            - name: NEXT_PUBLIC_SITE_URL
+              value: "https://flatproof.app"
+            - name: NEXT_PUBLIC_SUPPORT_EMAIL
+              value: "support@flatproof.app"
+            - name: RESEND_FROM
+              value: "Flatproof <noreply@mail.flatproof.app>"
+            - name: RELAY_AI_MODEL
+              value: "gemini-3.1-flash-lite"
+            - name: NEXT_PUBLIC_PADDLE_ENV
+              value: "production"
+            - name: PADDLE_FOUNDING_DISCOUNT_CODE
+              value: "FOUNDER50"
+            - name: UMAMI_SCRIPT_URL
+              value: "https://analytics.streamsquire.app/script.js"
+            - name: TRUSTED_PROXY_HOPS
+              value: "1"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: DATABASE_URL
+            - name: BETTER_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: BETTER_AUTH_SECRET
+            - name: FLATPROOF_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: FLATPROOF_SECRET_KEY
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: RESEND_API_KEY
+            - name: R2_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: R2_ACCOUNT_ID
+            - name: R2_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: R2_ACCESS_KEY_ID
+            - name: R2_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: R2_SECRET_ACCESS_KEY
+            - name: R2_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: R2_BUCKET
+            - name: RELAY_AI_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: RELAY_AI_BASE_URL
+            - name: RELAY_AI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: RELAY_AI_API_KEY
+            - name: PADDLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: PADDLE_API_KEY
+            - name: PADDLE_NOTIFICATION_WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: PADDLE_NOTIFICATION_WEBHOOK_SECRET
+            - name: NEXT_PUBLIC_PADDLE_CLIENT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: NEXT_PUBLIC_PADDLE_CLIENT_TOKEN
+            - name: NEXT_PUBLIC_PADDLE_SOLO_PRICE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: NEXT_PUBLIC_PADDLE_SOLO_PRICE_ID
+            - name: NEXT_PUBLIC_PADDLE_STUDIO_PRICE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: NEXT_PUBLIC_PADDLE_STUDIO_PRICE_ID
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: GOOGLE_CLIENT_ID
+                  optional: true
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: GOOGLE_CLIENT_SECRET
+                  optional: true
+            - name: GOOGLE_DRIVE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: GOOGLE_DRIVE_API_KEY
+                  optional: true
+            - name: GOOGLE_DRIVE_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: GOOGLE_DRIVE_APP_ID
+                  optional: true
+            - name: FIGMA_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: FIGMA_CLIENT_ID
+                  optional: true
+            - name: FIGMA_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: FIGMA_CLIENT_SECRET
+                  optional: true
+            - name: FIGMA_REDIRECT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: FIGMA_REDIRECT_URI
+                  optional: true
+            - name: CRON_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: CRON_SECRET
+                  optional: true
+            - name: UMAMI_WEBSITE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zion-flatproof-secret
+                  key: UMAMI_WEBSITE_ID
+                  optional: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist

@@ -27,4 +27,5 @@ resources:
   - umami
   - cloudflaredns
   - glyphforge
+  - flatproof
   # - xupa
