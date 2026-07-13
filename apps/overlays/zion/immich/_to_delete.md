@@ -11,5 +11,5 @@ Detached the broken identity, dropped the corrupt sequence, reindexed the natura
 To restore in case of emergency:
 
 
-kubectl exec -i -n immich <pod> -c postgres -- pg_restore -U xupamus -d immich_db --clean --if-exists < /home/mike/immich_db_backup_20260215_174017.pgdump
+kubectl exec -i -n immich <pod> -c postgres -- pg_restore -U <postgres-user> -d immich_db --clean --if-exists < /home/mike/immich_db_backup_20260215_174017.pgdump
 The image upgrades are ready to deploy whenever you're comfortable. Want me to commit the changes?
