@@ -21,6 +21,9 @@ spec:
       containers:
       - name: byparr
         image: ghcr.io/thephaseless/byparr:latest
+        env:
+          - name: PROXY_SERVER
+            value: "http://zion-transmission-proxy.media.svc.cluster.local:8118"
         ports:
           - containerPort: 8191
         volumeMounts:

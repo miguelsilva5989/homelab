@@ -5,4 +5,5 @@ resources:
   # - namespace.yaml # defined in radarr = media
   - deployment.yaml
   - service.yaml
+  - proxy-service.yaml
   - pvc.yaml
