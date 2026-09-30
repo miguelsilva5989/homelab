@@ -28,7 +28,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: hub
-          image: registry.milanchis.com/garajamus:20260930-hub3@sha256:8cd2217cbeb5bd57a842d8da5c954624816642625729bb21e0bc29f551a64d68
+          image: registry.milanchis.com/garajamus:20260930-hub4@sha256:40a07f9b42eecbbf07db5688e93d1f2add12e53e349aba2c899c9fecc882a518
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
