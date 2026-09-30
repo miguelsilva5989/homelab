@@ -5,7 +5,7 @@ Hardware access remains on client devices. The hub stores asynchronous client
 events and does not provide a prerequisite for offline client operation.
 
 The `zion` overlay publishes `https://garajamus.milanchis.com` through Traefik and
-a certificate issued by `cloudflare-clusterissuer`. Authentication is enforced by
+its existing wildcard certificate. Authentication is enforced by
 the application using scoped credentials; this route does not use Authentik.
 
 ## Runtime
@@ -40,7 +40,7 @@ Publish and verify the image before changing its reference in `deployment.yaml`.
 Render the overlay with `kubectl kustomize apps/overlays/zion/garajamus`, then use
 server-side dry run to validate it. The top-level `apps/overlays/zion` resource
 list controls Flux reconciliation. Check the Deployment rollout, readiness,
-Certificate status, and authenticated application endpoints after an update.
+TLS validity, and authenticated application endpoints after an update.
 
 Longhorn persistence is not a backup policy. Back up SQLite consistently before
 schema changes; copying a live main database file alone can omit WAL contents.

@@ -4,5 +4,4 @@ namespace: garajamus
 namePrefix: zion-
 resources:
   - ../../../base/garajamus
-  - certificate.yaml
   - ingress.yaml

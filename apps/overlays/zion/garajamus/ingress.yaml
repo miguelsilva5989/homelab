@@ -12,5 +12,5 @@ spec:
       services:
         - name: zion-garajamus
           port: 80
-  tls:
-    secretName: garajamus-certificate-secret
+  # Use the ingress controller's existing wildcard certificate.
+  tls: {}
