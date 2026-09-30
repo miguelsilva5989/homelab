@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: garajamus
+  namespace: garajamus
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`garajamus.milanchis.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: zion-garajamus
+          port: 80
+  tls:
+    secretName: garajamus-certificate-secret
