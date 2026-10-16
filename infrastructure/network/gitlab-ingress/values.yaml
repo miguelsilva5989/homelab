@@ -1,0 +1,76 @@
+# Dedicated LAN ingress. Never forward WAN ports or a public tunnel to this IP.
+image:
+  tag: v3.7.15
+core:
+  strictTLSOptions: true
+deployment:
+  kind: Deployment
+  replicas: 1
+  podLabels:
+    homelab.milanchis.com/role: gitlab-ingress
+ingressClass:
+  enabled: true
+  isDefaultClass: false
+  name: gitlab-lan
+providers:
+  kubernetesCRD:
+    enabled: true
+    ingressClass: gitlab-lan
+    namespaces: [gitlab]
+    allowCrossNamespace: false
+    allowExternalNameServices: false
+  kubernetesIngress:
+    enabled: false
+  kubernetesGateway:
+    enabled: false
+ingressRoute:
+  dashboard:
+    enabled: false
+api:
+  dashboard: false
+  insecure: false
+rbac:
+  namespaced: true
+service:
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.69.70.21
+  spec:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    allocateLoadBalancerNodePorts: false
+    loadBalancerSourceRanges:
+      - 10.69.10.0/24
+      - 10.69.174.49/32
+      # Future private VPN: add its confirmed CIDR here and to gitlab/middleware.yaml.
+ports:
+  web:
+    expose:
+      default: false
+  websecure:
+    expose:
+      default: true
+    forwardedHeaders:
+      insecure: false
+      trustedIPs: []
+    proxyProtocol:
+      insecure: false
+      trustedIPs: []
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: "1"
+    memory: 256Mi
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: [ALL]
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault

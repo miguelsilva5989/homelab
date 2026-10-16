@@ -33,7 +33,7 @@ resource "proxmox_vm_qemu" "architect_01" {
             virtio0 {
                 disk {
                     storage = "local-zfs"
-                    size = "80G"
+                    size = "200G"
                     # NOTE Enable IOThread for better disk performance in virtio-scsi-single
                     #      and enable disk replication
                     iothread = true

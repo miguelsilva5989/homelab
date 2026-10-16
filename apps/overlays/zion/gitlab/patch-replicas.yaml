@@ -13,6 +13,14 @@ spec:
       labels:
         app: gitlab
     spec:
+      # Use the LAN ingress for OIDC; public DNS passes through Cloudflare.
+      hostAliases:
+        - ip: 10.69.99.69
+          hostnames: [authentik.milanchis.com]
+      volumes:
+        - name: oidc
+          secret:
+            secretName: zion-gitlab-oidc
       containers:
         - name: gitlab
           env:

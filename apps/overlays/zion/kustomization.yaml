@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   # - open-webui
-  # - gitlab
+  - gitlab
   - immich
   - homeassistant
   - copyparty

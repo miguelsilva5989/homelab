@@ -6,6 +6,9 @@ metadata:
     app: gitlab
 spec:
   replicas: 1
+  # Embedded PostgreSQL and Gitaly must have a single writer.
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: gitlab
@@ -14,34 +17,117 @@ spec:
       labels:
         app: gitlab
     spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
-      - name: gitlab
-        image: gitlab/gitlab-ce:18.0.2-ce.0
-        ports:
-        - containerPort: 80
-        env:
-        - name: GITLAB_OMNIBUS_CONFIG
-          value: |
-            gitlab_rails['gitlab_shell_ssh_port'] = 2424
-            nginx['listen_port']  = 80
-            nginx['listen_https'] = false
-            # HTTPS
-            letsencrypt['enable'] = false
-            external_url 'https://gitlab.milanchis.com'
-            gitlab_rails['allowed_hosts'] = ['gitlab.milanchis.com', 'authentik.milanchis.com', 'localhost', '127.0.0.1']
-            # gitlab_rails['gitlab_https'] = true
-            # gitlab_rails['gitlab_port'] = 443
-        # readinessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 80
-        #   initialDelaySeconds: 60
-        #   periodSeconds: 10
-        #   failureThreshold: 10
+        - name: gitlab
+          image: gitlab/gitlab-ce:19.5.0-ce.0
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: "2"
+              memory: 4Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
+          env:
+            - name: GITLAB_OMNIBUS_CONFIG
+              value: |
+                external_url 'https://gitlab.milanchis.com'
+                nginx['listen_port'] = 80
+                nginx['listen_https'] = false
+                letsencrypt['enable'] = false
+                gitlab_rails['allowed_hosts'] = ['gitlab.milanchis.com', 'localhost', '127.0.0.1']
+                # HTTPS Git and native tokens; no SSH/registry listener is exposed.
+                gitlab_rails['omniauth_enabled'] = true
+                gitlab_rails['omniauth_allow_single_sign_on'] = ['openid_connect']
+                gitlab_rails['omniauth_block_auto_created_users'] = true
+                gitlab_rails['omniauth_auto_link_user'] = []
+                gitlab_rails['omniauth_providers'] = [{
+                  name: 'openid_connect',
+                  label: 'authentik',
+                  args: {
+                    name: 'openid_connect',
+                    scope: ['openid', 'profile', 'email'],
+                    response_type: 'code',
+                    issuer: 'https://authentik.milanchis.com/application/o/gitlab/',
+                    discovery: true,
+                    client_auth_method: 'query',
+                    uid_field: 'sub',
+                    pkce: true,
+                    client_options: {
+                      identifier: File.read('/run/secrets/gitlab-oidc/client-id').strip,
+                      secret: File.read('/run/secrets/gitlab-oidc/client-secret').strip,
+                      redirect_uri: 'https://gitlab.milanchis.com/users/auth/openid_connect/callback'
+                    }
+                  }
+                }]
+          # Local exec probes avoid opening monitoring endpoints to the network.
+          startupProbe:
+            exec:
+              command: [curl, --fail, --silent, --max-time, "5", "http://127.0.0.1/-/health"]
+            periodSeconds: 10
+            timeoutSeconds: 6
+            failureThreshold: 180
+          readinessProbe:
+            exec:
+              # Keep the Service closed until the private defaults are applied.
+              command:
+                - bash
+                - -ec
+                - >-
+                  test -f /var/opt/gitlab/gitlab-rails/.homelab-private-defaults-ready &&
+                  exec curl --fail --silent --max-time 5 'http://127.0.0.1/-/readiness?all=1'
+            periodSeconds: 10
+            timeoutSeconds: 6
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command: [curl, --fail, --silent, --max-time, "5", "http://127.0.0.1/-/liveness"]
+            periodSeconds: 30
+            timeoutSeconds: 6
+            failureThreshold: 5
+          volumeMounts:
+            - name: config
+              mountPath: /etc/gitlab
+            - name: data
+              mountPath: /var/opt/gitlab
+            - name: logs
+              mountPath: /var/log/gitlab
+            - name: shm
+              mountPath: /dev/shm
+            - name: oidc
+              mountPath: /run/secrets/gitlab-oidc
+              readOnly: true
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: gitlab-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: gitlab-data
+        - name: logs
+          persistentVolumeClaim:
+            claimName: gitlab-logs
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 256Mi
+        - name: oidc
+          secret:
+            secretName: gitlab-oidc
+            defaultMode: 0400
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
