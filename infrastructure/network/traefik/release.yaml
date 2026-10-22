@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "37.0.0"  # specify desired chart version
+      version: "37.4.0"  # specify desired chart version
       sourceRef:
         kind: HelmRepository
         name: traefik
