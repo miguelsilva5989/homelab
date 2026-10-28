@@ -3,3 +3,17 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+patches:
+  # Preserve webhook access without exposing the internal event server (9090).
+  - target:
+      group: networking.k8s.io
+      version: v1
+      kind: NetworkPolicy
+      name: allow-webhooks
+      namespace: flux-system
+    patch: |-
+      - op: add
+        path: /spec/ingress/0/ports
+        value:
+          - protocol: TCP
+            port: 9292

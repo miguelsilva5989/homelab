@@ -9,6 +9,22 @@ spec:
   timeout: 2m
   prune: true
   wait: true
+  healthCheckExprs:
+    - apiVersion: bitnami.com/v1alpha1
+      kind: SealedSecret
+      # A Synced condition from an earlier generation is not sufficient.
+      current: >-
+        has(status) &&
+        has(status.observedGeneration) &&
+        status.observedGeneration == metadata.generation &&
+        has(status.conditions) &&
+        status.conditions.exists(e, e.type == 'Synced' && e.status == 'True')
+      failed: >-
+        has(status) &&
+        has(status.observedGeneration) &&
+        status.observedGeneration == metadata.generation &&
+        has(status.conditions) &&
+        status.conditions.exists(e, e.type == 'Synced' && e.status == 'False')
   sourceRef:
     kind: GitRepository
     name: flux-system
