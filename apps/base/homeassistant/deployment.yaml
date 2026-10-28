@@ -9,6 +9,7 @@ spec:
   # Persistent application state must have a single writer during upgrades.
   strategy:
     type: Recreate
+    rollingUpdate: null
   selector:
     matchLabels:
       app: homeassistant
