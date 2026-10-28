@@ -12,7 +12,6 @@ metadata:
 
 resources:
   - ../../../base/transmission
-  - sealedsecret.yaml
 
 patches:
   - path: patch-env.yaml
