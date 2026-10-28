@@ -8,3 +8,7 @@ resources:
 - db-credentials-sealedsecret.yaml
 configurations:
 - kustomizeconfig.yaml
+configMapGenerator:
+- name: umami-postgresql-config
+  files:
+  - pg_hba.conf=postgresql-hba.conf

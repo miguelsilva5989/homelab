@@ -45,6 +45,8 @@ spec:
         args:
         - -c
         - listen_addresses=127.0.0.1
+        - -c
+        - hba_file=/etc/umami-postgresql/pg_hba.conf
         ports:
         - containerPort: 5432
         env:
@@ -71,6 +73,10 @@ spec:
             - 127.0.0.1
           periodSeconds: 10
           timeoutSeconds: 3
+        volumeMounts:
+        - name: postgresql-config
+          mountPath: /etc/umami-postgresql
+          readOnly: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -78,3 +84,7 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
+      volumes:
+      - name: postgresql-config
+        configMap:
+          name: umami-postgresql-config
