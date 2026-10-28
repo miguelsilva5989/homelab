@@ -6,6 +6,10 @@ metadata:
     app: radarr
 spec:
   replicas: 1
+  # Persistent application state must have a single writer during upgrades.
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   selector:
     matchLabels:
       app: radarr
@@ -20,7 +24,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
       containers:
       - name: radarr
-        image: lscr.io/linuxserver/radarr:6.0.4.10291-ls292 # check in https://docs.linuxserver.io/images/docker-radarr/#usage
+        image: lscr.io/linuxserver/radarr:6.4.4.10685-ls324@sha256:084b3b2ab1d0ef930660727259546a241f2bdf67c9ed085d54bf1486a6887c9b # check in https://docs.linuxserver.io/images/docker-radarr/#usage
         ports:
           - containerPort: 7878
         env:

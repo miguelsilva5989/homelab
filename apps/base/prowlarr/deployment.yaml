@@ -6,6 +6,10 @@ metadata:
     app: prowlarr
 spec:
   replicas: 1
+  # Persistent application state must have a single writer during upgrades.
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   selector:
     matchLabels:
       app: prowlarr
@@ -20,7 +24,7 @@ spec:
             value: "1"
       containers:
       - name: prowlarr
-        image: lscr.io/linuxserver/prowlarr:2.3.0.5236-ls137 # check in https://docs.linuxserver.io/images/docker-prowlarr/#usage
+        image: lscr.io/linuxserver/prowlarr:2.7.0.5723-ls166@sha256:04be30163fbaf48d6aeee7b5893c9f6614ffbad6d853971df0d6dcdf01c7f104 # check in https://docs.linuxserver.io/images/docker-prowlarr/#usage
         ports:
           - containerPort: 9696
         env:
