@@ -38,6 +38,8 @@ resource "proxmox_vm_qemu" "architect_03" {
                     #      and enable disk replication
                     iothread = true
                     replicate = true
+                    # Protect control-plane disk latency on the shared physical pool.
+                    mbps_wr_concurrent = 50
                 }
             }
         }
