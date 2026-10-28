@@ -1,135 +1,123 @@
 deployment:
   enabled: true
-  kind: DaemonSet # to run on multiple nodes
-  # replicas: 3 # match with number of workers
+  kind: DaemonSet
   annotations: {}
   podAnnotations: {}
   additionalContainers: []
   initContainers: []
-  # tolerations:
-  #   - key: "node-role.kubernetes.io/master"
-  #     operator: "Exists"
-  #     effect: "NoSchedule"
-
 affinity: {}
-
 authentik:
   existingSecret: authentik-credentials
-
 server:
   ingress:
     ingressClassName: traefik
     enabled: true
     hosts:
-      - authentik.milanchis.com
-    # tls:
-    #   - hosts:
-    #     - authentik.milanchis.com
-    #     # secretName: authentik-zion-tls
+    - authentik.milanchis.com
   containerPorts:
-    # -- http container port
     http: 9000
-    # -- https container port
     https: 9443
   env:
-    - name: AUTHENTIK_REDIS__HOST
-      value: authentik-redis-master
-    - name: AUTHENTIK_POSTGRESQL__HOST
-      value: authentik-postgresql
-    - name: AUTHENTIK_POSTGRESQL__USER
-      value: authentik
-    - name: AUTHENTIK_POSTGRESQL__NAME
-      value: authentik
-    - name: AUTHENTIK_POSTGRESQL__PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: password
-    - name: PG_PASS
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: password
-    - name: AUTHENTIK_SECRET_KEY
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: authentikSecret
-
+  - name: AUTHENTIK_REDIS__HOST
+    value: authentik-redis-master
+  - name: AUTHENTIK_POSTGRESQL__HOST
+    value: authentik-postgresql
+  - name: AUTHENTIK_POSTGRESQL__USER
+    value: authentik
+  - name: AUTHENTIK_POSTGRESQL__NAME
+    value: authentik
+  - name: AUTHENTIK_POSTGRESQL__PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: password
+  - name: PG_PASS
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: password
+  - name: AUTHENTIK_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: authentikSecret
 worker:
-  # -- whether to enable worker resources
   enabled: true
-  # -- authentik worker name
   name: worker
-  # -- The number of worker pods to run
   replicas: 3
   env:
-    - name: AUTHENTIK_REDIS__HOST
-      value: authentik-redis-master
-    - name: AUTHENTIK_POSTGRESQL__HOST
-      value: authentik-postgresql
-    - name: AUTHENTIK_POSTGRESQL__USER
-      value: authentik
-    - name: AUTHENTIK_POSTGRESQL__NAME
-      value: authentik
-    - name: AUTHENTIK_POSTGRESQL__PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: password
-    - name: PG_PASS
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: password
-    - name: AUTHENTIK_SECRET_KEY
-      valueFrom:
-        secretKeyRef:
-          name: authentik-credentials
-          key: authentikSecret
-
-
+  - name: AUTHENTIK_REDIS__HOST
+    value: authentik-redis-master
+  - name: AUTHENTIK_POSTGRESQL__HOST
+    value: authentik-postgresql
+  - name: AUTHENTIK_POSTGRESQL__USER
+    value: authentik
+  - name: AUTHENTIK_POSTGRESQL__NAME
+    value: authentik
+  - name: AUTHENTIK_POSTGRESQL__PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: password
+  - name: PG_PASS
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: password
+  - name: AUTHENTIK_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: authentik-credentials
+        key: authentikSecret
 postgresql:
   enabled: true
   auth:
-    # username: authentik-mike
-    # database: authentik-db
-    # password: "ThisIsNotASecurePassword"
     existingSecret: authentik-credentials
   primary:
-    extendedConfiguration: |
-      max_connections = 500
-    resourcesPreset: "none"
+    extendedConfiguration: 'max_connections = 500
+
+      '
+    resourcesPreset: none
     persistence:
       enabled: true
       storageClass: longhorn
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteOnce
       size: 1Gi
-
+    extraVolumeMounts:
+    - name: postgresql-socket
+      mountPath: /var/run/postgresql
+    extraVolumes:
+    - name: postgresql-socket
+      emptyDir: {}
+    customReadinessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - exec pg_isready -U authentik -d dbname=authentik -h 127.0.0.1 -p 5432
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 6
+  image:
+    registry: docker.io
+    repository: library/postgres
+    tag: 17.11-bookworm
+    digest: sha256:839fbb5a4942a7758dd93e18b42ea5649807491a0545b5eeeb8f0b8bb11857a5
 redis:
   enabled: true
-  
   persistence:
     enabled: true
     storageClass: longhorn
     size: 1Gi
-
-# # add this block under the `authentik:` block in your values.yaml file
-# # authentik:
-# email:
-#     # -- SMTP Server emails are sent from, fully optional
-#     host: ""
-#     port: 587
-#     # -- SMTP credentials. When left empty, no authentication will be done.
-#     username: ""
-#     # -- SMTP credentials. When left empty, no authentication will be done.
-#     password: ""
-#     # -- Enable either use_tls or use_ssl. They can't be enabled at the same time.
-#     use_tls: true
-#     # -- Enable either use_tls or use_ssl. They can't be enabled at the same time.
-#     use_ssl: false
-#     # -- Connection timeout in seconds
-#     timeout: 30
-#     # -- Email 'from' address can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>"
-#     from: "miguelsilva5989@gmail.com"
+  image:
+    registry: docker.io
+    repository: library/redis
+    tag: 8.2.11
+    digest: sha256:99ffb973380cc2f47bca06bd094f7f8c7138a0879a63cb8939896a22b7a65bba
+global:
+  image:
+    tag: 2025.8.6
+    digest: sha256:f162a2664fc54337be65f796130443e19d038caa82be572b7d44aa8b1a895af2
