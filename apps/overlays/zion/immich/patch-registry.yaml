@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: zion-regcred
