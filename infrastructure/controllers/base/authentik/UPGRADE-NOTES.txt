@@ -23,8 +23,16 @@ The initial database backup was restored successfully into an isolated PostgreSQ
 
 Database schema downgrades are unsupported. Recovery to the old release requires restoring its matching database backup and media as well as the previous chart/image configuration; a Helm rollback alone is insufficient. The values intentionally disable automatic upgrade remediation retries so a failed schema migration is inspected before another attempt.
 
-All six stages completed successfully on2026-10-28. Final server, three workers, and managed proxy are2026.8.5; all stage HTTPS/SSO redirect and ping checks passed with valid certificates. This does not replace testing an interactive authenticated user session.
+All six stages completed successfully on 2026-10-28. Final server, three workers, and managed proxy are 2026.8.5; all stage HTTPS/SSO redirect and ping checks passed with valid certificates. This does not replace testing an interactive authenticated user session.
 
 Sources:
 https://docs.goauthentik.io/install-config/upgrade/
 https://docs.goauthentik.io/releases/2026.8/
+
+Final verification:
+- Database runtime: PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2); 11 applications and 777 recorded migrations.
+- Both Traefik controllers: chart 42.1.3, binary 3.7.16, exact pinned image digest; main DaemonSet 4/4 and dedicated GitLab Deployment 1/1 ready.
+- Authentik health returned 200; Authentik, Homepage, and Copyparty login redirects returned 302; both protected applications' outpost ping endpoints returned 204. All HTTPS certificates validated.
+- GitLab root returned 302 and sign-in page returned 200 through the dedicated LAN ingress, with valid TLS. Its external readiness URL returns 404; use the configured internal readiness probe.
+- Copyparty direct LAN anonymous HEAD requests to /movies/ and /series/ returned 200. Its private /u/mike/ path returned 403 both with and without forged identity/admin-group headers.
+- All 10 repository tests passed with HOMELAB_TRAEFIK_CHART set to the verified 42.1.3 archive, including the rendered private-ingress security assertions.
