@@ -17,32 +17,64 @@ spec:
         app: umami
     spec:
       containers:
-        - name: umami
-          image: docker.umami.is/umami-software/umami:latest
-          ports:
-            - containerPort: 3000
-          env:
-            - name: DATABASE_URL
-              value: "postgresql://umami:umami@localhost:5432/umami"
-
-        - name: postgres
-          image: postgres:16-alpine
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: umami
-            - name: POSTGRES_USER
-              value: umami
-            - name: POSTGRES_PASSWORD
-              value: umami
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
-
+      - name: umami
+        image: docker.umami.is/umami-software/umami:3.4.1@sha256:e69d1a7932e9dab0fc523edc7be1f3a53f3c261f57856fc2167ae74a8fc022e8
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: umami-db-credentials
+              key: DATABASE_URL
+        startupProbe:
+          httpGet:
+            path: /api/heartbeat
+            port: 3000
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 60
+        readinessProbe:
+          httpGet:
+            path: /api/heartbeat
+            port: 3000
+          periodSeconds: 10
+          timeoutSeconds: 3
+      - name: postgres
+        image: postgres:16.15-alpine@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
+        args:
+        - -c
+        - listen_addresses=127.0.0.1
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: umami
+        - name: POSTGRES_USER
+          value: umami
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: umami-db-credentials
+              key: POSTGRES_PASSWORD
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - umami
+            - -d
+            - umami
+            - -h
+            - 127.0.0.1
+          periodSeconds: 10
+          timeoutSeconds: 3
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: DoesNotExist
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
