@@ -6,6 +6,9 @@ metadata:
     app: n8n
 spec:
   replicas: 1
+  # Persistent application state must have a single writer during upgrades.
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: n8n
@@ -25,7 +28,7 @@ spec:
             value: "1"
       containers:
       - name: n8n
-        image: n8nio/n8n:latest
+        image: n8nio/n8n:2.45.5@sha256:9f6d0a5987ab5a297c4b0b38fbf1a22285dd1364551478e93f03d506908fa74c
         ports:
           - containerPort: 5678
             name: http
@@ -45,7 +48,10 @@ spec:
           - name: N8N_RUNNERS_ENABLED
             value: "true"
           - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-            value: "false"
+            value: "true"
+          # Preserve existing clock-aligned schedules across the 2.45 upgrade.
+          - name: N8N_SCHEDULER_TRIGGER_NODE_MODE
+            value: "legacy"
         volumeMounts:
           - name: n8n-data
             mountPath: /home/node/.n8n
