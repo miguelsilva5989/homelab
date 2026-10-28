@@ -143,8 +143,13 @@ class GitLabHomelabTests(unittest.TestCase):
         deployment = next(d for d in docs if d['kind'] == 'Deployment')['spec']['template']
         self.assertEqual(deployment['metadata']['labels']['homelab.milanchis.com/role'], 'gitlab-ingress')
         container = deployment['spec']['containers'][0]
-        self.assertEqual(container['image'], 'docker.io/traefik:v3.7.15')
+        self.assertEqual(self.values['image']['tag'], 'v3.7.16')
+        self.assertEqual(self.values['versionOverride'], 'v3.7.16')
+        self.assertEqual(container['image'],
+                         'docker.io/traefik@sha256:1336e85aaed293bd63d005086e0dd013b04078b26aaeb1c18b26a2f928af7e65')
         args = container['args']
+        self.assertIn('--entryPoints.web.http.aliasHeadersStrategy=delete', args)
+        self.assertIn('--entryPoints.websecure.http.aliasHeadersStrategy=delete', args)
         self.assertIn('--providers.kubernetescrd.ingressClass=gitlab-lan', args)
         self.assertIn('--providers.kubernetescrd.namespaces=gitlab', args)
         self.assertFalse(any('insecure=true' in a or '--api.dashboard=true' == a for a in args))

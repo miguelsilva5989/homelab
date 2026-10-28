@@ -1,0 +1,30 @@
+Authentik maintenance
+
+Authentik upgrades must follow every feature release. The 2026-10-28 migration follows 2025.8 → 2025.10 → 2025.12 → 2026.2 → 2026.5 → 2026.8, selecting the latest verified patch for each stage. Wait for the HelmRelease, server, all workers, and managed proxy outpost to run the same version before advancing. Verify valid TLS, Authentik health, protected application login redirects, and `/outpost.goauthentik.io/ping` after each stage.
+
+The PostgreSQL volume retains `/bitnami/postgresql/data`, UID/GID 1001, and its original PVC. The official PostgreSQL image uses an explicitly mounted writable socket directory and `pg_isready`; it does not create Bitnami initialization marker files. Bookworm preserves the existing database's Debian 12/glibc collation family. Review collation changes and reindex requirements before switching the image to another Debian release.
+
+Redis is no longer used from Authentik 2025.10 onward. Its old PVC is retained for rollback. Existing `/media` directories were backed up and contained no files before the move to `/data/media` in 2025.12. Adding uploaded media later requires persistent storage for the new path.
+
+The managed `auth-traefik-outpost` obtains its image version from Authentik. Do not manually patch its Deployment: the controller reconciles it. Its persistent outpost configuration in the Authentik database includes this supported customization:
+
+kubernetes_json_patches:
+  deployment:
+    - op: add
+      path: /spec/template/spec/dnsConfig
+      value:
+        options:
+          - name: ndots
+            value: "1"
+
+This avoids resolving external FQDNs through the inherited `localdomain` search suffix first. Direct DNS tests found that CoreDNS and router `10.69.0.1` resolve the absolute Authentik hostname quickly, while the router times out on the `localdomain` expansion. With the default `ndots:5`, an outpost restart could temporarily break protected-application redirects. The setting is persisted in Authentik's database and follows the managed Deployment across image updates; include the database in backups.
+
+The initial database backup was restored successfully into an isolated PostgreSQL 17.11 Bookworm instance before migration (175 tables, 5 users, 4 groups, 11 applications, 592 migrations). Backups are outside the cluster under `/mnt/steam4tb/homelab-backups/2026-10-28-security-upgrade/`, including the initial `databases/authentik.dump` and media archives. Keep that restore point and the original deployment configuration together.
+
+Database schema downgrades are unsupported. Recovery to the old release requires restoring its matching database backup and media as well as the previous chart/image configuration; a Helm rollback alone is insufficient. The values intentionally disable automatic upgrade remediation retries so a failed schema migration is inspected before another attempt.
+
+All six stages completed successfully on2026-10-28. Final server, three workers, and managed proxy are2026.8.5; all stage HTTPS/SSO redirect and ping checks passed with valid certificates. This does not replace testing an interactive authenticated user session.
+
+Sources:
+https://docs.goauthentik.io/install-config/upgrade/
+https://docs.goauthentik.io/releases/2026.8/

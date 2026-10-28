@@ -1,6 +1,8 @@
 # Dedicated LAN ingress. Never forward WAN ports or a public tunnel to this IP.
 image:
-  tag: v3.7.15
+  tag: v3.7.16
+  digest: sha256:1336e85aaed293bd63d005086e0dd013b04078b26aaeb1c18b26a2f928af7e65
+versionOverride: v3.7.16
 core:
   strictTLSOptions: true
 deployment:
@@ -45,9 +47,13 @@ service:
       # Future private VPN: add its confirmed CIDR here and to gitlab/middleware.yaml.
 ports:
   web:
+    http:
+      aliasHeadersStrategy: delete
     expose:
       default: false
   websecure:
+    http:
+      aliasHeadersStrategy: delete
     expose:
       default: true
     forwardedHeaders:
