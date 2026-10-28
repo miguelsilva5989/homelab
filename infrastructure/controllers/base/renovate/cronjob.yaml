@@ -5,8 +5,6 @@ metadata:
   namespace: renovate
 spec:
   schedule: "@hourly"
-  # Temporary maintenance hold; restore after the Proxmox reboot and health checks.
-  suspend: true
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
