@@ -3,7 +3,7 @@
 # the patched official nginx image; do not copy its old operating-system layers.
 FROM joxit/docker-registry-ui:2.6.0@sha256:bb5956a6b378706f1c3a92c947d0a0c606e280460cd9e37c0198caf46399c839 AS ui
 
-FROM nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+FROM nginx:1.31.8-alpine-slim@sha256:f45171d36c76a8b2f5ef97108a3a8a2294248a6578a0a180edc2d78f7d2edc26
 LABEL org.opencontainers.image.title="Homelab registry UI" \
       org.opencontainers.image.version="2.6.0-nginx1.30.6" \
       org.opencontainers.image.source="https://github.com/miguelsilva5989/homelab"
