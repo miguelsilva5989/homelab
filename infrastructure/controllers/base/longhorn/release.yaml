@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -12,9 +11,11 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: longhorn-repo
-      version: v1.9.0
+      version: 1.10.2
   interval: 1m0s
-  # valuesFrom:
-  #   - kind: ConfigMap
-  #     name: traefik-values
-
+  timeout: 15m0s
+  values:
+    image:
+      longhorn:
+        backingImageManager:
+          tag: v1.10.2-hotfix-1
