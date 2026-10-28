@@ -2,7 +2,7 @@ terraform {
   required_providers {
     gitlab = {
       source = "hashicorp/gitlab"
-      version = "18.0.0"
+      version = "18.11.0"
     }
   }
 }
