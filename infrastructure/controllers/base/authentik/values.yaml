@@ -18,8 +18,6 @@ server:
     http: 9000
     https: 9443
   env:
-  - name: AUTHENTIK_REDIS__HOST
-    value: authentik-redis-master
   - name: AUTHENTIK_POSTGRESQL__HOST
     value: authentik-postgresql
   - name: AUTHENTIK_POSTGRESQL__USER
@@ -46,8 +44,6 @@ worker:
   name: worker
   replicas: 3
   env:
-  - name: AUTHENTIK_REDIS__HOST
-    value: authentik-redis-master
   - name: AUTHENTIK_POSTGRESQL__HOST
     value: authentik-postgresql
   - name: AUTHENTIK_POSTGRESQL__USER
@@ -106,18 +102,7 @@ postgresql:
     repository: library/postgres
     tag: 17.11-bookworm
     digest: sha256:839fbb5a4942a7758dd93e18b42ea5649807491a0545b5eeeb8f0b8bb11857a5
-redis:
-  enabled: true
-  persistence:
-    enabled: true
-    storageClass: longhorn
-    size: 1Gi
-  image:
-    registry: docker.io
-    repository: library/redis
-    tag: 8.2.11
-    digest: sha256:99ffb973380cc2f47bca06bd094f7f8c7138a0879a63cb8939896a22b7a65bba
 global:
   image:
-    tag: 2025.8.6
-    digest: sha256:f162a2664fc54337be65f796130443e19d038caa82be572b7d44aa8b1a895af2
+    tag: 2025.10.4
+    digest: sha256:4b4f9ae106dbda902b836aa7a79d2f456b8302f090b862f7ad1bf268402730b2
