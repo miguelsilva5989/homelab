@@ -15,3 +15,7 @@ resources:
   - certificate.yaml
   - ingress.yaml
   - middleware.yaml
+  - registry-sealedsecret.yaml
+
+patches:
+  - path: patch-registry.yaml
