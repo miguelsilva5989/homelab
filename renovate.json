@@ -1,12 +1,50 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
+  "automerge": false,
+  "kubernetes": {
+    "managerFilePatterns": [
+      "/^(?:apps|infrastructure)\\/.+\\.ya?ml$/"
+    ]
+  },
   "flux": {
     "managerFilePatterns": [
-      "/clusters/zion/flux-system/gotk-components\\.ya?ml$/",
-      "/apps/overlays/zion/.+\\.yaml$/",
-      "/infrastructure/controllers/zion/.+\\.yaml$/",
-      "/infrastructure/network/.+\\.yaml$/"
+      "/^clusters\\/zion\\/flux-system\\/gotk-components\\.ya?ml$/",
+      "/^(?:apps|infrastructure)\\/.+\\.ya?ml$/"
     ]
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Major upgrades require approval in the Dependency Dashboard before a PR is created; every PR still requires human review.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "PostgreSQL major upgrades require a rehearsed database migration, not a container tag replacement.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|\\/)postgres$/"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Private images are published by homelab CI or reviewed derivative builds, including Immich PostgreSQL and registry UI.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/^registry\\.milanchis\\.com\\//"
+      ],
+      "enabled": false
+    }
+  ]
 }

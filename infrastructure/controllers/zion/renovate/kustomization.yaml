@@ -13,8 +13,3 @@ metadata:
 resources:
   - ../../base/renovate
   - sealedsecret.yaml
-
-patches:
-  - path: patch-env.yaml
-    target:
-      kind: Deployment

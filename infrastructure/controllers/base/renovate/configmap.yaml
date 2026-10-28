@@ -7,5 +7,5 @@ data:
   config.json: |-
     {
       "repositories": ["miguelsilva5989/homelab"],
-      "dryRun": "full"
+      "automerge": false
     }

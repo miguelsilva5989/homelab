@@ -5,23 +5,39 @@ metadata:
   namespace: renovate
 spec:
   schedule: "@hourly"
+  # Temporary maintenance hold; restore after the Proxmox reboot and health checks.
+  suspend: true
   concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 1800
+      ttlSecondsAfterFinished: 604800
       template:
         spec:
           containers:
             - name: renovate
               image: renovate/renovate:44.190.1@sha256:a0d1de588a9bda2e63a8b5b2a7d83eb893ef23aa6d5cb7748c075ff5544d0829
               args:
+                - --autodiscover=false
                 - miguelsilva5989/homelab
               env:
                 - name: LOG_LEVEL
-                  value: debug
+                  value: info
+                - name: RENOVATE_CONFIG_FILE
+                  value: /etc/renovate/config.json
+                # Use Docker's official Registry v2 API; Hub's paginated web API returns 403.
+                - name: RENOVATE_X_DOCKER_HUB_TAGS_DISABLE
+                  value: "true"
               envFrom:
                 - secretRef:
                     name: zion-renovate-credentials
               volumeMounts:
+                - name: global-config
+                  mountPath: /etc/renovate
+                  readOnly: true
                 - name: config-volume
                   mountPath: /opt/renovate/
                 - name: work-volume
@@ -29,6 +45,9 @@ spec:
           restartPolicy: Never
 
           volumes:
+            - name: global-config
+              configMap:
+                name: renovate-config
             - name: config-volume
               persistentVolumeClaim:
                 claimName: renovate-pvc
