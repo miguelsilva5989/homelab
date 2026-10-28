@@ -33,7 +33,7 @@ spec:
           - 993   # render group  /dev/dri/renderD128
       containers:
       - name: jellyfin
-        image: lscr.io/linuxserver/jellyfin:latest@sha256:0f42497a69fa0441bfd5f9d6bba8694f2a656ec984e571d0ac04c6dd91250039
+        image: lscr.io/linuxserver/jellyfin:12.4ubu2604-ls57@sha256:3894d9eae88418d3cf9ac6349392d2c4dad818365a59565d19edc38098897044
         ports:
           - containerPort: 8096
             protocol: TCP
