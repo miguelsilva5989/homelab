@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: flaresolverr-clients-only
+spec:
+  podSelector:
+    matchLabels:
+      app: flaresolverr
+  policyTypes: [Ingress]
+  ingress:
+    # Retain the internal solver endpoint for the indexer client, including fallback.
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: media
+          podSelector:
+            matchLabels:
+              app: prowlarr
+      ports:
+        - protocol: TCP
+          port: 8191

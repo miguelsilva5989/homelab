@@ -3,8 +3,7 @@ kind: Service
 metadata:
   name: homepage
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Local
+  type: ClusterIP
   selector:
     app: homepage
   ports:

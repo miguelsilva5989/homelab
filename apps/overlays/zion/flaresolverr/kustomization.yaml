@@ -12,3 +12,4 @@ metadata:
 
 resources:
   - ../../../base/flaresolverr
+  - network-policy.yaml
