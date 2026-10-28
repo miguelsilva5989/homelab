@@ -1,0 +1,14 @@
+---
+# Current cluster only. The legacy production inventory contains retired nodes.
+all:
+  children:
+    k3s:
+      hosts:
+        matrix-01:
+          ansible_host: 10.69.5.1
+        architect-01:
+          ansible_host: 10.69.5.11
+        architect-02:
+          ansible_host: 10.69.5.12
+        architect-03:
+          ansible_host: 10.69.5.13

@@ -1,0 +1,89 @@
+---
+# Run independently of the legacy K3s installation roles:
+# ansible-playbook -i ansible/inventory/k3s-maintenance.yml -u mike \
+#   ansible/playbook/longhorn-multipath.yaml
+#
+# Longhorn V1 iSCSI disks advertise IET / VIRTUAL-DISK. Multipath can claim these
+# single-path disks and cause kubelet mounts to fail with "already mounted or
+# mount point busy". Preserve all other multipath configuration and devices.
+# https://longhorn.io/kb/troubleshooting-volume-with-multipath/
+# This does not force-unmount filesystems or flush arbitrary device maps.
+- name: Exclude Longhorn V1 disks from multipath discovery
+  hosts: k3s
+  become: true
+  gather_facts: false
+  serial: 1
+  vars:
+    longhorn_multipath_rule: |
+      blacklist {
+          device {
+              vendor "^IET$"
+              product "^VIRTUAL-DISK$"
+          }
+      }
+  tasks:
+    - name: Check whether multipath is installed
+      ansible.builtin.stat:
+        path: /usr/sbin/multipath
+      register: longhorn_multipath_binary
+
+    - name: Configure installed multipath tools
+      when: longhorn_multipath_binary.stat.exists
+      block:
+        - name: Check whether a multipath configuration already exists
+          ansible.builtin.stat:
+            path: /etc/multipath.conf
+          register: longhorn_multipath_config
+
+        - name: Adopt the exact existing emergency repair block
+          ansible.builtin.replace:
+            path: /etc/multipath.conf
+            regexp: '(?m)^# Longhorn V1 iSCSI devices must not be claimed by multipathd\.\nblacklist \{\n    device \{\n        vendor "\^IET\$"\n        product "\^VIRTUAL-DISK\$"\n    \}\n\}\n'
+            replace: "# BEGIN ANSIBLE MANAGED LONGHORN MULTIPATH\n{{ longhorn_multipath_rule }}# END ANSIBLE MANAGED LONGHORN MULTIPATH\n"
+            backup: true
+          when: longhorn_multipath_config.stat.exists
+          register: longhorn_multipath_adoption
+          notify: Reload active multipath daemon
+
+        - name: Persist the narrow Longhorn blacklist
+          ansible.builtin.blockinfile:
+            path: /etc/multipath.conf
+            create: true
+            owner: root
+            group: root
+            mode: '0644'
+            backup: true
+            marker: '# {mark} ANSIBLE MANAGED LONGHORN MULTIPATH'
+            block: '{{ longhorn_multipath_rule }}'
+          when: not ansible_check_mode or not longhorn_multipath_adoption.changed
+          notify: Reload active multipath daemon
+
+        - name: Read the effective multipath configuration
+          ansible.builtin.command: /usr/sbin/multipath -t
+          register: longhorn_multipath_effective
+          changed_when: false
+          check_mode: false
+
+        - name: Verify the exact device rule is effective
+          ansible.builtin.assert:
+            that:
+              - "'vendor \"^IET$\"' in longhorn_multipath_effective.stdout"
+              - "'product \"^VIRTUAL-DISK$\"' in longhorn_multipath_effective.stdout"
+            quiet: true
+          when: not ansible_check_mode
+
+        - name: Check whether multipathd is active
+          ansible.builtin.command: systemctl is-active multipathd
+          register: longhorn_multipath_service
+          changed_when: false
+          failed_when: longhorn_multipath_service.rc not in [0, 3, 4]
+          check_mode: false
+
+        - name: Apply the configuration before the next node
+          ansible.builtin.meta: flush_handlers
+
+  handlers:
+    - name: Reload active multipath daemon
+      ansible.builtin.command: /usr/sbin/multipathd reconfigure
+      when: longhorn_multipath_service.rc == 0
+      changed_when: true
