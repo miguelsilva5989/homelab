@@ -41,7 +41,7 @@ spec:
         - containerPort: 6379
       
       - name: postgres
-        image: registry.milanchis.com/immich-postgres:14.24-vchord0.4.3-20261028-4eef06f3@sha256:4eef06f313181e9ce5812224f6b5c888bf381f071e2a0aafdb5ae563bf433f07
+        image: registry.milanchis.com/immich-postgres:14.24-vchord0.4.3-bookworm-sec-20261028-a42e481b@sha256:a42e481b5888d33a3534034547504fbfeb26d2a155658b51102dc553e3a5bc7d
         ports:
         - containerPort: 5432
         envFrom:
