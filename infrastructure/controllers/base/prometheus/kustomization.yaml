@@ -7,6 +7,7 @@ resources:
   - namespace.yaml
   - repository.yaml
   - release.yaml
+  - persistence.yaml
   - release-adapter.yaml
 
 # configMapGenerator:
