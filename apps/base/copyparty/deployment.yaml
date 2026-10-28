@@ -6,6 +6,10 @@ metadata:
     app: copyparty
 spec:
   replicas: 1
+  # Persistent application state must have a single writer during upgrades.
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   selector:
     matchLabels:
       app: copyparty
@@ -16,7 +20,7 @@ spec:
     spec:
       containers:
       - name: copyparty
-        image: copyparty/ac
+        image: copyparty/ac:1.20.26@sha256:b2054d65e05daa8982ca17c26b12b74315c0ce586a03ff9018a59c80731b9e19
         imagePullPolicy: Always
         ports:
           - containerPort: 3923
