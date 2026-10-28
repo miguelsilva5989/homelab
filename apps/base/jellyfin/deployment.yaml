@@ -21,7 +21,7 @@ spec:
         options:
           - name: ndots
             value: "1"
-      podSecurityContext:
+      securityContext:
         # runAsNonRoot: false
         # fsGroup: 1000
         # seccompProfile:
