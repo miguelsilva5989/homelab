@@ -20,7 +20,7 @@ spec:
             value: "1"
       containers:
       - name: flaresolverr
-        image: flaresolverr/flaresolverr:v3.3.25
+        image: flaresolverr/flaresolverr:v3.5.2@sha256:c80ae007ce2ccdcd217a12426e4f039ef763ff90738c808d38810c3e59323767
         ports:
           - containerPort: 8191
         # env:
