@@ -6,8 +6,7 @@ deployment:
   additionalContainers: []
   initContainers: []
 affinity: {}
-authentik:
-  existingSecret: authentik-credentials
+authentik: {}
 server:
   ingress:
     ingressClassName: traefik
@@ -104,5 +103,5 @@ postgresql:
     digest: sha256:839fbb5a4942a7758dd93e18b42ea5649807491a0545b5eeeb8f0b8bb11857a5
 global:
   image:
-    tag: 2025.10.4
-    digest: sha256:4b4f9ae106dbda902b836aa7a79d2f456b8302f090b862f7ad1bf268402730b2
+    tag: 2025.12.6
+    digest: sha256:d4c1750e26bb7faa4d09e23305d75b54957ce4b81cee8e3acf4cc4bb8635d705
