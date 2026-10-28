@@ -5,6 +5,9 @@ metadata:
   labels:
     app: registry
 spec:
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +23,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
       containers:
       - name: registry
-        image: registry:3
+        image: registry:3@sha256:3725021071ec9383eb3d87ddbdff9ed602439b3f7c958c9c2fb941049ea6531d
         ports:
           - containerPort: 5000
         env:

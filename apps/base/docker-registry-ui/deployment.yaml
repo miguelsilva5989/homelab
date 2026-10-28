@@ -20,7 +20,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
       containers:
       - name: registry-ui
-        image: joxit/docker-registry-ui:main
+        image: joxit/docker-registry-ui:main@sha256:91f657f47aabcc8a497cd5ee4046b85a2c21ea7f2ff1d7dda9ce835b91bc15e8
         ports:
           - containerPort: 80
         env:

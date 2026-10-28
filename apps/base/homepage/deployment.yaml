@@ -5,6 +5,9 @@ metadata:
   labels:
     app: homepage
 spec:
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +23,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-sonarr-5cc9b67c58-89nbf -- curl -v https://skyhook.sonarr.tv
       containers:
       - name: homepage
-        image: ghcr.io/gethomepage/homepage:latest
+        image: ghcr.io/gethomepage/homepage:latest@sha256:f820276654539cdc2cf0169f28188d135919a7984fad76d83d8d5ff1383f3705
         ports:
           - containerPort: 3000
         env:

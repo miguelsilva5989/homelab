@@ -5,6 +5,9 @@ metadata:
   labels:
     app: transmission
 spec:
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +23,7 @@ spec:
             value: "1" # this should now work - kubectl exec -n media zion-transmission-5cc9b67c58-89nbf -- curl -v https://skyhook.transmission.tv
       containers:
       - name: transmission
-        image: haugene/transmission-openvpn:latest
+        image: haugene/transmission-openvpn:latest@sha256:845fe4f75bb723919dd72363fae3bb7a2a89b6cb6f807c3b0c4073ebfdd42293
         ports:
           - containerPort: 9091
           - containerPort: 8118

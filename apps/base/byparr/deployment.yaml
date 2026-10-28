@@ -5,6 +5,9 @@ metadata:
   labels:
     app: byparr
 spec:
+  strategy:
+    type: Recreate
+    rollingUpdate: null
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +23,7 @@ spec:
             value: "1"
       containers:
       - name: byparr
-        image: ghcr.io/thephaseless/byparr:latest
+        image: ghcr.io/thephaseless/byparr:latest@sha256:874f719518f617d03a60e03411fc5d090647e1a877041e81f8dc965927c7deb6
         env:
           - name: PROXY_SERVER
             value: "http://zion-transmission-proxy.media.svc.cluster.local:8118"
